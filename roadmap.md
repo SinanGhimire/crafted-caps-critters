@@ -15,3 +15,12 @@
 - [x] Ear-flap / bell hats replaced with fur trim and a side tassel
 - [x] Shop: 14 buyable run items (heals, plating, crit, pierce, multishot, lifesteal, explosive, legendary War Core) alongside guns, with owned-gear strip
 - [x] Android: Capacitor wrapper + build instructions in README
+
+## Progression update
+- [x] Class tree screen (5 story paths, 33 classes, coin + level gates)
+- [x] Permanent hero levels, stat bonuses and milestone abilities
+- [x] Run XP awarded on every game over
+- [x] Pause menu: resume / restart / sound / quit
+- [x] Phone view zooms out so sprites are smaller and spacing tighter
+- [x] Smoother enemy animation (frame cross-fade + smooth sampling)
+- [ ] APK build — blocked: this sandbox has no Java/Android SDK
