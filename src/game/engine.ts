@@ -597,7 +597,7 @@ function archetypeFor(w: Weapon): NonNullable<Weapon["archetype"]> {
 function finishWeapon(w: Weapon) {
   w.class = "gun";
   w.archetype = archetypeFor(w);
-  w.bulletSprite = undefined;
+  delete w.bulletSprite; // bullets are drawn procedurally
 }
 
 for (const w of Object.values(WEAPONS)) finishWeapon(w);
