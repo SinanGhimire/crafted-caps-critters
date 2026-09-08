@@ -944,6 +944,12 @@ function Game() {
               <p className="mt-4 text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                 Best <span className="text-gold">{Math.max(best, hud.score).toLocaleString()}</span>
               </p>
+              {runXp > 0 && (
+                <p className="mt-1 text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground">
+                  Hero XP <span className="text-gold">+{runXp.toLocaleString()}</span> · level{" "}
+                  <span className="text-gold">{heroLevel}</span>
+                </p>
+              )}
 
               {hud.won && (
                 <div className="pop-tray mt-4 rounded-2xl px-4 py-3">
