@@ -28,7 +28,11 @@ import type { CharacterKey, GameState, RunMode, WeaponKey } from "@/game/types";
 import { RARITY_COLOR, UPGRADE_MAP } from "@/game/upgrades";
 import { WaveShop } from "@/components/WaveShop";
 import { SpriteIcon } from "@/components/SpriteIcon";
-import { useProfile } from "@/game/profile";
+import { levelFor, useProfile } from "@/game/profile";
+import { ClassTree } from "@/components/ClassTree";
+import { Progression } from "@/components/Progression";
+import { metaBonus, xpForRun } from "@/game/progression";
+import { setMetaBonus } from "@/game/engine";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -169,13 +173,14 @@ function Game() {
   });
   const [ready, setReady] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [screen, setScreen] = useState<"art" | "select" | "play">("art");
+  const [screen, setScreen] = useState<"art" | "select" | "play" | "tree" | "levels">("art");
   const [mode, setMode] = useState<RunMode>("survival");
   const [panel, setPanel] = useState<PanelKey | null>("gift");
   const [character, setCharacter] = useState<CharacterKey>("bald");
   const [cls, setCls] = useState<ClassKey>("vagrant");
   const [best, setBest] = useState(0);
-  const { patch: patchProfile } = useProfile();
+  const { profile, patch: patchProfile } = useProfile();
+  const heroLevel = levelFor(profile.xp);
   const [muted, setMutedState] = useState(false);
   const [touch, setTouch] = useState(false);
   const [hud, setHud] = useState<Hud>(INITIAL_HUD);
@@ -197,6 +202,27 @@ function Game() {
       owned: [...new Set([...p.owned, ...PLAYER_CHARACTERS.map((c) => `hero:${c.key}`)])],
     }));
   }, [hud.won, patchProfile]);
+
+  // Every finished run banks permanent hero XP, exactly once.
+  const xpRef = useRef(false);
+  const [runXp, setRunXp] = useState(0);
+  useEffect(() => {
+    if (!hud.over) {
+      xpRef.current = false;
+      setRunXp(0);
+      return;
+    }
+    if (xpRef.current) return;
+    xpRef.current = true;
+    const gain = xpForRun({
+      score: hud.score,
+      wave: hud.wave,
+      kills: hud.kills,
+      won: hud.won,
+    });
+    setRunXp(gain);
+    patchProfile((p) => ({ ...p, xp: p.xp + gain }));
+  }, [hud.over, hud.score, hud.wave, hud.kills, hud.won, patchProfile]);
 
   useEffect(() => {
     setMutedState(loadMuted());
@@ -238,6 +264,8 @@ function Game() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Permanent account bonuses apply to every run.
+    setMetaBonus(metaBonus(heroLevel));
     stateRef.current = createState(character, mode, cls);
     const input = inputRef.current;
     input.firing = false;
@@ -254,7 +282,12 @@ function Game() {
       const cssW = Math.max(1, rect.width);
       const cssH = Math.max(1, rect.height);
       const aspect = cssW / cssH;
-      const lh = Math.round(Math.min(1000, Math.max(520, 720 * Math.sqrt(16 / 9 / aspect))));
+      // Phones get a larger logical view: everything renders smaller so more
+      // of the arena fits on a small screen.
+      const zoomOut = cssW < 820 ? 1.28 : 1;
+      const lh = Math.round(
+        Math.min(1400, Math.max(520, 720 * Math.sqrt(16 / 9 / aspect) * zoomOut)),
+      );
       const lw = Math.round(lh * aspect);
       setViewport(lw, lh);
       canvas.width = Math.floor(lw * dpr);
@@ -378,7 +411,7 @@ function Game() {
       window.removeEventListener("keyup", onKeyUp);
       window.removeEventListener("blur", onBlur);
     };
-  }, [ready, restartKey, screen, character, touch, mode, cls]);
+  }, [ready, restartKey, screen, character, touch, mode, cls, heroLevel]);
 
   const weapon = WEAPONS[hud.weapon];
 
@@ -429,6 +462,31 @@ function Game() {
     );
   }
 
+  if (screen === "tree") {
+    return (
+      <ClassTree
+        cls={cls}
+        onSelectClass={setCls}
+        onBack={() => {
+          playSfx("ui");
+          setScreen("art");
+        }}
+        onSfx={() => playSfx("ui")}
+      />
+    );
+  }
+
+  if (screen === "levels") {
+    return (
+      <Progression
+        onBack={() => {
+          playSfx("ui");
+          setScreen("art");
+        }}
+      />
+    );
+  }
+
   if (screen === "art") {
     return (
       <>
@@ -442,6 +500,7 @@ function Game() {
           onOpen={(t: ArtTarget) => {
             playSfx("ui");
             if (t.kind === "tab") setPanel(t.tab);
+            else if (t.kind === "screen") setScreen(t.screen);
             else if (t.kind === "modal") setPanel(t.modal as PanelKey);
           }}
           muted={muted}
@@ -828,6 +887,21 @@ function Game() {
                 >
                   Resume
                 </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setRestartKey((k) => k + 1)}
+                    className="pop-quiet press flex-1 rounded-2xl py-2.5 text-xs font-black uppercase tracking-[0.2em] text-foreground"
+                  >
+                    Restart
+                  </button>
+                  <button
+                    onClick={toggleMute}
+                    aria-label={muted ? "Unmute" : "Mute"}
+                    className="pop-quiet press flex-1 rounded-2xl py-2.5 text-xs font-black uppercase tracking-[0.2em] text-foreground"
+                  >
+                    {muted ? "Sound on" : "Sound off"}
+                  </button>
+                </div>
                 <button
                   onClick={() => setScreen("art")}
                   className="pop-quiet press w-full rounded-2xl py-2.5 text-xs font-black uppercase tracking-[0.2em] text-foreground"
@@ -870,6 +944,12 @@ function Game() {
               <p className="mt-4 text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                 Best <span className="text-gold">{Math.max(best, hud.score).toLocaleString()}</span>
               </p>
+              {runXp > 0 && (
+                <p className="mt-1 text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground">
+                  Hero XP <span className="text-gold">+{runXp.toLocaleString()}</span> · level{" "}
+                  <span className="text-gold">{heroLevel}</span>
+                </p>
+              )}
 
               {hud.won && (
                 <div className="pop-tray mt-4 rounded-2xl px-4 py-3">

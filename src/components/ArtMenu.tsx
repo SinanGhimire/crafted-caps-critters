@@ -44,6 +44,7 @@ function useOfferTimer() {
 export type ArtTarget =
   | { kind: "play" }
   | { kind: "tab"; tab: "character" | "classes" | "weapons" | "upgrades" | "echoes" }
+  | { kind: "screen"; screen: "tree" | "levels" }
   | { kind: "modal"; modal: string };
 
 type Tint = "gold" | "violet" | "teal" | "crimson" | "leaf";
@@ -66,6 +67,8 @@ const LEFT_RAIL: RailItem[] = [
 ];
 
 const RIGHT_RAIL: RailItem[] = [
+  { id: "tree", label: "Class Tree", icon: Layers, target: { kind: "screen", screen: "tree" }, tint: "violet" },
+  { id: "levels", label: "Levels", icon: Sparkles, target: { kind: "screen", screen: "levels" }, tint: "gold" },
   { id: "ranks", label: "Ranks", icon: Crown, target: { kind: "modal", modal: "leaderboard" }, badge: "!", tint: "crimson" },
 ];
 
