@@ -694,14 +694,14 @@ function Game() {
             paddingBottom: "max(0.375rem, env(safe-area-inset-bottom))",
           }}
         >
-          {/* TOP ROW: HP left, timer center, score right */}
-          <div className="flex items-start justify-between px-1 pt-1 sm:px-3 sm:pt-2">
+          {/* TOP ROW: vitals left, timer center, score + controls right */}
+          <div className="flex items-start justify-between gap-1.5 px-1 pt-1 sm:px-3 sm:pt-2">
 
-            {/* LEFT: Class badge + level + currency */}
-            <div className="flex flex-col gap-1">
-              <div className="flex items-center gap-1.5">
+            {/* LEFT: portrait + HP bar + coins */}
+            <div className="flex min-w-0 flex-1 items-center gap-1.5 rounded-xl border border-[oklch(1_0_0/12%)] bg-[oklch(0.08_0.02_292/62%)] px-1.5 py-1 backdrop-blur-sm sm:gap-2 sm:px-2">
+              <div className="relative shrink-0">
                 <div
-                  className="grid h-8 w-7 shrink-0 place-items-center overflow-hidden rounded-lg border-[2px] border-ink shadow-[0_2px_0_oklch(0.06_0_0/60%)]"
+                  className="grid h-8 w-8 place-items-center overflow-hidden rounded-lg border-2 border-ink sm:h-9 sm:w-9"
                   style={{
                     background: `radial-gradient(circle at 50% 45%, color-mix(in oklab, ${CLASSES[cls].color} 38%, transparent), rgba(0,0,0,0.45) 74%)`,
                   }}
@@ -709,76 +709,98 @@ function Game() {
                 >
                   <ClassPortrait cls={cls} className="h-full w-full" />
                 </div>
-                <div className="flex h-[18px] w-[18px] shrink-0 items-center justify-center rounded-full border-[2px] border-ink bg-primary font-display text-[9px] leading-none text-white shadow-[0_2px_0_oklch(0.06_0_0/60%)]">
+                <span className="absolute -bottom-1 -right-1 grid h-4 min-w-4 place-items-center rounded-full border-2 border-ink bg-primary px-0.5 font-display text-[8px] leading-none text-white">
                   {hud.level}
-                </div>
-              </div>
-              <p className="font-display text-[8px] uppercase tracking-[0.18em] text-white/70 [text-shadow:0_1px_3px_oklch(0_0_0/70%)]">
-                {CLASSES[cls].name}
-              </p>
-              <div className="flex items-center gap-1">
-                <span className="text-[11px]">🪙</span>
-                <span className="font-display text-[11px] leading-none tabular-nums text-gold [text-shadow:0_1px_3px_oklch(0_0_0/80%)]">
-                  {hud.materials}
                 </span>
+              </div>
+
+              <div className="min-w-0 flex-1">
+                {/* HEALTH BAR */}
+                <div className="relative h-3 w-full overflow-hidden rounded-full border border-ink/70 bg-[oklch(0.14_0.03_20/85%)] sm:h-3.5">
+                  <div
+                    className="h-full rounded-full transition-[width] duration-150"
+                    style={{
+                      width: `${Math.max(0, Math.min(100, (hud.hp / Math.max(1, hud.maxHp)) * 100))}%`,
+                      background:
+                        hud.hp / Math.max(1, hud.maxHp) > 0.35
+                          ? "linear-gradient(180deg, oklch(0.82 0.19 145), oklch(0.6 0.19 145))"
+                          : "linear-gradient(180deg, oklch(0.75 0.21 27), oklch(0.55 0.21 27))",
+                    }}
+                  />
+                  <span className="absolute inset-0 grid place-items-center font-display text-[8px] leading-none tabular-nums text-white [text-shadow:0_1px_2px_oklch(0_0_0/90%)] sm:text-[9px]">
+                    {Math.max(0, Math.ceil(hud.hp))}/{Math.ceil(hud.maxHp)}
+                  </span>
+                </div>
+                {/* XP BAR */}
+                <div className="mt-1 h-1.5 w-full overflow-hidden rounded-full border border-ink/60 bg-[oklch(0.14_0.02_292/85%)]">
+                  <div
+                    className="h-full rounded-full bg-linear-to-r from-[oklch(0.85_0.15_92)] to-[oklch(0.72_0.17_62)] transition-[width] duration-150"
+                    style={{ width: `${Math.min(100, (hud.xp / Math.max(1, hud.xpToNext)) * 100)}%` }}
+                  />
+                </div>
+                <div className="mt-0.5 flex items-center gap-1">
+                  <span className="text-[9px] leading-none">🪙</span>
+                  <span className="font-display text-[10px] leading-none tabular-nums text-gold">
+                    {hud.materials}
+                  </span>
+                  <span className="truncate font-display text-[8px] uppercase tracking-[0.15em] text-white/45">
+                    {CLASSES[cls].name}
+                  </span>
+                </div>
               </div>
             </div>
 
             {/* CENTER: Wave timer */}
-            <div className="flex flex-col items-center" aria-live="polite">
-              <span className="font-display text-2xl leading-none text-white [text-shadow:0_2px_6px_oklch(0_0_0/70%)] sm:text-3xl">
+            <div className="flex shrink-0 flex-col items-center rounded-xl border border-[oklch(1_0_0/12%)] bg-[oklch(0.08_0.02_292/62%)] px-2 py-1 backdrop-blur-sm" aria-live="polite">
+              <span className="font-display text-xl leading-none text-white sm:text-3xl">
                 {Math.ceil(hud.waveTimer)}
               </span>
-              <p className="font-display text-[8px] uppercase tracking-[0.25em] text-white/60 [text-shadow:0_1px_3px_oklch(0_0_0/60%)] sm:text-[9px]">
+              <p className="font-display text-[8px] uppercase tracking-[0.2em] text-white/60 sm:text-[9px]">
                 Wave {hud.wave}
               </p>
             </div>
 
             {/* RIGHT: Score + echo + controls */}
-            <div className="flex items-start gap-1.5">
-              <div className="flex flex-col items-end">
-                <span className="font-display text-[10px] leading-none tabular-nums text-white [text-shadow:0_1px_4px_oklch(0_0_0/70%)] sm:text-xs">
+            <div className="flex shrink-0 items-start gap-1">
+              <div className="flex flex-col items-end rounded-xl border border-[oklch(1_0_0/12%)] bg-[oklch(0.08_0.02_292/62%)] px-1.5 py-1 backdrop-blur-sm">
+                <span className="font-display text-[11px] leading-none tabular-nums text-white sm:text-sm">
                   {hud.score.toLocaleString()}
                 </span>
-                <div className="mt-0.5 flex items-center gap-1">
-                  <span className="text-[8px] font-black uppercase tracking-wider text-white/50 [text-shadow:0_1px_3px_oklch(0_0_0/60%)]">
-                    Echo {String(Math.ceil(hud.echoTimer)).padStart(2, "0")}
-                  </span>
-                  {hud.echoes > 0 && (
-                    <span className="text-[9px] font-black text-primary [text-shadow:0_1px_3px_oklch(0_0_0/60%)]">x{hud.echoes}</span>
-                  )}
-                </div>
+                <span className="mt-0.5 text-[8px] font-black uppercase tracking-wider text-white/50">
+                  Echo {String(Math.ceil(hud.echoTimer)).padStart(2, "0")}
+                  {hud.echoes > 0 ? ` x${hud.echoes}` : ""}
+                </span>
               </div>
               <div className="pointer-events-auto flex flex-col gap-1">
-                <button
-                  onClick={toggleMute}
-                  aria-label={muted ? "Unmute sound" : "Mute sound"}
-                  className="grid h-7 w-7 place-items-center rounded-md border-[2px] border-ink/40 bg-[oklch(0.1_0.01_0/50%)] backdrop-blur-sm"
-                >
-                  {muted ? (
-                    <VolumeX className="h-3.5 w-3.5 text-white/70" strokeWidth={2.75} aria-hidden />
-                  ) : (
-                    <Volume2 className="h-3.5 w-3.5 text-white/70" strokeWidth={2.75} aria-hidden />
-                  )}
-                </button>
                 <button
                   onClick={() => {
                     const st = stateRef.current;
                     if (!st.over) st.paused = !st.paused;
                   }}
                   aria-label="Pause game"
-                  className="grid h-7 w-7 place-items-center rounded-md border-[2px] border-ink/40 bg-[oklch(0.1_0.01_0/50%)] backdrop-blur-sm"
+                  className="grid h-8 w-8 place-items-center rounded-lg border border-[oklch(1_0_0/15%)] bg-[oklch(0.08_0.02_292/62%)] backdrop-blur-sm"
                 >
-                  <Pause className="h-3.5 w-3.5 text-white/70" strokeWidth={2.75} aria-hidden />
+                  <Pause className="h-4 w-4 text-white/80" strokeWidth={2.75} aria-hidden />
+                </button>
+                <button
+                  onClick={toggleMute}
+                  aria-label={muted ? "Unmute sound" : "Mute sound"}
+                  className="grid h-8 w-8 place-items-center rounded-lg border border-[oklch(1_0_0/15%)] bg-[oklch(0.08_0.02_292/62%)] backdrop-blur-sm"
+                >
+                  {muted ? (
+                    <VolumeX className="h-4 w-4 text-white/80" strokeWidth={2.75} aria-hidden />
+                  ) : (
+                    <Volume2 className="h-4 w-4 text-white/80" strokeWidth={2.75} aria-hidden />
+                  )}
                 </button>
               </div>
             </div>
           </div>
 
-          {/* BOTTOM: Perks + weapon label + XP bar + hint */}
+          {/* BOTTOM: perks + weapon */}
           <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center gap-0.5 px-2 pb-1 sm:px-4">
             {hud.perks.length > 0 && (
-              <div className="flex flex-wrap justify-center gap-0.5">
+              <div className="flex max-w-full flex-wrap justify-center gap-0.5">
                 {hud.perks.map(({ id, n }) => {
                   const u = UPGRADE_MAP[id];
                   if (!u) return null;
@@ -802,22 +824,23 @@ function Game() {
               </div>
             )}
 
-            <span
-              className="font-display text-[9px] uppercase tracking-[0.2em] [text-shadow:0_1px_3px_oklch(0_0_0/80%)]"
-              style={{ color: weapon.color }}
-            >
-              {weapon.name}
-            </span>
-
-            {/* equipped gun */}
-            <div className="pointer-events-none flex items-end gap-1.5">
+            <div className="pointer-events-none flex items-center gap-1.5 rounded-xl border border-[oklch(1_0_0/10%)] bg-[oklch(0.08_0.02_292/55%)] px-2 py-0.5 backdrop-blur-sm">
               <Slot label="1" color={weapon.color} sprite={weapon.sprite as string} cd={0} />
+              <span
+                className="font-display text-[9px] uppercase tracking-[0.2em]"
+                style={{ color: weapon.color }}
+              >
+                {weapon.name}
+              </span>
             </div>
 
-            <p className="text-center text-[7px] font-bold text-white/30 [text-shadow:0_1px_2px_oklch(0_0_0/50%)] sm:text-[8px]">
-              {touch ? "Left stick move - right stick focus (+35%)" : "WASD - hold click focus fire (+35%) - Esc pauses"}
-            </p>
+            {!touch && (
+              <p className="text-center text-[8px] font-bold text-white/30">
+                WASD - hold click focus fire (+35%) - Esc pauses
+              </p>
+            )}
           </div>
+
         </div>
 
         {/* Touch sticks */}
