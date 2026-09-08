@@ -10,6 +10,7 @@ import { AI_ROLE } from "./ai";
 import { ITEM_MAP, itemPrice, rollItems } from "./shop-items";
 import { CLASSES, classForSkin, type ClassKey } from "./classes";
 import { drawWorn, warmAccessories } from "./accessory-images";
+import { NO_BONUS, type MetaBonus } from "./progression";
 import type {
   Bullet,
   Mods,
