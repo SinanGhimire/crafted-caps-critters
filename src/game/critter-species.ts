@@ -44,6 +44,19 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 4, weight: 2.6 },
   e_skel_gold: { tier: 3, radius: 28, speed: [112, 152], hp: 32, score: 54, height: 144, damage: 17, minWave: 7, weight: 1.9 },
 
+  // ---- the slime line (each step up is a beefier slime)
+  e_slimelet_green: { tier: 1, radius: 16, speed: [120, 158], hp: 5, score: 12, height: 74, damage: 7, minWave: 1, weight: 3.2 },
+  e_slimelet_blue: { tier: 1, radius: 17, speed: [130, 168], hp: 8, score: 18, height: 78, damage: 9, minWave: 2, weight: 2.8 },
+  e_slime_green: { tier: 1, radius: 24, speed: [104, 136], hp: 12, score: 20, height: 104, damage: 10, minWave: 1, weight: 3.4 },
+  e_slime_blue: { tier: 2, radius: 27, speed: [110, 146], hp: 22, score: 36, height: 116, damage: 13, minWave: 3, weight: 2.8 },
+  e_slime_yellow: { tier: 2, radius: 28, speed: [118, 156], hp: 26, score: 42, height: 120, damage: 14, minWave: 4, weight: 2.4 },
+  e_slime_red: { tier: 3, radius: 31, speed: [116, 152], hp: 44, score: 68, height: 132, damage: 18, minWave: 7, weight: 1.9 },
+  e_slime_purple: { tier: 4, radius: 34, speed: [110, 148], hp: 68, score: 104, height: 144, damage: 22, minWave: 10, weight: 1.4 },
+  e_slime_black: { tier: 4, radius: 38, speed: [100, 132], hp: 96, score: 148, height: 158, damage: 26, minWave: 13, weight: 1.0 },
+
+  // ---- cult
+  e_cultist: { tier: 3, radius: 26, speed: [98, 128], hp: 38, score: 72, height: 138, damage: 16, minWave: 6, weight: 1.8 },
+
   // ---- boss (never rolled by the wave pool)
   e_boss_bone: { tier: 5, radius: 44, speed: [88, 116], hp: 340, score: 840, height: 228, damage: 35, minWave: 999, weight: 0 },
 };
