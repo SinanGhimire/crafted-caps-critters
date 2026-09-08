@@ -118,7 +118,7 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   { key: "e_slime_red", name: "Ember Slime", body: "#e2543f", shade: "#8a2418", eye: "#ffe3d2", shape: "blob", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.08, legs: "none", glow: "rgba(226,84,63,0.28)" },
   { key: "e_slime_purple", name: "Void Slime", body: "#9a5fd6", shade: "#4d2478", eye: "#f2e2ff", shape: "blob", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.14, legs: "none", glow: "rgba(154,95,214,0.3)" },
   { key: "e_slime_black", name: "Tar Sovereign", body: "#3a3350", shade: "#191527", eye: "#ff7a6a", shape: "blob", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.24, legs: "none", glow: "rgba(120,90,200,0.28)" },
-  { key: "e_cultist", name: "Hooded Cultist", body: "#5b2b46", shade: "#2a1322", eye: "#ff5a5a", shape: "tall", crown: "hood" as never, mouth: "none", eyes: 2, arms: true, tail: false, size: 1.0, legs: "none" },
+  { key: "e_cultist", name: "Hooded Cultist", body: "#5b2b46", shade: "#2a1322", eye: "#ff5a5a", shape: "tall", crown: "none", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.0, legs: "none" },
   { key: "e_boss_bone", name: "Marshal Ossein", body: "#f0cd74", shade: "#8c6f1f", eye: "#fff6cf", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.75, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(240,205,116,0.4)" },
 ];
 

@@ -6,7 +6,7 @@ import {
   critterSrc,
   type CritterEnemyKey,
 } from "./critters";
-import { ENEMY_ART } from "./enemy-art";
+import { ENEMY_ART, ENEMY_FRAMES } from "./enemy-art";
 
 
 
@@ -205,7 +205,9 @@ export function loadSprites(): Promise<Sprites> {
 
     const [actorAnims, playerAnims, singleImgs] = await Promise.all([
       // one drawing per foe: a single frame that the renderer animates itself
-      Promise.all(actorKeys.map(async (k) => loadAnims(await actorSrc(k), [1, 1, 1]))),
+      Promise.all(
+        actorKeys.map(async (k) => loadAnims(await actorSrc(k), ENEMY_FRAMES[k] ?? [1, 1, 1])),
+      ),
       Promise.all(playerKeys.map((k) => loadAnims(playerSrc(k), PLAYER_FRAMES))),
       Promise.all(singleKeys.map((k) => loadImage(SINGLE_SRC[k] ?? ""))),
     ]);
