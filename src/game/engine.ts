@@ -1686,14 +1686,14 @@ function waveBurst(s: GameState) {
       s.wave === 5
         ? "e_slime_boss"
         : s.wave === 10
-          ? "e_gollux"
+          ? "e_boss_spore"
           : s.wave === 16
-            ? "e_demon"
+            ? "e_boss_bone"
             : s.wave === 20
-              ? "e_nightborne"
+              ? "e_boss_imp"
               : s.wave % 2 === 0
-                ? "e_demon"
-                : "e_demon_slime";
+                ? "e_boss_bone"
+                : "e_boss_spore";
     spawnEnemy(s, true, {
       species: bossSpecies,
       scale: s.wave === 5 ? 1.45 : s.wave === 10 ? 1.85 : s.wave === 16 ? 2.05 : 2.45,
@@ -2107,7 +2107,7 @@ function killEnemy(s: GameState, e: Enemy) {
     }
   }
   if (e.role === "brood") s.popups.push({ x: e.x, y: e.y - 90, life: 2, text: "NEST DESTROYED" });
-  if (s.mode === "survival" && s.wave === 20 && e.species === "e_nightborne") {
+  if (s.mode === "survival" && s.wave === 20 && e.species === "e_boss_imp") {
     s.won = true;
     s.over = true;
     s.popups.push({ x: e.x, y: e.y - 120, life: 3, text: "SURVIVAL CLEARED!" });
