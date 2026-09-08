@@ -183,7 +183,11 @@ function Game() {
   // Clearing wave 20 pays out the run: coins, gems and the full hero roster.
   const paidRef = useRef(false);
   useEffect(() => {
-    if (!hud.won || paidRef.current) return;
+    if (!hud.won) {
+      paidRef.current = false;
+      return;
+    }
+    if (paidRef.current) return;
     paidRef.current = true;
     patchProfile((p) => ({
       ...p,
