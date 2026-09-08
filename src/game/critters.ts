@@ -26,10 +26,14 @@ export type CritterBrow = "none" | "angry" | "sad" | "flat";
 export type CritterEnemyKey =
   // ---- vermin & fliers
   | "e_gnat" | "e_bat" | "e_flyer"
+  // ---- crawlers
+  | "e_spider" | "e_worm"
   // ---- slimes & fungus
   | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
   // ---- undead
   | "e_skel_white" | "e_skel_gold"
+  // ---- specialists
+  | "e_bomber" | "e_caster" | "e_brute"
   // ---- boss
   | "e_boss_bone";
 
