@@ -82,3 +82,6 @@ export const ENEMY_FRAMES: Record<CritterEnemyKey, [number, number, number]> = {
 };
 
 /** Foes that stay airborne: they hover instead of stepping. */
+
+/** Foes that stay airborne: they hover instead of stepping. */
+export const FLYING_FOES = new Set<CritterEnemyKey>([]);
