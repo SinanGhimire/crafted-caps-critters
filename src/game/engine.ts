@@ -674,6 +674,7 @@ export function openShop(s: GameState) {
   s.phase = "shop";
   s.shopRerolls = 0;
   s.shopOffers = rollSlotOffers(s);
+  s.itemOffers = rollItems(s.ownedItems, 4);
   s.sfx.push("level");
 }
 
@@ -683,6 +684,7 @@ export function rerollShop(s: GameState) {
   s.materials -= cost;
   s.shopRerolls += 1;
   s.shopOffers = rollSlotOffers(s);
+  s.itemOffers = rollItems(s.ownedItems, 4);
   return true;
 }
 
@@ -698,6 +700,21 @@ export function buyWeapon(s: GameState, key: WeaponKey) {
   return true;
 }
 
+export function buyItem(s: GameState, id: string) {
+  const item = ITEM_MAP[id];
+  if (!item) return false;
+  const owned = s.ownedItems[id] ?? 0;
+  if (owned >= item.maxStacks) return false;
+  const cost = itemPrice(id, s.wave, owned);
+  if (s.materials < cost) return false;
+  s.materials -= cost;
+  s.ownedItems[id] = owned + 1;
+  item.apply(s);
+  s.itemOffers = s.itemOffers.filter((k) => k !== id);
+  s.sfx.push("pickup");
+  return true;
+}
+
 export function equipWeapon(s: GameState, key: WeaponKey) {
   if (!s.arsenal.includes(key)) return false;
   s.player.weapon = key;
@@ -708,6 +725,7 @@ export function equipWeapon(s: GameState, key: WeaponKey) {
 export function closeShop(s: GameState) {
   s.phase = "wave";
   s.shopOffers = [];
+  s.itemOffers = [];
   advanceWave(s);
 }
 
@@ -1341,6 +1359,8 @@ export function createState(
     arsenal: [WEAPONS[def.weapon] ? def.weapon : "pistol"],
     class: cls,
     shopOffers: [],
+    itemOffers: [],
+    ownedItems: {},
     shopRerolls: 0,
     materials: def.startingMaterials,
     mode,
