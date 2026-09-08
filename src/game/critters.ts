@@ -24,12 +24,13 @@ export type CritterPattern = "none" | "spots" | "stripes" | "plates" | "belly";
 export type CritterBrow = "none" | "angry" | "sad" | "flat";
 
 export type CritterEnemyKey =
-  // ---- vermin & fliers
-  | "e_flyer"
+  // ---- classic pack (hand-animated strips)
+  | "e_scarlet" | "e_moss" | "e_amber" | "e_wisp"
+  | "e_violet" | "e_toxin" | "e_furbat" | "e_crimson"
   // ---- crawlers
   | "e_spider" | "e_worm"
   // ---- slimes & fungus
-  | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
+  | "e_slime_skull" | "e_mushroom"
   // ---- undead
   | "e_skel_white" | "e_skel_gold"
   // ---- specialists
