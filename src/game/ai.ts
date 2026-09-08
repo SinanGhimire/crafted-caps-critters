@@ -15,6 +15,17 @@ export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
   e_skel_white: "chase",
   e_skel_gold: "charge",
 
+  e_imp_violet: "swarm",
+  e_imp_bile: "chase",
+  e_imp_crimson: "dash",
+  e_gnat: "zigzag",
+  e_rat: "swarm",
+  e_bat: "zigzag",
+  e_flyer: "dash",
+  e_sticklooter: "swarm",
+  e_slime_skull: "split",
+  e_mushroom: "trail",
+
   // the slime line
   e_slimelet_green: "swarm",
   e_slimelet_blue: "swarm",

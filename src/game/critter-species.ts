@@ -38,6 +38,22 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 4, weight: 2.6 },
   e_skel_gold: { tier: 3, radius: 28, speed: [112, 152], hp: 32, score: 54, height: 144, damage: 17, minWave: 7, weight: 1.9 },
 
+  // ---- imps
+  e_imp_violet: { tier: 1, radius: 24, speed: [132, 170], hp: 8, score: 13, height: 116, damage: 9, minWave: 1, weight: 3.4 },
+  e_imp_bile: { tier: 2, radius: 27, speed: [118, 152], hp: 15, score: 26, height: 128, damage: 12, minWave: 3, weight: 2.8 },
+  e_imp_crimson: { tier: 3, radius: 30, speed: [126, 162], hp: 26, score: 48, height: 142, damage: 16, minWave: 6, weight: 2.2 },
+
+  // ---- vermin & fliers
+  e_gnat: { tier: 1, radius: 18, speed: [136, 176], hp: 6, score: 15, height: 92, damage: 8, minWave: 1, weight: 2.8 },
+  e_rat: { tier: 1, radius: 20, speed: [150, 190], hp: 7, score: 14, height: 90, damage: 8, minWave: 1, weight: 2.6 },
+  e_bat: { tier: 2, radius: 22, speed: [146, 188], hp: 13, score: 28, height: 106, damage: 11, minWave: 4, weight: 2.4 },
+  e_flyer: { tier: 3, radius: 26, speed: [140, 180], hp: 26, score: 62, height: 126, damage: 15, minWave: 8, weight: 1.6 },
+
+  // ---- ooze & fungus
+  e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.0 },
+  e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 7, weight: 1.8 },
+  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 3, weight: 2.2 },
+
   // ---- the slime line (each step up is a beefier slime)
   e_slimelet_green: { tier: 1, radius: 16, speed: [120, 158], hp: 5, score: 12, height: 74, damage: 7, minWave: 1, weight: 3.2 },
   e_slimelet_blue: { tier: 1, radius: 17, speed: [130, 168], hp: 8, score: 18, height: 78, damage: 9, minWave: 2, weight: 2.8 },
