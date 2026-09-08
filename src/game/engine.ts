@@ -3118,11 +3118,25 @@ function drawFrame(
   const fh = img.height;
   const h = height;
   const w = h * (fw / fh);
-  const i = Math.max(0, Math.min(strip.frames - 1, Math.floor(frame)));
+  const total = strip.frames;
+  const f = ((frame % total) + total) % total;
+  const i = Math.floor(f);
+  const t = f - i;
+  const j = (i + 1) % total;
   ctx.save();
   ctx.translate(x, y);
   if (flip) ctx.scale(-1, 1);
+  // Smooth sampling + a short cross-fade into the next frame removes the
+  // stair-stepped, snappy look on low-frame-count strips (slimes, cultist).
+  ctx.imageSmoothingEnabled = true;
+  ctx.imageSmoothingQuality = "high";
   ctx.drawImage(src, i * fw, 0, fw, fh, -w / 2, -h, w, h);
+  if (total > 1 && t > 0.001) {
+    const prev = ctx.globalAlpha;
+    ctx.globalAlpha = prev * t;
+    ctx.drawImage(src, j * fw, 0, fw, fh, -w / 2, -h, w, h);
+    ctx.globalAlpha = prev;
+  }
   ctx.restore();
 }
 
