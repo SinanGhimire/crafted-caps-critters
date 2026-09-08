@@ -30,6 +30,12 @@ export type CritterEnemyKey =
   | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
   // ---- undead
   | "e_skel_white" | "e_skel_gold"
+  // ---- the slime line
+  | "e_slimelet_green" | "e_slimelet_blue"
+  | "e_slime_green" | "e_slime_blue" | "e_slime_yellow"
+  | "e_slime_red" | "e_slime_purple" | "e_slime_black"
+  // ---- cult
+  | "e_cultist"
   // ---- boss
   | "e_boss_bone";
 
@@ -104,6 +110,15 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   { key: "e_skel_gold", name: "Gilded Bones", body: "#e8c56a", shade: "#8c6f1f", eye: "#fff0b8", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.08, legs: "two", pattern: "plates", brow: "angry" },
 
   /* ---------------- boss: the commander ----------------------------------- */
+  { key: "e_slimelet_green", name: "Slimelet", body: "#7ed957", shade: "#3f7a2a", eye: "#fff3b0", shape: "blob", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.6, legs: "none" },
+  { key: "e_slimelet_blue", name: "Frost Slimelet", body: "#5fb8f0", shade: "#26618f", eye: "#eaf8ff", shape: "blob", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.62, legs: "none" },
+  { key: "e_slime_green", name: "Green Slime", body: "#5fc23f", shade: "#2f6c22", eye: "#fff3b0", shape: "blob", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.9, legs: "none" },
+  { key: "e_slime_blue", name: "Tide Slime", body: "#3f8fd6", shade: "#1d4b7a", eye: "#eaf8ff", shape: "blob", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.98, legs: "none" },
+  { key: "e_slime_yellow", name: "Sulphur Slime", body: "#e8c93f", shade: "#8a7414", eye: "#fffbe0", shape: "blob", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.02, legs: "none" },
+  { key: "e_slime_red", name: "Ember Slime", body: "#e2543f", shade: "#8a2418", eye: "#ffe3d2", shape: "blob", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.08, legs: "none", glow: "rgba(226,84,63,0.28)" },
+  { key: "e_slime_purple", name: "Void Slime", body: "#9a5fd6", shade: "#4d2478", eye: "#f2e2ff", shape: "blob", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.14, legs: "none", glow: "rgba(154,95,214,0.3)" },
+  { key: "e_slime_black", name: "Tar Sovereign", body: "#3a3350", shade: "#191527", eye: "#ff7a6a", shape: "blob", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.24, legs: "none", glow: "rgba(120,90,200,0.28)" },
+  { key: "e_cultist", name: "Hooded Cultist", body: "#5b2b46", shade: "#2a1322", eye: "#ff5a5a", shape: "tall", crown: "none", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.0, legs: "none" },
   { key: "e_boss_bone", name: "Marshal Ossein", body: "#f0cd74", shade: "#8c6f1f", eye: "#fff6cf", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.75, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(240,205,116,0.4)" },
 ];
 

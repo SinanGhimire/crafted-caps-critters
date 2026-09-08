@@ -21,6 +21,19 @@ export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
   e_skel_white: "chase",
   e_skel_gold: "charge",
 
+  // the slime line
+  e_slimelet_green: "swarm",
+  e_slimelet_blue: "swarm",
+  e_slime_green: "chase",
+  e_slime_blue: "chase",
+  e_slime_yellow: "zigzag",
+  e_slime_red: "leap",
+  e_slime_purple: "split",
+  e_slime_black: "hydra",
+
+  // cult
+  e_cultist: "shooter",
+
   // boss
   e_boss_bone: "charge",
 };

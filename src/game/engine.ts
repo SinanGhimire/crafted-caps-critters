@@ -2087,7 +2087,10 @@ function killEnemy(s: GameState, e: Enemy) {
 
   // ---- blueprint death mechanics
   if (e.role === "split" && !e.minion) {
-    const spawn = "e_sticklooter";
+    // slimes burst into slimelets; anything else drips out vermin
+    const spawn = String(e.species).startsWith("e_slime")
+      ? ("e_slimelet_green" as Species)
+      : ("e_sticklooter" as Species);
     for (let i = 0; i < 3; i++) spawnMinion(s, e, spawn, 0.85);
     s.popups.push({ x: e.x, y: e.y - 70, life: 0.9, text: "SPLIT!" });
   }
