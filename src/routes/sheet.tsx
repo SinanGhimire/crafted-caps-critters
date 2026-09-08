@@ -26,7 +26,7 @@ function Sheet() {
               style={{
                 width: 190,
                 height: 150,
-                backgroundImage: `url(${ENEMY_ART[d.key][0]})`,
+                backgroundImage: `url(${ENEMY_ART[d.key as keyof typeof ENEMY_ART][0]})`,
                 backgroundSize: "600% 100%",
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "left top",
