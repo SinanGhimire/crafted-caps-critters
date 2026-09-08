@@ -6,6 +6,7 @@ import {
   critterSrc,
   type CritterEnemyKey,
 } from "./critters";
+import { ENEMY_ART } from "./enemy-art";
 
 
 
@@ -85,11 +86,11 @@ function proceduralActorSrc(key: ActorKey): [string, string, string] {
 }
 
 /**
- * Every foe is animated procedurally — no imported sprite strips — so nothing
- * ever glides across the arena as a static decal.
+ * Every foe uses its hand-drawn animation pack (idle 6 / walk 8 / death 10).
+ * The procedural chibi is only a safety net for a key without artwork.
  */
 async function actorSrc(key: ActorKey): Promise<[string, string, string]> {
-  return proceduralActorSrc(key);
+  return ENEMY_ART[key] ?? proceduralActorSrc(key);
 }
 
 
