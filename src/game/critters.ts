@@ -24,6 +24,12 @@ export type CritterPattern = "none" | "spots" | "stripes" | "plates" | "belly";
 export type CritterBrow = "none" | "angry" | "sad" | "flat";
 
 export type CritterEnemyKey =
+  // ---- imps
+  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson"
+  // ---- vermin & fliers
+  | "e_gnat" | "e_rat" | "e_bat" | "e_flyer"
+  // ---- ooze & fungus
+  | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
   // ---- the slime line
   | "e_slimelet_green" | "e_slimelet_blue"
   | "e_slime_green" | "e_slime_blue" | "e_slime_yellow"
@@ -100,6 +106,16 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   { key: "e_skel_gold", name: "Gilded Bones", body: "#e8c56a", shade: "#8c6f1f", eye: "#fff0b8", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.08, legs: "two", pattern: "plates", brow: "angry" },
 
   /* ---------------- boss: the commander ----------------------------------- */
+  { key: "e_imp_violet", name: "Imp Runt", body: "#a06bd6", shade: "#4c2c78", eye: "#f2e6ff", shape: "orb", crown: "none", mouth: "none", eyes: 2, arms: false, tail: false, size: 0.72, legs: "two", pattern: "none" },
+  { key: "e_imp_bile", name: "Bile Imp", body: "#9fc24a", shade: "#4c6318", eye: "#eaffb8", shape: "orb", crown: "horns", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.84, legs: "two", pattern: "spots", brow: "angry" },
+  { key: "e_imp_crimson", name: "Crimson Imp", body: "#d4544f", shade: "#6d1f1c", eye: "#ffe0d0", shape: "orb", crown: "hornsteel", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 0.96, legs: "two", pattern: "plates", brow: "angry" },
+  { key: "e_gnat", name: "Fuzz Stinger", body: "#c9b273", shade: "#6d5c2c", eye: "#fff3c9", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.66, legs: "none", pattern: "none", wings: true },
+  { key: "e_rat", name: "Gloom Stalker", body: "#5b5f76", shade: "#252838", eye: "#ff7a9c", shape: "wide", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.78, legs: "many", pattern: "none", brow: "angry" },
+  { key: "e_bat", name: "Night Bat", body: "#6b5aa8", shade: "#2f2650", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.82, legs: "none", pattern: "none", wings: true, brow: "angry" },
+  { key: "e_flyer", name: "Sporewing", body: "#a86a44", shade: "#4d2c1a", eye: "#f0e2c0", shape: "mound", crown: "fin", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: true, size: 1.02, legs: "none", pattern: "plates", wings: true, brow: "angry" },
+  { key: "e_sticklooter", name: "Sticklooter", body: "#6fc9d6", shade: "#256a76", eye: "#0f2a2e", shape: "jelly", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "spots" },
+  { key: "e_slime_skull", name: "Skull Ooze", body: "#9fb6d8", shade: "#3c4a68", eye: "#ff7a4a", shape: "jelly", crown: "shards", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.1, legs: "none", pattern: "plates", brow: "angry" },
+  { key: "e_mushroom", name: "Spore Cap", body: "#d95f5f", shade: "#7a2c2c", eye: "#fff0d0", shape: "mound", crown: "none", mouth: "grin", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "spots" },
   { key: "e_slimelet_green", name: "Slimelet", body: "#7ed957", shade: "#3f7a2a", eye: "#fff3b0", shape: "blob", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.6, legs: "none" },
   { key: "e_slimelet_blue", name: "Frost Slimelet", body: "#5fb8f0", shade: "#26618f", eye: "#eaf8ff", shape: "blob", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.62, legs: "none" },
   { key: "e_slime_green", name: "Green Slime", body: "#5fc23f", shade: "#2f6c22", eye: "#fff3b0", shape: "blob", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.9, legs: "none" },
