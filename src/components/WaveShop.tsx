@@ -154,28 +154,6 @@ export function WaveShop({ state, onLeave }: { state: GameState; onLeave: () => 
       );
     });
 
-  const itemCards = s.itemOffers.map((id) => {
-    const item = ITEM_MAP[id];
-    if (!item) return null;
-    const owned = s.ownedItems[id] ?? 0;
-    const price = itemPrice(id, s.wave, owned);
-    const color = ITEM_RARITY_COLOR[item.rarity];
-    return (
-      <ItemCard
-        key={id}
-        item={{ icon: item.icon, name: item.name, desc: item.desc, rarity: item.rarity }}
-        color={color}
-        owned={owned}
-        price={price}
-        canBuy={s.materials >= price}
-        onBuy={() => {
-          buyItem(s, id);
-          bump();
-        }}
-      />
-    );
-  });
-
   return (
     <div className="absolute inset-0 z-40 flex items-start justify-center overflow-y-auto bg-[oklch(0.07_0.02_292/0.88)] p-3 backdrop-blur-md md:rounded-2xl">
       <div className="pop-shell animate-float-up my-auto w-full max-w-3xl rounded-3xl p-4 sm:p-6">
@@ -211,7 +189,6 @@ export function WaveShop({ state, onLeave }: { state: GameState; onLeave: () => 
         </div>
 
         <SlotStrip label="Guns for sale">{weaponCards(s.shopOffers)}</SlotStrip>
-        <SlotStrip label="Gear & supplies">{itemCards}</SlotStrip>
         <OwnedRow
           keys={s.arsenal}
           active={s.player.weapon}
