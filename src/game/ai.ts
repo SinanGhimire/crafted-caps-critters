@@ -7,15 +7,8 @@ import type { CritterEnemyKey } from "./critters";
  * readable places instead of one giant table.
  */
 export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
-  // imps
-  e_imp_violet: "swarm",
-  e_imp_bile: "chase",
-  e_imp_crimson: "dash",
-
   // vermin & fliers
   e_gnat: "zigzag",
-  e_rat: "swarm",
-  
   e_bat: "zigzag",
   e_flyer: "dash",
 
@@ -28,15 +21,8 @@ export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
   e_skel_white: "chase",
   e_skel_gold: "charge",
 
-  // my own additions
-  e_wisp: "zigzag",
-  e_beetle: "rhino",
-
-  // bosses
-  e_slime_boss: "rhino",
-  e_boss_spore: "titan",
+  // boss
   e_boss_bone: "charge",
-  e_boss_imp: "dash",
 };
 
 /** One-line mechanic blurb — used by the bestiary UI. */
