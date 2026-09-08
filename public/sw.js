@@ -9,8 +9,8 @@ const SHELL = [
   "/",
   "/manifest.json",
   "/favicon.png",
-  "/icon.svg",
-  "/favicon.svg",
+  
+  "/app-icon.png",
 ];
 
 /* ---- install ---- */
