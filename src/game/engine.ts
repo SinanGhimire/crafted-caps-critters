@@ -3662,7 +3662,9 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
   const drawEnemy = (e: Enemy) => {
     const st = STATS[e.species];
     const h = st.height * e.scale;
-    const strips = sprites.strips[st.sprite];
+    const strips =
+      sprites.strips[st.sprite] ?? Object.values(sprites.strips)[0];
+    if (!strips) return;
     if (e.dying) {
       const strip = strips.death;
       const k = Math.min(1, e.deathT / 0.62);

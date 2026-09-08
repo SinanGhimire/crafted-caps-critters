@@ -116,10 +116,9 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
         href: "https://fonts.googleapis.com/css2?family=Bungee&family=Nunito:wght@400;700;900&display=swap",
       },
       { rel: "icon", href: "/favicon.png", type: "image/png" },
-      
-      { rel: "apple-touch-icon", href: "/favicon.png" },
+      { rel: "apple-touch-icon", href: "/app-icon.png" },
       { rel: "manifest", href: "/manifest.json" },
-      { rel: "apple-touch-startup-image", href: "/favicon.png" },
+      { rel: "apple-touch-startup-image", href: "/app-icon.png" },
     ],
   }),
   shellComponent: RootShell,
