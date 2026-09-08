@@ -2087,7 +2087,7 @@ function killEnemy(s: GameState, e: Enemy) {
 
   // ---- blueprint death mechanics
   if (e.role === "split" && !e.minion) {
-    const spawn = "e_sticklooter";
+    const spawn = "e_moss";
     for (let i = 0; i < 3; i++) spawnMinion(s, e, spawn, 0.85);
     s.popups.push({ x: e.x, y: e.y - 70, life: 0.9, text: "SPLIT!" });
   }
@@ -2897,7 +2897,7 @@ export function update(s: GameState, input: Input, dt: number) {
         if (!e.didSplit && !e.minion && e.hp < e.maxHp * 0.5) {
           e.didSplit = true;
           for (let k = 0; k < 2; k++) {
-            const c = spawnMinion(s, e, "e_sticklooter", 0.55);
+            const c = spawnMinion(s, e, "e_moss", 0.55);
             c.didSplit = true;
           }
           

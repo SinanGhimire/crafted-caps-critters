@@ -30,8 +30,17 @@ interface CritterTuning {
 }
 
 const TUNING: Record<CritterEnemyKey, CritterTuning> = {
-  // ---- vermin & fliers
-  e_flyer: { tier: 2, radius: 26, speed: [140, 180], hp: 22, score: 48, height: 126, damage: 13, minWave: 3, weight: 2.6 },
+  // ---- classic pack
+  e_scarlet: { tier: 1, radius: 22, speed: [104, 138], hp: 9, score: 14, height: 98, damage: 9, minWave: 1, weight: 3.6 },
+  e_moss: { tier: 1, radius: 21, speed: [124, 160], hp: 7, score: 15, height: 94, damage: 8, minWave: 1, weight: 3.4 },
+  e_amber: { tier: 2, radius: 26, speed: [96, 126], hp: 20, score: 32, height: 112, damage: 13, minWave: 3, weight: 2.8 },
+  e_wisp: { tier: 2, radius: 20, speed: [150, 192], hp: 12, score: 26, height: 92, damage: 10, minWave: 2, weight: 2.8 },
+  e_violet: { tier: 3, radius: 28, speed: [118, 152], hp: 30, score: 52, height: 126, damage: 16, minWave: 5, weight: 2.2 },
+  e_toxin: { tier: 3, radius: 29, speed: [100, 130], hp: 34, score: 56, height: 130, damage: 15, minWave: 6, weight: 2.0 },
+  e_furbat: { tier: 2, radius: 19, speed: [162, 205], hp: 11, score: 24, height: 88, damage: 10, minWave: 3, weight: 2.6 },
+  e_crimson: { tier: 4, radius: 32, speed: [110, 144], hp: 56, score: 96, height: 146, damage: 20, minWave: 8, weight: 1.5 },
+
+
 
   // ---- crawlers
   e_spider: { tier: 1, radius: 24, speed: [126, 168], hp: 13, score: 26, height: 104, damage: 10, minWave: 1, weight: 3.4 },
@@ -43,7 +52,6 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   e_brute: { tier: 4, radius: 38, speed: [70, 92], hp: 82, score: 140, height: 176, damage: 24, minWave: 9, weight: 1.1 },
 
   // ---- slimes & fungus
-  e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.4 },
   e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 6, weight: 2.0 },
   e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 2, weight: 3.0 },
 

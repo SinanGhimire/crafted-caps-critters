@@ -94,15 +94,21 @@ export const DEATH_FRAMES = 10;
  * version of a creature the player already knows.
  */
 export const CRITTER_ENEMIES: CritterDesign[] = [
-  /* ---------------- vermin & fliers: fast chip damage --------------------- */
-  { key: "e_flyer", name: "Gazer", body: "#8fd3ca", shade: "#2f6f68", eye: "#f0e2c0", shape: "orb", crown: "horns", mouth: "fangs", eyes: 1, arms: false, tail: true, size: 1.02, legs: "none", pattern: "none", wings: false, brow: "angry" },
+  /* -------- classic pack: fully hand-animated idle / walk / death --------- */
+  { key: "e_scarlet", name: "Scarlet Imp", body: "#d9483f", shade: "#7d2019", eye: "#ffffff", shape: "orb", crown: "horns", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.88, legs: "two", pattern: "none", brow: "angry" },
+  { key: "e_moss", name: "Moss Imp", body: "#7fce93", shade: "#33703f", eye: "#ffffff", shape: "orb", crown: "horns", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.86, legs: "two", pattern: "none" },
+  { key: "e_amber", name: "Amber Imp", body: "#f0a92e", shade: "#8d5c0c", eye: "#ffffff", shape: "orb", crown: "horns", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.95, legs: "two", pattern: "none" },
+  { key: "e_wisp", name: "Wisp", body: "#9aa3f0", shade: "#3f4691", eye: "#ffffff", shape: "orb", crown: "none", mouth: "none", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "none", wings: true },
+  { key: "e_violet", name: "Violet Fiend", body: "#b256d8", shade: "#5c2172", eye: "#1a1020", shape: "orb", crown: "ears", mouth: "none", eyes: 2, arms: false, tail: false, size: 1.0, legs: "two", pattern: "none" },
+  { key: "e_toxin", name: "Toxin Fiend", body: "#a8c93c", shade: "#4e6b16", eye: "#ffffff", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.05, legs: "two", pattern: "spots", brow: "angry" },
+  { key: "e_furbat", name: "Fur Bat", body: "#6b5b2e", shade: "#372d13", eye: "#ffd24a", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.78, legs: "none", pattern: "none", wings: true, brow: "angry" },
+  { key: "e_crimson", name: "Crimson Horn", body: "#c8323f", shade: "#6d1420", eye: "#ffffff", shape: "orb", crown: "horns", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.1, legs: "two", pattern: "none", brow: "angry" },
 
   /* ---------------- crawlers ---------------------------------------------- */
   { key: "e_spider", name: "Widowling", body: "#3c3c66", shade: "#1c1c33", eye: "#ffffff", shape: "orb", crown: "none", mouth: "fangs", eyes: 3, arms: false, tail: false, size: 0.86, legs: "many", pattern: "none", brow: "angry" },
   { key: "e_worm", name: "Gnaw Grub", body: "#ef8fa4", shade: "#8f4257", eye: "#ffffff", shape: "tall", crown: "none", mouth: "maw", eyes: 2, arms: false, tail: false, size: 0.95, legs: "none", pattern: "none" },
 
   /* ---------------- slimes & fungus --------------------------------------- */
-  { key: "e_sticklooter", name: "Sticklooter", body: "#6fc9d6", shade: "#256a76", eye: "#0f2a2e", shape: "jelly", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "spots" },
   { key: "e_slime_skull", name: "Skull Ooze", body: "#9fb6d8", shade: "#3c4a68", eye: "#ff7a4a", shape: "jelly", crown: "shards", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.1, legs: "none", pattern: "plates", brow: "angry" },
   { key: "e_mushroom", name: "Spore Cap", body: "#d95f5f", shade: "#7a2c2c", eye: "#fff0d0", shape: "mound", crown: "none", mouth: "grin", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "spots" },
 
