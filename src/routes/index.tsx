@@ -7,7 +7,7 @@ import { ClassPortrait } from "@/components/ClassPortrait";
 import { useEffect, useRef, useState } from "react";
 import { loadSprites, type Sprites } from "@/game/assets";
 import homeArtAsset from "@/assets/echo-home-art.png.asset.json";
-import echoWordmark from "@/assets/echo-wordmark.png.asset.json";
+import echoWordmark from "@/assets/echo-loading.png.asset.json";
 import { initAudio, loadMuted, playSfx, setMuted, type SfxName } from "@/game/audio";
 import {
   WEAPONS,

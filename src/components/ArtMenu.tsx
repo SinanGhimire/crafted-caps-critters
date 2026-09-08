@@ -374,10 +374,9 @@ export function ArtMenu({
       <div className="absolute inset-x-0 bottom-16 z-30 flex justify-center px-2 sm:bottom-20 sm:px-3 lg:hidden">
         <nav
           aria-label="Menu"
-          className="no-scrollbar flex w-full max-w-lg items-center justify-between gap-1.5 py-2 sm:gap-2"
+          className="flex w-full max-w-lg flex-col items-center gap-2 py-2"
         >
-
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex items-center justify-center gap-1.5 sm:gap-2">
             <TopPill
               icon={Gem}
               value={profile.gems.toLocaleString()}
@@ -391,7 +390,7 @@ export function ArtMenu({
               tint="bg-[oklch(0.86_0.16_88)]"
             />
           </div>
-          <div className="flex items-center gap-1.5 sm:gap-2">
+          <div className="flex w-full flex-wrap items-center justify-center gap-1.5 sm:gap-2">
             {MENU_BAR.map((item) => (
               <BarButton key={item.id} item={item} onOpen={onOpen} />
             ))}
