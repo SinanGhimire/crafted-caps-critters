@@ -1684,15 +1684,15 @@ function waveBurst(s: GameState) {
     // version of a family the player has already been fighting.
     const bossSpecies =
       s.wave === 5
-        ? "e_demon_slime"
+        ? "e_slime_boss"
         : s.wave === 10
-          ? "e_bonelord"
+          ? "e_gollux"
           : s.wave === 16
-            ? "e_imp_infernal"
+            ? "e_demon"
             : s.wave === 20
               ? "e_nightborne"
               : s.wave % 2 === 0
-                ? "e_nightborne"
+                ? "e_demon"
                 : "e_demon_slime";
     spawnEnemy(s, true, {
       species: bossSpecies,
@@ -2085,7 +2085,7 @@ function killEnemy(s: GameState, e: Enemy) {
 
   // ---- blueprint death mechanics
   if (e.role === "split" && !e.minion) {
-    const spawn = e.species === "e_blob_gray" ? "e_blob_pup" : "e_imp_violet";
+    const spawn = e.species === "e_slime_skull" ? "e_sticklooter" : "e_imp_violet";
     for (let i = 0; i < 3; i++) spawnMinion(s, e, spawn, 0.85);
     s.popups.push({ x: e.x, y: e.y - 70, life: 0.9, text: "SPLIT!" });
   }

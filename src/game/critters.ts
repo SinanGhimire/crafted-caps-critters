@@ -24,22 +24,20 @@ export type CritterPattern = "none" | "spots" | "stripes" | "plates" | "belly";
 export type CritterBrow = "none" | "angry" | "sad" | "flat";
 
 export type CritterEnemyKey =
-  // ---- critters
-  | "e_mushroom"
-  // ---- undead
-  | "e_skel_white" | "e_skel_gold"
   // ---- imps
-  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson" | "e_gnat"
-  // ---- vermin
-  | "e_bat"
-  // ---- slimes
-  | "e_sticklooter" | "e_slime_skull"
+  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson"
+  // ---- vermin & fliers
+  | "e_gnat" | "e_rat" | "e_bat" | "e_flyer"
+  // ---- slimes & fungus
+  | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
+  // ---- undead
+  | "e_skel_white" | "e_skel_gold" | "e_wizard"
+  // ---- golems
+  | "e_golem_blue" | "e_golem_ember" | "e_golem_armor"
+  // ---- heavies
+  | "e_bringer"
   // ---- bosses
-  | "e_nightborne" | "e_demon_slime"
-  // ---- tier ascensions (Brotato-style upgraded versions of the base chibi)
-  | "e_imp_infernal" | "e_bonelord" | "e_wraithwing"
-  // ---- graveyard shift
-  | "e_blob_gray" | "e_blob_pup" | "e_zombie" | "e_ghost" | "e_hound";
+  | "e_slime_boss" | "e_gollux" | "e_demon" | "e_demon_slime" | "e_nightborne";
 
 export type CritterHeroKey = "templar" | "reaper" | "oracle" | "seraph" | "warchief" | "sprout";
 
@@ -86,41 +84,52 @@ export const DEATH_FRAMES = 10;
 /* ------------------------------- the roster -------------------------------- */
 
 /**
- * The roster is built in Brotato-style FAMILIES: every family starts from the
- * same little chibi body and each tier is a visibly upgraded version of the
- * one below it — bigger, darker, more horns, claws, glow. Same DNA, clearly
- * stronger silhouette.
+ * The roster.
+ *
+ * Every foe here is drawn by the original hand-animated sprite strips in
+ * `enemy-art.ts` (idle 6 / walk 8 / death 10). The design entry below supplies
+ * the display name, the health-bar / particle colour, and a procedural
+ * stand-in used only if a strip ever fails to load.
+ *
+ * The line-up is grouped into families so each step up reads as a beefier
+ * version of a creature the player already knows.
  */
 export const CRITTER_ENEMIES: CritterDesign[] = [
-  /* ---------------- imp line: the baseline horde (tier 1 -> 4) ------------- */
+  /* ---------------- imp line: the baseline horde -------------------------- */
   { key: "e_imp_violet", name: "Imp Runt", body: "#a06bd6", shade: "#4c2c78", eye: "#f2e6ff", shape: "orb", crown: "none", mouth: "none", eyes: 2, arms: false, tail: false, size: 0.72, legs: "two", pattern: "none" },
   { key: "e_imp_bile", name: "Bile Imp", body: "#9fc24a", shade: "#4c6318", eye: "#eaffb8", shape: "orb", crown: "horns", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.84, legs: "two", pattern: "spots", brow: "angry" },
   { key: "e_imp_crimson", name: "Crimson Imp", body: "#d4544f", shade: "#6d1f1c", eye: "#ffe0d0", shape: "orb", crown: "hornsteel", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 0.96, legs: "two", pattern: "plates", brow: "angry" },
-  { key: "e_imp_infernal", name: "Infernal Imp", body: "#6a1f2e", shade: "#2c0a12", eye: "#ffb03a", shape: "orb", crown: "scythes", mouth: "maw", eyes: 2, arms: true, claws: true, tail: true, size: 1.16, legs: "two", pattern: "plates", brow: "angry", core: "#ff7a2a", neon: "#ff6a2a", glow: "rgba(255,106,42,0.4)" },
 
-  /* ---------------- ooze line: slimes that keep growing (1 -> 5) ---------- */
-  { key: "e_blob_pup", name: "Ooze Pup", body: "#7fd6a8", shade: "#2f6b4c", eye: "#0f2a1c", shape: "jelly", crown: "none", mouth: "smile", eyes: 2, arms: false, tail: false, size: 0.62, legs: "none", pattern: "none" },
-  { key: "e_sticklooter", name: "Sticklooter", body: "#6fc9d6", shade: "#256a76", eye: "#0f2a2e", shape: "jelly", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "spots" },
-  { key: "e_blob_gray", name: "Split Ooze", body: "#9aa3b4", shade: "#454c5c", eye: "#ffe07a", shape: "jelly", crown: "none", mouth: "grin", eyes: 3, arms: false, tail: false, size: 0.98, legs: "none", pattern: "spots", brow: "flat" },
-  { key: "e_slime_skull", name: "Skull Ooze", body: "#9fb6d8", shade: "#3c4a68", eye: "#ff7a4a", shape: "jelly", crown: "shards", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.1, legs: "none", pattern: "plates", brow: "angry", core: "#ff7a4a", glow: "rgba(159,182,216,0.32)" },
-  { key: "e_demon_slime", name: "Demon Slime", body: "#c33f5c", shade: "#5c1424", eye: "#ffd24a", shape: "blob", crown: "horns", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.8, legs: "two", pattern: "plates", brow: "angry", core: "#ffd24a", neon: "#ff4d6a", glow: "rgba(195,63,92,0.45)" },
-
-  /* ---------------- winged line: fast chip damage (1 -> 3) ---------------- */
+  /* ---------------- vermin & fliers: fast chip damage --------------------- */
   { key: "e_gnat", name: "Fuzz Stinger", body: "#c9b273", shade: "#6d5c2c", eye: "#fff3c9", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.66, legs: "none", pattern: "none", wings: true },
-  { key: "e_bat", name: "Night Bat", body: "#6b5aa8", shade: "#2f2650", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.82, legs: "none", pattern: "none", wings: true, brow: "angry", glow: "rgba(107,90,168,0.32)" },
-  { key: "e_wraithwing", name: "Wraithwing", body: "#3a2f5c", shade: "#171029", eye: "#7cf7d8", shape: "orb", crown: "rings", mouth: "maw", eyes: 2, arms: false, tail: true, size: 1.02, legs: "none", pattern: "none", wings: true, brow: "angry", core: "#7cf7d8", neon: "#6ef0d0", glow: "rgba(124,247,216,0.34)" },
+  { key: "e_rat", name: "Gloom Stalker", body: "#5b5f76", shade: "#252838", eye: "#ff7a9c", shape: "wide", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.78, legs: "many", pattern: "none", brow: "angry" },
+  { key: "e_bat", name: "Night Bat", body: "#6b5aa8", shade: "#2f2650", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.82, legs: "none", pattern: "none", wings: true, brow: "angry" },
+  { key: "e_flyer", name: "Sporewing", body: "#a86a44", shade: "#4d2c1a", eye: "#f0e2c0", shape: "mound", crown: "fin", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: true, size: 1.02, legs: "none", pattern: "plates", wings: true, brow: "angry" },
 
-  /* ---------------- bone line: armoured mid-game (2 -> 4) ----------------- */
+  /* ---------------- slimes & fungus --------------------------------------- */
+  { key: "e_sticklooter", name: "Sticklooter", body: "#6fc9d6", shade: "#256a76", eye: "#0f2a2e", shape: "jelly", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "spots" },
+  { key: "e_slime_skull", name: "Skull Ooze", body: "#9fb6d8", shade: "#3c4a68", eye: "#ff7a4a", shape: "jelly", crown: "shards", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.1, legs: "none", pattern: "plates", brow: "angry" },
+  { key: "e_mushroom", name: "Spore Cap", body: "#d95f5f", shade: "#7a2c2c", eye: "#fff0d0", shape: "mound", crown: "none", mouth: "grin", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "spots" },
+
+  /* ---------------- undead ------------------------------------------------ */
   { key: "e_skel_white", name: "Bone Soldier", body: "#e8e8ee", shade: "#8b8b98", eye: "#9fd8ff", shape: "tall", crown: "none", mouth: "fangs", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "none", brow: "angry" },
-  { key: "e_skel_gold", name: "Gilded Bones", body: "#e8c56a", shade: "#8c6f1f", eye: "#fff0b8", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.08, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(232,197,106,0.35)" },
-  { key: "e_bonelord", name: "Bone Lord", body: "#b9c4d6", shade: "#4a5468", eye: "#b04dff", shape: "tall", crown: "hornsteel", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.3, legs: "two", pattern: "plates", brow: "angry", core: "#b04dff", neon: "#a04dff", glow: "rgba(176,77,255,0.38)" },
+  { key: "e_skel_gold", name: "Gilded Bones", body: "#e8c56a", shade: "#8c6f1f", eye: "#fff0b8", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.08, legs: "two", pattern: "plates", brow: "angry" },
+  { key: "e_wizard", name: "Grave Warlock", body: "#5a4a9c", shade: "#241d49", eye: "#8bf7c8", shape: "tall", crown: "fin", mouth: "grin", eyes: 2, arms: true, tail: false, size: 1.05, legs: "two", pattern: "none", brow: "flat", core: "#8bf7c8" },
 
-  /* ---------------- rot line: heavies and stalkers ------------------------ */
-  { key: "e_mushroom", name: "Spore Cap", body: "#d95f5f", shade: "#7a2c2c", eye: "#fff0d0", shape: "mound", crown: "none", mouth: "grin", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "spots", glow: "rgba(217,95,95,0.35)" },
-  { key: "e_zombie", name: "Shambler", body: "#7fa15e", shade: "#3a4c26", eye: "#ffe9a8", shape: "tall", crown: "none", mouth: "fangs", eyes: 2, arms: true, tail: false, size: 1.02, legs: "two", pattern: "stripes", brow: "sad" },
-  { key: "e_hound", name: "Rot Hound", body: "#8a5a4a", shade: "#3c2320", eye: "#ff8a4a", shape: "wide", crown: "spikes", mouth: "maw", eyes: 2, arms: false, claws: true, tail: true, size: 1, legs: "many", pattern: "stripes", brow: "angry" },
-  { key: "e_ghost", name: "Pale Echo", body: "#cfe4ef", shade: "#6f8a9c", eye: "#3a2f5c", shape: "ghost", crown: "none", mouth: "maw", eyes: 2, arms: false, tail: false, size: 1, legs: "none", pattern: "none", brow: "sad", neon: "#bfe9ff", glow: "rgba(191,233,255,0.32)" },
-  { key: "e_nightborne", name: "NightBorne", body: "#3b2a55", shade: "#170f26", eye: "#ff3b5c", shape: "tall", crown: "spikes", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.7, legs: "two", pattern: "plates", brow: "angry", core: "#ff3b5c", neon: "#ff3b5c", glow: "rgba(255,59,92,0.4)" },
+  /* ---------------- golems: armoured mid-game ----------------------------- */
+  { key: "e_golem_blue", name: "Frost Golem", body: "#6aa8d6", shade: "#254a6b", eye: "#eaf6ff", shape: "block", crown: "shards", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.14, legs: "two", pattern: "plates", brow: "flat" },
+  { key: "e_golem_ember", name: "Ember Golem", body: "#c9552f", shade: "#5f1d0e", eye: "#ffd24a", shape: "block", crown: "shards", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.2, legs: "two", pattern: "plates", brow: "angry", core: "#ff8a2a" },
+  { key: "e_golem_armor", name: "Bulwark Golem", body: "#8a93a6", shade: "#3c4353", eye: "#ffe07a", shape: "block", crown: "pavise", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.32, legs: "two", pattern: "plates", brow: "flat" },
+
+  /* ---------------- heavies ----------------------------------------------- */
+  { key: "e_bringer", name: "Bringer of Death", body: "#4a3a6b", shade: "#1d1530", eye: "#7cf7d8", shape: "tall", crown: "scythes", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.4, legs: "two", pattern: "plates", brow: "angry", core: "#7cf7d8" },
+
+  /* ---------------- bosses ------------------------------------------------ */
+  { key: "e_slime_boss", name: "Magma Sovereign", body: "#e0762c", shade: "#6b2a0c", eye: "#ffe07a", shape: "blob", crown: "crown", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.6, legs: "two", pattern: "plates", glow: "rgba(224,118,44,0.42)" },
+  { key: "e_gollux", name: "Gollux", body: "#b58a4a", shade: "#57391a", eye: "#ff7a4a", shape: "block", crown: "hornsteel", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.7, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(181,138,74,0.42)" },
+  { key: "e_demon", name: "Abyss Demon", body: "#8c2f3c", shade: "#3a0e16", eye: "#ffb03a", shape: "tall", crown: "horns", mouth: "maw", eyes: 2, arms: true, claws: true, tail: true, size: 1.75, legs: "two", pattern: "plates", brow: "angry", core: "#ff7a2a", glow: "rgba(255,106,42,0.4)" },
+  { key: "e_demon_slime", name: "Demon Slime", body: "#c33f5c", shade: "#5c1424", eye: "#ffd24a", shape: "blob", crown: "horns", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.8, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(195,63,92,0.45)" },
+  { key: "e_nightborne", name: "NightBorne", body: "#3b2a55", shade: "#170f26", eye: "#ff3b5c", shape: "tall", crown: "spikes", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.7, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(255,59,92,0.4)" },
 ];
 
 

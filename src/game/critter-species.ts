@@ -30,35 +30,42 @@ interface CritterTuning {
 }
 
 const TUNING: Record<CritterEnemyKey, CritterTuning> = {
-  // ---- imp line (tier 1 -> 4): the backbone of every wave
+  // ---- imp line: the backbone of every wave
   e_imp_violet: { tier: 1, radius: 24, speed: [132, 170], hp: 8, score: 13, height: 116, damage: 9, minWave: 1, weight: 3.4 },
   e_imp_bile: { tier: 2, radius: 27, speed: [118, 152], hp: 15, score: 26, height: 128, damage: 12, minWave: 3, weight: 2.8 },
   e_imp_crimson: { tier: 3, radius: 30, speed: [126, 162], hp: 26, score: 48, height: 142, damage: 16, minWave: 6, weight: 2.2 },
-  e_imp_infernal: { tier: 4, radius: 34, speed: [112, 144], hp: 48, score: 96, height: 162, damage: 21, minWave: 10, weight: 1.5 },
 
-  // ---- ooze line (tier 1 -> 5)
-  e_blob_pup: { tier: 1, radius: 17, speed: [120, 158], hp: 5, score: 10, height: 78, damage: 7, minWave: 2, weight: 0.6 },
-  e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.0 },
-  e_blob_gray: { tier: 2, radius: 29, speed: [80, 102], hp: 22, score: 38, height: 120, damage: 12, minWave: 4, weight: 2.2 },
-  e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 7, weight: 1.8 },
-  e_demon_slime: { tier: 5, radius: 46, speed: [70, 92], hp: 175, score: 600, height: 226, damage: 32, minWave: 999, weight: 0 },
-
-  // ---- winged line (tier 1 -> 3)
+  // ---- vermin & fliers
   e_gnat: { tier: 1, radius: 18, speed: [136, 176], hp: 6, score: 15, height: 92, damage: 8, minWave: 1, weight: 2.8 },
+  e_rat: { tier: 1, radius: 20, speed: [150, 190], hp: 7, score: 14, height: 90, damage: 8, minWave: 1, weight: 2.6 },
+  
   e_bat: { tier: 2, radius: 22, speed: [146, 188], hp: 13, score: 28, height: 106, damage: 11, minWave: 4, weight: 2.4 },
-  e_wraithwing: { tier: 3, radius: 26, speed: [152, 196], hp: 24, score: 62, height: 124, damage: 15, minWave: 8, weight: 1.6 },
+  e_flyer: { tier: 3, radius: 26, speed: [140, 180], hp: 26, score: 62, height: 126, damage: 15, minWave: 8, weight: 1.6 },
 
-  // ---- bone line (tier 2 -> 4)
+  // ---- slimes & fungus
+  e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.0 },
+  e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 7, weight: 1.8 },
+  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 3, weight: 2.2 },
+
+  // ---- undead
   e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 5, weight: 2.2 },
   e_skel_gold: { tier: 3, radius: 28, speed: [112, 152], hp: 32, score: 54, height: 144, damage: 17, minWave: 8, weight: 1.7 },
-  e_bonelord: { tier: 4, radius: 33, speed: [100, 130], hp: 58, score: 110, height: 168, damage: 22, minWave: 12, weight: 1.2 },
+  e_wizard: { tier: 3, radius: 27, speed: [86, 112], hp: 28, score: 66, height: 140, damage: 16, minWave: 9, weight: 1.5 },
 
-  // ---- rot line
-  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 3, weight: 2.2 },
-  e_zombie: { tier: 2, radius: 27, speed: [74, 98], hp: 26, score: 36, height: 138, damage: 15, minWave: 3, weight: 2.4 },
-  e_hound: { tier: 3, radius: 26, speed: [152, 192], hp: 24, score: 56, height: 114, damage: 16, minWave: 6, weight: 1.6 },
-  e_ghost: { tier: 3, radius: 25, speed: [106, 136], hp: 22, score: 60, height: 128, damage: 15, minWave: 9, weight: 1.4 },
-  e_nightborne: { tier: 5, radius: 42, speed: [86, 112], hp: 165, score: 560, height: 220, damage: 30, minWave: 999, weight: 0 },
+  // ---- golems
+  e_golem_blue: { tier: 3, radius: 31, speed: [78, 100], hp: 44, score: 70, height: 148, damage: 18, minWave: 7, weight: 1.6 },
+  e_golem_ember: { tier: 4, radius: 33, speed: [84, 108], hp: 60, score: 104, height: 158, damage: 22, minWave: 11, weight: 1.3 },
+  e_golem_armor: { tier: 4, radius: 36, speed: [66, 86], hp: 92, score: 132, height: 172, damage: 25, minWave: 13, weight: 1.0 },
+
+  // ---- heavies
+  e_bringer: { tier: 4, radius: 34, speed: [96, 124], hp: 76, score: 140, height: 176, damage: 24, minWave: 14, weight: 1.0 },
+
+  // ---- bosses (never rolled by the wave pool)
+  e_slime_boss: { tier: 5, radius: 44, speed: [66, 88], hp: 150, score: 520, height: 214, damage: 28, minWave: 999, weight: 0 },
+  e_gollux: { tier: 5, radius: 46, speed: [62, 82], hp: 260, score: 700, height: 232, damage: 34, minWave: 999, weight: 0 },
+  e_demon: { tier: 5, radius: 44, speed: [88, 116], hp: 320, score: 820, height: 228, damage: 36, minWave: 999, weight: 0 },
+  e_demon_slime: { tier: 5, radius: 46, speed: [70, 92], hp: 175, score: 600, height: 226, damage: 32, minWave: 999, weight: 0 },
+  e_nightborne: { tier: 5, radius: 42, speed: [86, 112], hp: 420, score: 1000, height: 220, damage: 38, minWave: 999, weight: 0 },
 };
 
 
