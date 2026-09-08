@@ -24,18 +24,14 @@ export type CritterPattern = "none" | "spots" | "stripes" | "plates" | "belly";
 export type CritterBrow = "none" | "angry" | "sad" | "flat";
 
 export type CritterEnemyKey =
-  // ---- imps
-  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson"
   // ---- vermin & fliers
-  | "e_gnat" | "e_rat" | "e_bat" | "e_flyer"
+  | "e_gnat" | "e_bat" | "e_flyer"
   // ---- slimes & fungus
   | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
   // ---- undead
   | "e_skel_white" | "e_skel_gold"
-  // ---- my own additions
-  | "e_wisp" | "e_beetle"
-  // ---- bosses
-  | "e_slime_boss" | "e_boss_spore" | "e_boss_bone" | "e_boss_imp";
+  // ---- boss
+  | "e_boss_bone";
 
 export type CritterHeroKey = "templar" | "reaper" | "oracle" | "seraph" | "warchief" | "sprout";
 
@@ -93,14 +89,8 @@ export const DEATH_FRAMES = 10;
  * version of a creature the player already knows.
  */
 export const CRITTER_ENEMIES: CritterDesign[] = [
-  /* ---------------- imp line: the baseline horde -------------------------- */
-  { key: "e_imp_violet", name: "Imp Runt", body: "#a06bd6", shade: "#4c2c78", eye: "#f2e6ff", shape: "orb", crown: "none", mouth: "none", eyes: 2, arms: false, tail: false, size: 0.72, legs: "two", pattern: "none" },
-  { key: "e_imp_bile", name: "Bile Imp", body: "#9fc24a", shade: "#4c6318", eye: "#eaffb8", shape: "orb", crown: "horns", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.84, legs: "two", pattern: "spots", brow: "angry" },
-  { key: "e_imp_crimson", name: "Crimson Imp", body: "#d4544f", shade: "#6d1f1c", eye: "#ffe0d0", shape: "orb", crown: "hornsteel", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 0.96, legs: "two", pattern: "plates", brow: "angry" },
-
   /* ---------------- vermin & fliers: fast chip damage --------------------- */
   { key: "e_gnat", name: "Fuzz Stinger", body: "#c9b273", shade: "#6d5c2c", eye: "#fff3c9", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.66, legs: "none", pattern: "none", wings: true },
-  { key: "e_rat", name: "Gloom Stalker", body: "#5b5f76", shade: "#252838", eye: "#ff7a9c", shape: "wide", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.78, legs: "many", pattern: "none", brow: "angry" },
   { key: "e_bat", name: "Night Bat", body: "#6b5aa8", shade: "#2f2650", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.82, legs: "none", pattern: "none", wings: true, brow: "angry" },
   { key: "e_flyer", name: "Sporewing", body: "#a86a44", shade: "#4d2c1a", eye: "#f0e2c0", shape: "mound", crown: "fin", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: true, size: 1.02, legs: "none", pattern: "plates", wings: true, brow: "angry" },
 
@@ -113,15 +103,8 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   { key: "e_skel_white", name: "Bone Soldier", body: "#e8e8ee", shade: "#8b8b98", eye: "#9fd8ff", shape: "tall", crown: "none", mouth: "fangs", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "none", brow: "angry" },
   { key: "e_skel_gold", name: "Gilded Bones", body: "#e8c56a", shade: "#8c6f1f", eye: "#fff0b8", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.08, legs: "two", pattern: "plates", brow: "angry" },
 
-  /* ---------------- newcomers --------------------------------------------- */
-  { key: "e_wisp", name: "Frost Wisp", body: "#8fe4f0", shade: "#2b7f92", eye: "#ffffff", shape: "orb", crown: "shards", mouth: "none", eyes: 2, arms: false, tail: false, size: 0.7, legs: "none", pattern: "none", wings: true, glow: "rgba(143,228,240,0.4)" },
-  { key: "e_beetle", name: "Shell Grunt", body: "#2f7a4a", shade: "#143a24", eye: "#f6f0d8", shape: "wide", crown: "fin", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.0, legs: "many", pattern: "plates", brow: "angry" },
-
-  /* ---------------- bosses ------------------------------------------------ */
-  { key: "e_slime_boss", name: "Emberforge Warlord", body: "#e0762c", shade: "#6b2a0c", eye: "#ffe07a", shape: "blob", crown: "crown", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.6, legs: "two", pattern: "plates", glow: "rgba(224,118,44,0.42)" },
-  { key: "e_boss_spore", name: "Sporelord Gulm", body: "#e0603f", shade: "#6d2418", eye: "#fff0d0", shape: "mound", crown: "crown", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.7, legs: "two", pattern: "spots", glow: "rgba(224,96,63,0.4)" },
+  /* ---------------- boss: the commander ----------------------------------- */
   { key: "e_boss_bone", name: "Marshal Ossein", body: "#f0cd74", shade: "#8c6f1f", eye: "#fff6cf", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.75, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(240,205,116,0.4)" },
-  { key: "e_boss_imp", name: "Crimson Tyrant Vorn", body: "#e0554f", shade: "#6d1f1c", eye: "#ffe0d0", shape: "orb", crown: "hornsteel", mouth: "maw", eyes: 2, arms: true, claws: true, tail: true, size: 1.8, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(224,85,79,0.42)" },
 ];
 
 
