@@ -1493,7 +1493,7 @@ export function arenaEdgePoint(): Vec {
  */
 function targetAlive(s: GameState) {
   // Endless keeps escalating instead of flattening into a capped late-game.
-  // Survival is deliberately pressure-heavy so the 23-wave clear is earned.
+  // Survival is deliberately pressure-heavy so the 20-wave clear is earned.
   const base =
     4 +
     (s.wave - 1) * (s.mode === "endless" ? 1.8 : 1.65) +
@@ -1677,20 +1677,32 @@ function waveBurst(s: GameState) {
   for (let i = 0; i < n; i++) spawnEnemy(s);
   const survivalBoss =
     s.mode === "survival" &&
-    (s.wave === 5 || s.wave === 10 || s.wave === 16 || s.wave === 20 || s.wave === 23);
+    (s.wave === 5 || s.wave === 10 || s.wave === 16 || s.wave === 20);
   const regularBoss = s.mode === "boss" && s.wave % 3 === 0;
   if (survivalBoss || regularBoss) {
-    // Bosses alternate between the stone titan and the NightBorne revenant.
-    const bossSpecies = s.wave % 2 === 0 ? "e_nightborne" : "e_demon_slime";
+    // Survival's four bosses are all different creatures, each a grown-up
+    // version of a family the player has already been fighting.
+    const bossSpecies =
+      s.wave === 5
+        ? "e_demon_slime"
+        : s.wave === 10
+          ? "e_bonelord"
+          : s.wave === 16
+            ? "e_imp_infernal"
+            : s.wave === 20
+              ? "e_nightborne"
+              : s.wave % 2 === 0
+                ? "e_nightborne"
+                : "e_demon_slime";
     spawnEnemy(s, true, {
       species: bossSpecies,
-      scale: s.wave === 5 ? 1.35 : s.wave === 10 || s.wave === 16 ? 1.8 : 2.35,
+      scale: s.wave === 5 ? 1.45 : s.wave === 10 ? 1.85 : s.wave === 16 ? 2.05 : 2.45,
     });
     s.popups.push({
       x: s.player.x,
       y: s.player.y - 150,
       life: 2.4,
-      text: `${s.wave === 5 ? "EASY" : s.wave === 16 ? "ELITE" : s.wave === 23 ? "FINAL" : "NORMAL"} BOSS`,
+      text: `${s.wave === 5 ? "EASY" : s.wave === 16 ? "ELITE" : s.wave === 20 ? "FINAL" : "NORMAL"} BOSS`,
     });
   }
 }
@@ -2095,7 +2107,7 @@ function killEnemy(s: GameState, e: Enemy) {
     }
   }
   if (e.role === "brood") s.popups.push({ x: e.x, y: e.y - 90, life: 2, text: "NEST DESTROYED" });
-  if (s.mode === "survival" && s.wave === 23 && (e.species === "e_demon_slime" || e.species === "e_nightborne")) {
+  if (s.mode === "survival" && s.wave === 20 && e.species === "e_nightborne") {
     s.won = true;
     s.over = true;
     s.popups.push({ x: e.x, y: e.y - 120, life: 3, text: "SURVIVAL CLEARED!" });
@@ -2327,8 +2339,8 @@ export function update(s: GameState, input: Input, dt: number) {
   /* --------------------------------- waves --------------------------------- */
   s.waveTimer -= dt;
   if (s.waveTimer <= 0) {
-    if (s.mode === "survival" && s.wave >= 23) {
-      // Wave 23 only ends when its final boss is defeated.
+    if (s.mode === "survival" && s.wave >= 20) {
+      // Wave 20 only ends when its final boss is defeated.
       s.waveTimer = 9999;
     } else {
       // wave cleared: hold the fight and open the between-wave armoury
