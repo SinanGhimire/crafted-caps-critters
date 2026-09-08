@@ -1268,6 +1268,14 @@ function ruggedPath(ctx: CanvasRenderingContext2D) {
 
 /* ------------------------------- state factory ------------------------------ */
 
+/** Permanent account bonuses, refreshed from the profile before every run. */
+let META: MetaBonus = NO_BONUS;
+
+/** Apply the player's permanent progression bonuses to future runs. */
+export function setMetaBonus(bonus: MetaBonus) {
+  META = bonus;
+}
+
 export function createState(
   character: CharacterKey = "bald",
   mode: RunMode = "survival",
@@ -1280,11 +1288,11 @@ export function createState(
   const c = CHARACTERS[skin];
   const decor: Decor[] = [];
 
-  const maxHp = Math.round(def.hp * def.hpMult);
-  const speed = Math.round(def.speed * def.speedMult);
+  const maxHp = Math.round(def.hp * def.hpMult * META.hpMult);
+  const speed = Math.round(def.speed * def.speedMult * META.speedMult);
   const mods = baseMods();
-  mods.crit += def.crit;
-  mods.lifesteal += def.lifesteal;
+  mods.crit += def.crit + META.crit;
+  mods.lifesteal += def.lifesteal + META.lifesteal;
 
   const startTurrets: Turret[] = [];
   for (let i = 0; i < def.turrets; i++) {
@@ -1322,7 +1330,7 @@ export function createState(
       animT: 0,
       weapon: WEAPONS[def.weapon] ? def.weapon : "pistol",
       shield: 0,
-      damageMult: def.damage * def.damageMult,
+      damageMult: def.damage * def.damageMult * META.damageMult,
       rateMult: 1,
       character: skin,
       class: cls,
@@ -1355,7 +1363,7 @@ export function createState(
     itemOffers: [],
     ownedItems: {},
     shopRerolls: 0,
-    materials: def.startingMaterials,
+    materials: def.startingMaterials + META.materials,
     mode,
     fireCooldown: 0,
     focusAim: false,
