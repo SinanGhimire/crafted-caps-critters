@@ -1,6 +1,6 @@
 import { createFileRoute } from "@tanstack/react-router";
 import { useEffect, useState } from "react";
-import { echoStrips, IDLE_FRAMES } from "@/game/echo-art";
+import { ENEMY_IMG } from "@/game/enemy-images";
 import { CRITTER_ENEMIES } from "@/game/critters";
 import { ClassPortrait } from "@/components/ClassPortrait";
 import { CLASSES, type ClassKey } from "@/game/classes";
@@ -29,10 +29,10 @@ function Sheet() {
               style={{
                 width: 190,
                 height: 150,
-                backgroundImage: ready ? `url(${echoStrips(d)[0]})` : undefined,
-                backgroundSize: `${IDLE_FRAMES * 100}% 100%`,
+                backgroundImage: ready && ENEMY_IMG[d.key] ? `url(${ENEMY_IMG[d.key]})` : undefined,
+                backgroundSize: "contain",
                 backgroundRepeat: "no-repeat",
-                backgroundPosition: "left top",
+                backgroundPosition: "center",
               }}
             />
             {d.name}
