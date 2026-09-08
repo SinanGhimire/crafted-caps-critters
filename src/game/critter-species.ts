@@ -31,7 +31,6 @@ interface CritterTuning {
 
 const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   // ---- vermin & fliers
-  e_flyer: { tier: 2, radius: 26, speed: [140, 180], hp: 22, score: 48, height: 126, damage: 13, minWave: 3, weight: 2.6 },
 
   // ---- crawlers
   e_spider: { tier: 1, radius: 24, speed: [126, 168], hp: 13, score: 26, height: 104, damage: 10, minWave: 1, weight: 3.4 },
@@ -43,7 +42,6 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   e_brute: { tier: 4, radius: 38, speed: [70, 92], hp: 82, score: 140, height: 176, damage: 24, minWave: 9, weight: 1.1 },
 
   // ---- slimes & fungus
-  e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.4 },
   e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 6, weight: 2.0 },
   e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 2, weight: 3.0 },
 

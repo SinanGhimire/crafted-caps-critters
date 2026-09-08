@@ -6,4 +6,4 @@ import type { CritterEnemyKey } from "./critters";
  */
 
 /** Foes that stay airborne: they hover instead of stepping. */
-export const FLYING_FOES = new Set<CritterEnemyKey>(["e_flyer"]);
+export const FLYING_FOES = new Set<CritterEnemyKey>(["e_wisp", "e_furbat"]);

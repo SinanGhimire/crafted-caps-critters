@@ -109,7 +109,6 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   { key: "e_worm", name: "Gnaw Grub", body: "#ef8fa4", shade: "#8f4257", eye: "#ffffff", shape: "tall", crown: "none", mouth: "maw", eyes: 2, arms: false, tail: false, size: 0.95, legs: "none", pattern: "none" },
 
   /* ---------------- slimes & fungus --------------------------------------- */
-  { key: "e_sticklooter", name: "Sticklooter", body: "#6fc9d6", shade: "#256a76", eye: "#0f2a2e", shape: "jelly", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "spots" },
   { key: "e_slime_skull", name: "Skull Ooze", body: "#9fb6d8", shade: "#3c4a68", eye: "#ff7a4a", shape: "jelly", crown: "shards", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 1.1, legs: "none", pattern: "plates", brow: "angry" },
   { key: "e_mushroom", name: "Spore Cap", body: "#d95f5f", shade: "#7a2c2c", eye: "#fff0d0", shape: "mound", crown: "none", mouth: "grin", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "spots" },
 
