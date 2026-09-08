@@ -1680,11 +1680,23 @@ function waveBurst(s: GameState) {
     (s.wave === 5 || s.wave === 10 || s.wave === 16 || s.wave === 20);
   const regularBoss = s.mode === "boss" && s.wave % 3 === 0;
   if (survivalBoss || regularBoss) {
-    // Bosses alternate between the stone titan and the NightBorne revenant.
-    const bossSpecies = s.wave % 2 === 0 ? "e_nightborne" : "e_demon_slime";
+    // Survival's four bosses are all different creatures, each a grown-up
+    // version of a family the player has already been fighting.
+    const bossSpecies =
+      s.wave === 5
+        ? "e_demon_slime"
+        : s.wave === 10
+          ? "e_bonelord"
+          : s.wave === 16
+            ? "e_imp_infernal"
+            : s.wave === 20
+              ? "e_nightborne"
+              : s.wave % 2 === 0
+                ? "e_nightborne"
+                : "e_demon_slime";
     spawnEnemy(s, true, {
       species: bossSpecies,
-      scale: s.wave === 5 ? 1.35 : s.wave === 10 || s.wave === 16 ? 1.8 : 2.35,
+      scale: s.wave === 5 ? 1.45 : s.wave === 10 ? 1.85 : s.wave === 16 ? 2.05 : 2.45,
     });
     s.popups.push({
       x: s.player.x,
