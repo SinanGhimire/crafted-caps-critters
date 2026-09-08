@@ -6,7 +6,6 @@ import {
   critterSrc,
   type CritterEnemyKey,
 } from "./critters";
-import { ENEMY_ART } from "./enemy-art";
 
 
 
@@ -85,12 +84,12 @@ function proceduralActorSrc(key: ActorKey): [string, string, string] {
   return design ? critterSrc(design) : ["", "", ""];
 }
 
-/** Hand-drawn strips when the enemy has art; procedural critter renderer otherwise. */
+/**
+ * Every foe is animated procedurally — no imported sprite strips — so nothing
+ * ever glides across the arena as a static decal.
+ */
 async function actorSrc(key: ActorKey): Promise<[string, string, string]> {
-  const art = ENEMY_ART[key];
-  if (art) return art;
   return proceduralActorSrc(key);
-
 }
 
 
