@@ -50,22 +50,12 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   // ---- undead
   e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 5, weight: 2.2 },
   e_skel_gold: { tier: 3, radius: 28, speed: [112, 152], hp: 32, score: 54, height: 144, damage: 17, minWave: 8, weight: 1.7 },
-  e_wizard: { tier: 3, radius: 27, speed: [86, 112], hp: 28, score: 66, height: 140, damage: 16, minWave: 9, weight: 1.5 },
-
-  // ---- golems
-  e_golem_blue: { tier: 3, radius: 31, speed: [78, 100], hp: 44, score: 70, height: 148, damage: 18, minWave: 7, weight: 1.6 },
-  e_golem_ember: { tier: 4, radius: 33, speed: [84, 108], hp: 60, score: 104, height: 158, damage: 22, minWave: 11, weight: 1.3 },
-  e_golem_armor: { tier: 4, radius: 36, speed: [66, 86], hp: 92, score: 132, height: 172, damage: 25, minWave: 13, weight: 1.0 },
-
-  // ---- heavies
-  e_bringer: { tier: 4, radius: 34, speed: [96, 124], hp: 76, score: 140, height: 176, damage: 24, minWave: 14, weight: 1.0 },
 
   // ---- bosses (never rolled by the wave pool)
   e_slime_boss: { tier: 5, radius: 44, speed: [66, 88], hp: 150, score: 520, height: 214, damage: 28, minWave: 999, weight: 0 },
-  e_gollux: { tier: 5, radius: 46, speed: [62, 82], hp: 260, score: 700, height: 232, damage: 34, minWave: 999, weight: 0 },
-  e_demon: { tier: 5, radius: 44, speed: [88, 116], hp: 320, score: 820, height: 228, damage: 36, minWave: 999, weight: 0 },
-  e_demon_slime: { tier: 5, radius: 46, speed: [70, 92], hp: 175, score: 600, height: 226, damage: 32, minWave: 999, weight: 0 },
-  e_nightborne: { tier: 5, radius: 42, speed: [86, 112], hp: 420, score: 1000, height: 220, damage: 38, minWave: 999, weight: 0 },
+  e_boss_spore: { tier: 5, radius: 45, speed: [72, 94], hp: 260, score: 700, height: 224, damage: 32, minWave: 999, weight: 0 },
+  e_boss_bone: { tier: 5, radius: 44, speed: [88, 116], hp: 340, score: 840, height: 228, damage: 35, minWave: 999, weight: 0 },
+  e_boss_imp: { tier: 5, radius: 46, speed: [84, 112], hp: 460, score: 1100, height: 232, damage: 38, minWave: 999, weight: 0 },
 };
 
 

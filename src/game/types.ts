@@ -427,6 +427,10 @@ export interface GameState {
   arsenal: WeaponKey[];
   /** weapons on sale in the between-wave shop */
   shopOffers: WeaponKey[];
+  /** items on sale in the between-wave shop */
+  itemOffers: string[];
+  /** permanent run items bought, id -> copies */
+  ownedItems: Record<string, number>;
   /** rerolls already bought in the current shop visit */
   shopRerolls: number;
   materials: number;

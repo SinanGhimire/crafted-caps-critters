@@ -6,6 +6,7 @@ import { baseMods } from "./types";
 import { applyUpgrade, rollUpgrades, xpForLevel, RARITY_COLOR, UPGRADE_MAP } from "./upgrades";
 import { CRITTER_KEYS, CRITTER_STATS, CRITTER_TIER } from "./critter-species";
 import { AI_ROLE } from "./ai";
+import { ITEM_MAP, itemPrice, rollItems } from "./shop-items";
 import { CLASSES, classForSkin, type ClassKey } from "./classes";
 import { drawWorn, warmAccessories } from "./accessory-images";
 import type {
@@ -674,6 +675,7 @@ export function openShop(s: GameState) {
   s.phase = "shop";
   s.shopRerolls = 0;
   s.shopOffers = rollSlotOffers(s);
+  s.itemOffers = rollItems(s.ownedItems, 4);
   s.sfx.push("level");
 }
 
@@ -683,6 +685,7 @@ export function rerollShop(s: GameState) {
   s.materials -= cost;
   s.shopRerolls += 1;
   s.shopOffers = rollSlotOffers(s);
+  s.itemOffers = rollItems(s.ownedItems, 4);
   return true;
 }
 
@@ -698,6 +701,21 @@ export function buyWeapon(s: GameState, key: WeaponKey) {
   return true;
 }
 
+export function buyItem(s: GameState, id: string) {
+  const item = ITEM_MAP[id];
+  if (!item) return false;
+  const owned = s.ownedItems[id] ?? 0;
+  if (owned >= item.maxStacks) return false;
+  const cost = itemPrice(id, s.wave, owned);
+  if (s.materials < cost) return false;
+  s.materials -= cost;
+  s.ownedItems[id] = owned + 1;
+  item.apply(s);
+  s.itemOffers = s.itemOffers.filter((k) => k !== id);
+  s.sfx.push("pickup");
+  return true;
+}
+
 export function equipWeapon(s: GameState, key: WeaponKey) {
   if (!s.arsenal.includes(key)) return false;
   s.player.weapon = key;
@@ -708,6 +726,7 @@ export function equipWeapon(s: GameState, key: WeaponKey) {
 export function closeShop(s: GameState) {
   s.phase = "wave";
   s.shopOffers = [];
+  s.itemOffers = [];
   advanceWave(s);
 }
 
@@ -1341,6 +1360,8 @@ export function createState(
     arsenal: [WEAPONS[def.weapon] ? def.weapon : "pistol"],
     class: cls,
     shopOffers: [],
+    itemOffers: [],
+    ownedItems: {},
     shopRerolls: 0,
     materials: def.startingMaterials,
     mode,
@@ -1686,14 +1707,14 @@ function waveBurst(s: GameState) {
       s.wave === 5
         ? "e_slime_boss"
         : s.wave === 10
-          ? "e_gollux"
+          ? "e_boss_spore"
           : s.wave === 16
-            ? "e_demon"
+            ? "e_boss_bone"
             : s.wave === 20
-              ? "e_nightborne"
+              ? "e_boss_imp"
               : s.wave % 2 === 0
-                ? "e_demon"
-                : "e_demon_slime";
+                ? "e_boss_bone"
+                : "e_boss_spore";
     spawnEnemy(s, true, {
       species: bossSpecies,
       scale: s.wave === 5 ? 1.45 : s.wave === 10 ? 1.85 : s.wave === 16 ? 2.05 : 2.45,
@@ -2107,7 +2128,7 @@ function killEnemy(s: GameState, e: Enemy) {
     }
   }
   if (e.role === "brood") s.popups.push({ x: e.x, y: e.y - 90, life: 2, text: "NEST DESTROYED" });
-  if (s.mode === "survival" && s.wave === 20 && e.species === "e_nightborne") {
+  if (s.mode === "survival" && s.wave === 20 && e.species === "e_boss_imp") {
     s.won = true;
     s.over = true;
     s.popups.push({ x: e.x, y: e.y - 120, life: 3, text: "SURVIVAL CLEARED!" });

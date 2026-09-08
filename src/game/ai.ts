@@ -27,22 +27,12 @@ export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
   // undead
   e_skel_white: "chase",
   e_skel_gold: "charge",
-  e_wizard: "shooter",
-
-  // golems
-  e_golem_blue: "chase",
-  e_golem_ember: "charge",
-  e_golem_armor: "shield",
-
-  // heavies
-  e_bringer: "charge",
 
   // bosses
   e_slime_boss: "rhino",
-  e_gollux: "titan",
-  e_demon: "charge",
-  e_demon_slime: "rhino",
-  e_nightborne: "dash",
+  e_boss_spore: "titan",
+  e_boss_bone: "charge",
+  e_boss_imp: "dash",
 };
 
 /** One-line mechanic blurb — used by the bestiary UI. */

@@ -22,3 +22,15 @@ cd <repository-name>
 npm i
 npm run dev
 ```
+
+## Running Echo Vanguards on Android
+
+1. Export the project to GitHub and `git pull` it locally, then run `npm install`.
+2. `npx cap add android` (one time) — this creates the native Android project.
+3. `npm run build` then `npx cap sync android`.
+4. `npx cap run android` with Android Studio installed, or open the `android/`
+   folder in Android Studio and build a signed APK / AAB for the Play Store.
+
+`capacitor.config.ts` points the app at the live preview URL so the phone always
+loads the latest build. Delete the `server` block before shipping to the store so
+the APK runs entirely from the bundled `dist/` output.

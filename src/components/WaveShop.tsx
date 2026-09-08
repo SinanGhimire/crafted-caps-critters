@@ -2,6 +2,7 @@ import { useState } from "react";
 import { SpriteIcon } from "@/components/SpriteIcon";
 import {
   WEAPONS,
+  buyItem,
   buyWeapon,
   closeShop,
   equipWeapon,
@@ -9,6 +10,8 @@ import {
   rerollShop,
   weaponPrice,
 } from "@/game/engine";
+
+import { ITEM_MAP, ITEM_RARITY_COLOR, itemPrice } from "@/game/shop-items";
 
 import type { GameState, WeaponKey, WeaponRarity } from "@/game/types";
 
@@ -151,6 +154,28 @@ export function WaveShop({ state, onLeave }: { state: GameState; onLeave: () => 
       );
     });
 
+  const itemCards = s.itemOffers.map((id) => {
+    const item = ITEM_MAP[id];
+    if (!item) return null;
+    const owned = s.ownedItems[id] ?? 0;
+    const price = itemPrice(id, s.wave, owned);
+    const color = ITEM_RARITY_COLOR[item.rarity];
+    return (
+      <ItemCard
+        key={id}
+        item={{ icon: item.icon, name: item.name, desc: item.desc, rarity: item.rarity }}
+        color={color}
+        owned={owned}
+        price={price}
+        canBuy={s.materials >= price}
+        onBuy={() => {
+          buyItem(s, id);
+          bump();
+        }}
+      />
+    );
+  });
+
   return (
     <div className="absolute inset-0 z-40 flex items-start justify-center overflow-y-auto bg-[oklch(0.07_0.02_292/0.88)] p-3 backdrop-blur-md md:rounded-2xl">
       <div className="pop-shell animate-float-up my-auto w-full max-w-3xl rounded-3xl p-4 sm:p-6">
@@ -186,6 +211,7 @@ export function WaveShop({ state, onLeave }: { state: GameState; onLeave: () => 
         </div>
 
         <SlotStrip label="Guns for sale">{weaponCards(s.shopOffers)}</SlotStrip>
+        <SlotStrip label="Gear & supplies">{itemCards}</SlotStrip>
         <OwnedRow
           keys={s.arsenal}
           active={s.player.weapon}
@@ -194,6 +220,8 @@ export function WaveShop({ state, onLeave }: { state: GameState; onLeave: () => 
             bump();
           }}
         />
+
+        <OwnedItems owned={s.ownedItems} />
 
         <div className="pop-tray sticky bottom-0 mt-5 flex flex-col gap-2 rounded-2xl p-2 sm:flex-row">
           <button
@@ -257,6 +285,100 @@ function OwnedRow({
                 {w.name}
               </span>
             </button>
+          );
+        })}
+      </div>
+    </div>
+  );
+}
+
+
+/** One purchasable run item. */
+function ItemCard({
+  item,
+  color,
+  owned,
+  price,
+  canBuy,
+  onBuy,
+}: {
+  item: { icon: string; name: string; desc: string; rarity: string };
+  color: string;
+  owned: number;
+  price: number;
+  canBuy: boolean;
+  onBuy: () => void;
+}) {
+  return (
+    <div
+      className="pop-tray flex items-center gap-3 rounded-2xl p-3 text-left transition-transform duration-150 hover:-translate-y-0.5"
+      style={{
+        borderColor: `color-mix(in oklab, ${color} 55%, transparent)`,
+        boxShadow: `0 0 0 1px color-mix(in oklab, ${color} 18%, transparent), 0 10px 22px -14px ${color}`,
+      }}
+    >
+      <div
+        className="grid h-14 w-14 shrink-0 place-items-center rounded-xl text-2xl"
+        style={{
+          background: `radial-gradient(circle at 50% 45%, color-mix(in oklab, ${color} 30%, transparent), transparent 70%)`,
+          border: `2px solid color-mix(in oklab, ${color} 35%, transparent)`,
+          color,
+        }}
+      >
+        {item.icon}
+      </div>
+      <div className="min-w-0 flex-1">
+        <p className="truncate font-display text-sm leading-tight" style={{ color }}>
+          {item.name}
+          {owned > 0 ? <span className="ml-1 text-[10px] text-muted-foreground">x{owned}</span> : null}
+        </p>
+        <p
+          className="mt-0.5 inline-block rounded-full px-1.5 py-0.5 text-[8px] font-black uppercase tracking-[0.2em]"
+          style={{ background: `color-mix(in oklab, ${color} 22%, transparent)`, color }}
+        >
+          {item.rarity}
+        </p>
+        <p className="mt-1 text-[10px] font-bold leading-tight text-muted-foreground">{item.desc}</p>
+      </div>
+      <button
+        disabled={!canBuy}
+        onClick={onBuy}
+        className={`press shrink-0 rounded-xl px-3 py-2 text-[11px] font-black uppercase tracking-[0.15em] ${
+          canBuy ? "pop-buy" : "pop-quiet opacity-50"
+        }`}
+      >
+        {`\u{1FA99} ${price}`}
+      </button>
+    </div>
+  );
+}
+
+/** Everything bought this run, as a compact badge strip. */
+function OwnedItems({ owned }: { owned: Record<string, number> }) {
+  const rows = Object.entries(owned).filter(([, n]) => n > 0);
+  if (!rows.length) return null;
+  return (
+    <div className="mt-3">
+      <p className="text-[9px] font-black uppercase tracking-[0.3em] text-pop-edge">Gear owned</p>
+      <div className="mt-1.5 flex flex-wrap gap-1.5">
+        {rows.map(([id, n]) => {
+          const item = ITEM_MAP[id];
+          if (!item) return null;
+          const color = ITEM_RARITY_COLOR[item.rarity];
+          return (
+            <span
+              key={id}
+              className="flex items-center gap-1 rounded-xl border-2 px-2 py-1 text-[10px] font-black"
+              style={{
+                borderColor: `color-mix(in oklab, ${color} 45%, transparent)`,
+                background: `color-mix(in oklab, ${color} 16%, transparent)`,
+                color,
+              }}
+            >
+              <span>{item.icon}</span>
+              {item.name}
+              {n > 1 ? <span className="text-muted-foreground">x{n}</span> : null}
+            </span>
           );
         })}
       </div>

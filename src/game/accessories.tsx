@@ -73,12 +73,11 @@ type HatDetail =
   | "feather"
   | "pin"
   | "stitches"
-  | "earflaps"
+  | "fur"
   | "bullets"
   | "coin"
   | "candle"
-  | "bells"
-  | "horns"
+  | "tassel"
   | "leaf"
   | "cross"
   | "veil"
@@ -115,10 +114,10 @@ const SPECS: Record<AccessoryId, HatSpec> = {
   shadowBeanie: { name: "Shadow Beanie", shape: "hood", main: "#272733", shade: "#12121b", accent: "#8a72bd", detail: "none", fit: 1.06, sit: 16, tall: 1.05 },
   raiderHat: { name: "Raider Hat", shape: "cowboy", main: "#7a4b32", shade: "#3c261c", accent: "#cf6a48", detail: "bullets", sit: 18, brim: 1.05 },
   corsairTricorn: { name: "Corsair Tricorn", shape: "tricorn", main: "#243449", shade: "#0f1721", accent: "#dcae4d", detail: "coin", sit: 17 },
-  rageBeanie: { name: "Rage Beanie", shape: "beanie", main: "#9c362a", shade: "#521c17", accent: "#f0803f", detail: "horns", sit: 19, tall: 0.9 },
+  rageBeanie: { name: "Rage Beanie", shape: "beanie", main: "#9c362a", shade: "#521c17", accent: "#f0803f", detail: "flame", sit: 19, tall: 0.9 },
   sentinelBowler: { name: "Sentinel Bowler", shape: "bowler", main: "#48596b", shade: "#26313c", accent: "#93b3bd", detail: "chain", sit: 18 },
   championHat: { name: "Champion Fedora", shape: "fedora", main: "#ad732a", shade: "#5d3b17", accent: "#f0cf72", detail: "star", sit: 17 },
-  trapperHat: { name: "Trapper Hat", shape: "bucket", main: "#5f4b34", shade: "#31261a", accent: "#8fae6b", detail: "earflaps", fit: 1.08, sit: 17 },
+  trapperHat: { name: "Trapper Hat", shape: "bucket", main: "#5f4b34", shade: "#31261a", accent: "#8fae6b", detail: "fur", fit: 1.08, sit: 17 },
   pathfinderCap: { name: "Pathfinder Cap", shape: "flatcap", main: "#4d7044", shade: "#294026", accent: "#b2cf72", detail: "leaf", sit: 20 },
   arcaneHat: { name: "Arcane Hat", shape: "wizard", main: "#5e4384", shade: "#2d2140", accent: "#7cc4d4", detail: "star", sit: 16, tall: 1.15 },
   hexHat: { name: "Hex Hat", shape: "wizard", main: "#3f2851", shade: "#1e1327", accent: "#bb6f9a", detail: "eye", sit: 16, tall: 1.3 },
@@ -132,11 +131,11 @@ const SPECS: Record<AccessoryId, HatSpec> = {
   toxicBucket: { name: "Toxic Bucket Hat", shape: "bucket", main: "#6b7a3b", shade: "#374122", accent: "#b3d94f", detail: "stitches", fit: 1.05, sit: 19 },
   medicCap: { name: "Medic Cap", shape: "cap", main: "#e0dac6", shade: "#7c7666", accent: "#c34741", detail: "cross", sit: 19 },
   lunaticBeanie: { name: "Lunatic Beanie", shape: "beanie", main: "#7c4a78", shade: "#3f253d", accent: "#e3736c", detail: "pompom", sit: 19, tall: 1.15 },
-  harlequinCap: { name: "Harlequin Cap", shape: "flatcap", main: "#98374a", shade: "#4d1c26", accent: "#e5b452", detail: "bells", sit: 20 },
+  harlequinCap: { name: "Harlequin Cap", shape: "flatcap", main: "#98374a", shade: "#4d1c26", accent: "#e5b452", detail: "tassel", sit: 20 },
   carnivalHat: { name: "Carnival Top Hat", shape: "top", main: "#3c6455", shade: "#1f382e", accent: "#dc6a4f", detail: "stripes", sit: 17, tall: 1.05 },
   wraithHat: { name: "Wraith Fedora", shape: "fedora", main: "#6f6b7c", shade: "#343241", accent: "#aec6c4", detail: "veil", sit: 16 },
   zealotHat: { name: "Zealot Hood", shape: "hood", main: "#503854", shade: "#271a2b", accent: "#b1544f", detail: "cross", fit: 1.06, sit: 15, tall: 1.1 },
-  fiendHat: { name: "Fiend Tricorn", shape: "tricorn", main: "#6f3033", shade: "#38161a", accent: "#e5643f", detail: "horns", sit: 17 },
+  fiendHat: { name: "Fiend Tricorn", shape: "tricorn", main: "#6f3033", shade: "#38161a", accent: "#e5643f", detail: "skull", sit: 17 },
   harvesterHat: { name: "Harvester Widebrim", shape: "cowboy", main: "#22232b", shade: "#0e0f14", accent: "#8a6f92", detail: "skull", sit: 17, brim: 1.1 },
   gunslingerHat: { name: "Gunslinger Hat", shape: "cowboy", main: "#7d4c28", shade: "#402716", accent: "#dcaa4f", detail: "feather", sit: 18 },
   sapperCap: { name: "Sapper Work Cap", shape: "cap", main: "#5c6446", shade: "#31371f", accent: "#d19340", detail: "gear", sit: 19 },
@@ -253,18 +252,16 @@ function detailArt(detail: HatDetail, spec: HatSpec) {
       return `<circle cx="100" cy="44" r="13" fill="${A}" ${THIN}/><path d="M100 36 L104 44 L100 52 L96 44 Z" fill="${OUTLINE}"/>`;
     case "stitches":
       return `<path d="M60 52 L70 46 M78 42 L88 38 M112 38 L122 42 M130 46 L140 52" stroke="${A}" stroke-width="5" stroke-linecap="round"/>`;
-    case "earflaps":
-      return `<path d="M42 70 Q30 92 42 112 Q56 106 58 82 Z" fill="${A}" ${EDGE}/><path d="M158 70 Q170 92 158 112 Q144 106 142 82 Z" fill="${A}" ${EDGE}/>`;
+    case "fur":
+      return `<path d="M46 68 Q100 84 154 68 L154 82 Q100 100 46 82 Z" fill="${A}" ${EDGE}/><path d="M62 74 Q100 86 138 74" stroke="${OUTLINE}" stroke-width="3" fill="none" opacity=".45"/>`;
     case "bullets":
       return `<rect x="66" y="58" width="10" height="18" rx="3" fill="${A}" ${THIN}/><rect x="84" y="56" width="10" height="18" rx="3" fill="${A}" ${THIN}/><rect x="102" y="56" width="10" height="18" rx="3" fill="${A}" ${THIN}/><rect x="120" y="58" width="10" height="18" rx="3" fill="${A}" ${THIN}/>`;
     case "coin":
       return `<circle cx="100" cy="64" r="15" fill="${A}" ${EDGE}/><path d="M100 56 V72 M94 60 H106" stroke="${OUTLINE}" stroke-width="4"/>`;
     case "candle":
       return `<rect x="92" y="-4" width="16" height="26" rx="4" fill="#f2ead2" ${THIN}/><path d="M100 -8 Q108 -20 100 -34 Q92 -20 100 -8 Z" fill="${A}" ${THIN}/>`;
-    case "bells":
-      return `<circle cx="34" cy="72" r="13" fill="${A}" ${EDGE}/><circle cx="166" cy="72" r="13" fill="${A}" ${EDGE}/>`;
-    case "horns":
-      return `<path d="M56 62 Q34 46 30 16 Q56 30 68 56 Z" fill="${A}" ${EDGE}/><path d="M144 62 Q166 46 170 16 Q144 30 132 56 Z" fill="${A}" ${EDGE}/>`;
+    case "tassel":
+      return `<path d="M140 40 Q158 56 156 78" stroke="${A}" stroke-width="6" fill="none" stroke-linecap="round"/><circle cx="156" cy="86" r="10" fill="${A}" ${EDGE}/>`;
     case "leaf":
       return `<path d="M112 52 Q140 40 156 14 Q132 24 116 46 Z" fill="${A}" ${EDGE}/><path d="M118 50 Q136 34 152 20" stroke="${OUTLINE}" stroke-width="3" fill="none" opacity=".6"/>`;
     case "cross":
