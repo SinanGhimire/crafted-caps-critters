@@ -31,12 +31,10 @@ interface CritterTuning {
 
 const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   // ---- vermin & fliers
-  e_gnat: { tier: 1, radius: 18, speed: [136, 176], hp: 6, score: 15, height: 92, damage: 8, minWave: 1, weight: 3.4 },
-  e_bat: { tier: 2, radius: 22, speed: [146, 188], hp: 13, score: 28, height: 106, damage: 11, minWave: 3, weight: 2.8 },
-  e_flyer: { tier: 3, radius: 26, speed: [140, 180], hp: 26, score: 62, height: 126, damage: 15, minWave: 7, weight: 1.8 },
+  e_flyer: { tier: 2, radius: 26, speed: [140, 180], hp: 22, score: 48, height: 126, damage: 13, minWave: 3, weight: 2.6 },
 
   // ---- crawlers
-  e_spider: { tier: 2, radius: 24, speed: [126, 168], hp: 15, score: 30, height: 104, damage: 11, minWave: 2, weight: 3.0 },
+  e_spider: { tier: 1, radius: 24, speed: [126, 168], hp: 13, score: 26, height: 104, damage: 10, minWave: 1, weight: 3.4 },
   e_worm: { tier: 2, radius: 26, speed: [88, 118], hp: 22, score: 38, height: 116, damage: 14, minWave: 5, weight: 2.2 },
 
   // ---- specialists
@@ -47,7 +45,7 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   // ---- slimes & fungus
   e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.4 },
   e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 6, weight: 2.0 },
-  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 2, weight: 2.6 },
+  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 2, weight: 3.0 },
 
   // ---- undead
   e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 4, weight: 2.6 },

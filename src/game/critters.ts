@@ -25,7 +25,7 @@ export type CritterBrow = "none" | "angry" | "sad" | "flat";
 
 export type CritterEnemyKey =
   // ---- vermin & fliers
-  | "e_gnat" | "e_bat" | "e_flyer"
+  | "e_flyer"
   // ---- crawlers
   | "e_spider" | "e_worm"
   // ---- slimes & fungus
@@ -94,8 +94,6 @@ export const DEATH_FRAMES = 10;
  */
 export const CRITTER_ENEMIES: CritterDesign[] = [
   /* ---------------- vermin & fliers: fast chip damage --------------------- */
-  { key: "e_gnat", name: "Green Stinger", body: "#a8cf3c", shade: "#4e6b16", eye: "#fff3c9", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.66, legs: "none", pattern: "none", wings: true },
-  { key: "e_bat", name: "Night Bat", body: "#3e4382", shade: "#1e2148", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.82, legs: "none", pattern: "none", wings: true, brow: "angry" },
   { key: "e_flyer", name: "Gazer", body: "#8fd3ca", shade: "#2f6f68", eye: "#f0e2c0", shape: "orb", crown: "horns", mouth: "fangs", eyes: 1, arms: false, tail: true, size: 1.02, legs: "none", pattern: "none", wings: false, brow: "angry" },
 
   /* ---------------- crawlers ---------------------------------------------- */
