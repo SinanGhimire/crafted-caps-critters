@@ -409,6 +409,7 @@ function poseDeath(u: number): Pose {
 }
 
 function strip(d: CritterDesign, frames: number, pose: (u: number) => Pose): string {
+  if (typeof document === "undefined") return "";
   const c = document.createElement("canvas");
   c.width = FRAME * frames;
   c.height = FRAME;
@@ -432,6 +433,7 @@ const cache = new Map<string, [string, string, string]>();
 
 /** [idle, walk, death] data-url strips for a creature, generated once. */
 export function echoStrips(d: CritterDesign): [string, string, string] {
+  if (typeof document === "undefined") return ["", "", ""];
   const hit = cache.get(d.key);
   if (hit) return hit;
   const out: [string, string, string] = [
