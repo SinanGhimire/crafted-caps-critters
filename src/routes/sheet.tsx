@@ -1,4 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
+import { useEffect, useState } from "react";
 import { echoStrips, IDLE_FRAMES } from "@/game/echo-art";
 import { CRITTER_ENEMIES } from "@/game/critters";
 import { ClassPortrait } from "@/components/ClassPortrait";
@@ -16,6 +17,8 @@ export const Route = createFileRoute("/sheet")({
 });
 
 function Sheet() {
+  const [ready, setReady] = useState(false);
+  useEffect(() => setReady(true), []);
   const keys = Object.keys(CLASSES) as ClassKey[];
   return (
     <div style={{ background: "#14121a", padding: 16, color: "#fff", fontFamily: "sans-serif" }}>
@@ -26,7 +29,7 @@ function Sheet() {
               style={{
                 width: 190,
                 height: 150,
-                backgroundImage: `url(${echoStrips(d)[0]})`,
+                backgroundImage: ready ? `url(${echoStrips(d)[0]})` : undefined,
                 backgroundSize: `${IDLE_FRAMES * 100}% 100%`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "left top",
