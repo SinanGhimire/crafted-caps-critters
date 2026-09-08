@@ -10,12 +10,6 @@ import type { CritterEnemyKey } from "./critters";
  *    renderer plays their real frames (hop, wobble, dissolve).
  */
 
-import e_gnat from "@/assets/foes2/e_gnat.png";
-import e_bat from "@/assets/foes2/e_bat.png";
-import e_flyer from "@/assets/foes2/e_flyer.png";
-import e_sticklooter from "@/assets/foes2/e_sticklooter.png";
-import e_slime_skull from "@/assets/foes2/e_slime_skull.png";
-import e_mushroom from "@/assets/foes2/e_mushroom.png";
 import e_skel_white from "@/assets/foes2/e_skel_white.png";
 import e_skel_gold from "@/assets/foes2/e_skel_gold.png";
 import e_boss_bone from "@/assets/foes2/e_boss_bone.png";
@@ -52,12 +46,6 @@ import cultD from "@/assets/foes3/cultist-death.png";
 export type ArtStrips = [string, string, string];
 
 export const ENEMY_ART: Record<CritterEnemyKey, ArtStrips> = {
-  e_gnat: [e_gnat, e_gnat, e_gnat],
-  e_bat: [e_bat, e_bat, e_bat],
-  e_flyer: [e_flyer, e_flyer, e_flyer],
-  e_sticklooter: [e_sticklooter, e_sticklooter, e_sticklooter],
-  e_slime_skull: [e_slime_skull, e_slime_skull, e_slime_skull],
-  e_mushroom: [e_mushroom, e_mushroom, e_mushroom],
   e_skel_white: [e_skel_white, e_skel_white, e_skel_white],
   e_skel_gold: [e_skel_gold, e_skel_gold, e_skel_gold],
   e_boss_bone: [e_boss_bone, e_boss_bone, e_boss_bone],
@@ -78,12 +66,6 @@ export const ENEMY_ART: Record<CritterEnemyKey, ArtStrips> = {
  * animates, the slime line and the cultist carry real animation frames.
  */
 export const ENEMY_FRAMES: Record<CritterEnemyKey, [number, number, number]> = {
-  e_gnat: [1, 1, 1],
-  e_bat: [1, 1, 1],
-  e_flyer: [1, 1, 1],
-  e_sticklooter: [1, 1, 1],
-  e_slime_skull: [1, 1, 1],
-  e_mushroom: [1, 1, 1],
   e_skel_white: [1, 1, 1],
   e_skel_gold: [1, 1, 1],
   e_boss_bone: [1, 1, 1],
@@ -100,4 +82,3 @@ export const ENEMY_FRAMES: Record<CritterEnemyKey, [number, number, number]> = {
 };
 
 /** Foes that stay airborne: they hover instead of stepping. */
-export const FLYING_FOES = new Set<CritterEnemyKey>(["e_gnat", "e_bat", "e_flyer"]);
