@@ -1693,20 +1693,9 @@ function waveBurst(s: GameState) {
     (s.wave === 5 || s.wave === 10 || s.wave === 16 || s.wave === 20);
   const regularBoss = s.mode === "boss" && s.wave % 3 === 0;
   if (survivalBoss || regularBoss) {
-    // Survival's four bosses are all different creatures, each a grown-up
-    // version of a family the player has already been fighting.
-    const bossSpecies =
-      s.wave === 5
-        ? "e_slime_boss"
-        : s.wave === 10
-          ? "e_boss_spore"
-          : s.wave === 16
-            ? "e_boss_bone"
-            : s.wave === 20
-              ? "e_boss_imp"
-              : s.wave % 2 === 0
-                ? "e_boss_bone"
-                : "e_boss_spore";
+    // One commander presides over every boss wave, growing bigger and meaner
+    // each time. New boss creatures land once their artwork arrives.
+    const bossSpecies = "e_boss_bone" as const;
     spawnEnemy(s, true, {
       species: bossSpecies,
       scale: s.wave === 5 ? 1.45 : s.wave === 10 ? 1.85 : s.wave === 16 ? 2.05 : 2.45,
