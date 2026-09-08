@@ -27,6 +27,7 @@ import type { CharacterKey, GameState, RunMode, WeaponKey } from "@/game/types";
 import { RARITY_COLOR, UPGRADE_MAP } from "@/game/upgrades";
 import { WaveShop } from "@/components/WaveShop";
 import { SpriteIcon } from "@/components/SpriteIcon";
+import { useProfile } from "@/game/profile";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -173,10 +174,24 @@ function Game() {
   const [character, setCharacter] = useState<CharacterKey>("bald");
   const [cls, setCls] = useState<ClassKey>("vagrant");
   const [best, setBest] = useState(0);
+  const { patch: patchProfile } = useProfile();
   const [muted, setMutedState] = useState(false);
   const [touch, setTouch] = useState(false);
   const [hud, setHud] = useState<Hud>(INITIAL_HUD);
   const [restartKey, setRestartKey] = useState(0);
+
+  // Clearing wave 20 pays out the run: coins, gems and the full hero roster.
+  const paidRef = useRef(false);
+  useEffect(() => {
+    if (!hud.won || paidRef.current) return;
+    paidRef.current = true;
+    patchProfile((p) => ({
+      ...p,
+      coins: p.coins + 5000,
+      gems: p.gems + 50,
+      owned: [...new Set([...p.owned, ...PLAYER_CHARACTERS.map((c) => `hero:${c.key}`)])],
+    }));
+  }, [hud.won, patchProfile]);
 
   useEffect(() => {
     setMutedState(loadMuted());
@@ -857,6 +872,17 @@ function Game() {
               <p className="mt-4 text-[11px] font-black uppercase tracking-[0.3em] text-muted-foreground">
                 Best <span className="text-gold">{Math.max(best, hud.score).toLocaleString()}</span>
               </p>
+
+              {hud.won && (
+                <div className="pop-tray mt-4 rounded-2xl px-4 py-3">
+                  <p className="text-[10px] font-black uppercase tracking-[0.3em] text-gold">
+                    Victory rewards
+                  </p>
+                  <p className="mt-1 text-[11px] font-bold text-muted-foreground">
+                    +5,000 coins, +50 gems and every hero unlocked.
+                  </p>
+                </div>
+              )}
 
 
               <div className="mt-5 flex flex-col gap-2 sm:flex-row">
