@@ -111,6 +111,11 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   { key: "e_skel_white", name: "Bone Soldier", body: "#e8e8ee", shade: "#8b8b98", eye: "#9fd8ff", shape: "tall", crown: "none", mouth: "fangs", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "none", brow: "angry" },
   { key: "e_skel_gold", name: "Gilded Bones", body: "#e8c56a", shade: "#8c6f1f", eye: "#fff0b8", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.08, legs: "two", pattern: "plates", brow: "angry" },
 
+  /* ---------------- specialists ------------------------------------------- */
+  { key: "e_bomber", name: "Fuse Fiend", body: "#f2662a", shade: "#8f3210", eye: "#fff0d0", shape: "orb", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.92, legs: "two", pattern: "none", brow: "angry", glow: "rgba(242,102,42,0.35)" },
+  { key: "e_caster", name: "Hex Acolyte", body: "#6b3fa0", shade: "#361b57", eye: "#a8ef5c", shape: "mound", crown: "none", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.0, legs: "two", pattern: "none", core: "#a8ef5c" },
+  { key: "e_brute", name: "Slab Brute", body: "#5a6272", shade: "#2c313c", eye: "#ffffff", shape: "block", crown: "none", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.35, legs: "two", pattern: "plates", brow: "angry" },
+
   /* ---------------- boss: the commander ----------------------------------- */
   { key: "e_boss_bone", name: "Marshal Ossein", body: "#f0cd74", shade: "#8c6f1f", eye: "#fff6cf", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.75, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(240,205,116,0.4)" },
 ];
