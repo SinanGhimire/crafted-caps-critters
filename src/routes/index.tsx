@@ -803,6 +803,33 @@ function Game() {
             </div>
           </div>
 
+          {/* FLOATING HEALTH BAR ABOVE PLAYER */}
+          {!hud.over && (
+            <div
+              className="pointer-events-none absolute z-20 w-24 -translate-x-1/2 -translate-y-full sm:w-28"
+              style={{
+                left: `${hud.playerScreenX}%`,
+                top: `${hud.playerScreenY - 13}%`,
+              }}
+            >
+              <div className="relative h-2.5 w-full overflow-hidden rounded-full border border-ink/70 bg-[oklch(0.14_0.03_20/85%)] shadow-[0_2px_6px_oklch(0_0_0/50%)]">
+                <div
+                  className="h-full rounded-full transition-[width] duration-150"
+                  style={{
+                    width: `${Math.max(0, Math.min(100, (hud.hp / Math.max(1, hud.maxHp)) * 100))}%`,
+                    background:
+                      hud.hp / Math.max(1, hud.maxHp) > 0.35
+                        ? "linear-gradient(180deg, oklch(0.82 0.19 145), oklch(0.6 0.19 145))"
+                        : "linear-gradient(180deg, oklch(0.75 0.21 27), oklch(0.55 0.21 27))",
+                  }}
+                />
+                <span className="absolute inset-0 grid place-items-center font-display text-[8px] leading-none tabular-nums text-white [text-shadow:0_1px_2px_oklch(0_0_0/90%)]">
+                  {Math.max(0, Math.ceil(hud.hp))}/{Math.ceil(hud.maxHp)}
+                </span>
+              </div>
+            </div>
+          )}
+
           {/* BOTTOM: perks + weapon */}
           <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center gap-0.5 px-2 pb-1 sm:px-4">
             {hud.perks.length > 0 && (
