@@ -286,9 +286,9 @@ function Game() {
       const cssW = Math.max(1, rect.width);
       const cssH = Math.max(1, rect.height);
       const aspect = cssW / cssH;
-      // Phones get a larger logical view: everything renders smaller so more
-      // of the arena fits on a small screen.
-      const zoomOut = cssW < 560 ? 1.7 : cssW < 820 ? 1.5 : cssW < 1100 ? 1.2 : 1;
+      // Brotato-style closer camera: keep the logical view tight so sprites
+      // read big on phones.
+      const zoomOut = cssW < 560 ? 1.12 : cssW < 820 ? 1.05 : cssW < 1100 ? 0.95 : 0.85;
       const lh = Math.round(
         Math.min(2000, Math.max(520, 720 * Math.sqrt(16 / 9 / aspect) * zoomOut)),
       );
