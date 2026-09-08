@@ -887,6 +887,21 @@ function Game() {
                 >
                   Resume
                 </button>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => setRestartKey((k) => k + 1)}
+                    className="pop-quiet press flex-1 rounded-2xl py-2.5 text-xs font-black uppercase tracking-[0.2em] text-foreground"
+                  >
+                    Restart
+                  </button>
+                  <button
+                    onClick={toggleMute}
+                    aria-label={muted ? "Unmute" : "Mute"}
+                    className="pop-quiet press flex-1 rounded-2xl py-2.5 text-xs font-black uppercase tracking-[0.2em] text-foreground"
+                  >
+                    {muted ? "Sound on" : "Sound off"}
+                  </button>
+                </div>
                 <button
                   onClick={() => setScreen("art")}
                   className="pop-quiet press w-full rounded-2xl py-2.5 text-xs font-black uppercase tracking-[0.2em] text-foreground"
