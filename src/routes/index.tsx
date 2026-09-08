@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { Pause, Volume2, VolumeX } from "lucide-react";
+import { Pause } from "lucide-react";
 import { MenuPanel, type PanelKey } from "@/components/MenuPanel";
 import { ArtMenu, type ArtTarget } from "@/components/ArtMenu";
 import { CLASSES, type ClassKey } from "@/game/classes";
