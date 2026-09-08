@@ -13,7 +13,6 @@ import {
   Skull,
   Sparkles,
   Swords,
-  Trophy,
   User,
   Volume2,
   VolumeX,
