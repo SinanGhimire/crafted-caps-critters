@@ -286,7 +286,7 @@ function Game() {
       // of the arena fits on a small screen.
       const zoomOut = cssW < 560 ? 1.7 : cssW < 820 ? 1.5 : cssW < 1100 ? 1.2 : 1;
       const lh = Math.round(
-        Math.min(1400, Math.max(520, 720 * Math.sqrt(16 / 9 / aspect) * zoomOut)),
+        Math.min(2000, Math.max(520, 720 * Math.sqrt(16 / 9 / aspect) * zoomOut)),
       );
       const lw = Math.round(lh * aspect);
       setViewport(lw, lh);
