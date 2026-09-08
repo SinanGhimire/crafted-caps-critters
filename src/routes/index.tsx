@@ -409,18 +409,11 @@ function Game() {
     return (
       <div className="flex h-[100dvh] w-full flex-col items-center justify-center bg-[#0a0812]">
         <div className="flex flex-col items-center gap-6">
-          <div className="relative">
-            <svg width="80" height="80" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg">
-              <rect width="512" height="512" rx="108" fill="#1a1428"/>
-              <text
-                x="256" y="310"
-                fontFamily="Impact, 'Arial Black', sans-serif"
-                fontSize="320" fontWeight="900" fill="#e8b84d"
-                textAnchor="middle"
-              >E</text>
-            </svg>
-          </div>
-          <h1 className="text-title text-2xl">Echo Vanguards</h1>
+          <img
+            src={echoWordmark.url}
+            alt="Echo Vanguards"
+            className="w-64 max-w-[80vw] drop-shadow-[0_8px_24px_rgba(140,110,220,0.35)]"
+          />
           <div className="w-48 overflow-hidden rounded-full border-2 border-[#0a0812] bg-[#1a1428]">
             <div
               className="h-2 rounded-full bg-linear-to-r from-[#e8b84d] to-[#c8922a] transition-[width] duration-200 ease-out"
