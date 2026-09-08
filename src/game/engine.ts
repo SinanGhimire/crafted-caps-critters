@@ -4097,23 +4097,17 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
   }
   ctx.restore();
 
-  // ammo art on top of the glow: every gun class throws its own round
+  // bright hot core on top of the glow — pure light, no ammo art
   for (const b of s.bullets) {
-    if (!b.sprite) continue;
-    const art = sprites.singles[b.sprite];
-    if (!art || !art.width) continue;
-    const f = firstFrame(art);
-    const h = Math.max(9, b.radius * 2.1);
-    const w2 = h * (f.w / f.h);
+    const r = Math.max(1.6, b.radius * 0.45);
     ctx.save();
-    ctx.globalAlpha = b.fromEcho ? 0.55 : 1;
-    ctx.translate(b.x, b.y);
-    ctx.rotate(b.angle + Math.PI / 2);
-    ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(f.img, -w2 / 2, -h / 2, w2, h);
+    ctx.globalAlpha = b.fromEcho ? 0.5 : 0.95;
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, r, 0, Math.PI * 2);
+    ctx.fill();
     ctx.restore();
   }
-
 
   // enemy projectiles — glowing orbs, bolts and arcing mortar shells
   ctx.save();
