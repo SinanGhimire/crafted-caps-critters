@@ -389,6 +389,8 @@ function Game() {
           paused: s.paused,
           materials: s.materials,
           phase: s.phase,
+          playerScreenX: ((s.player.x - s.cam.x) / WORLD_W) * 100,
+          playerScreenY: ((s.player.y - s.cam.y) / WORLD_H) * 100,
         });
         // Expose state for debugging
         (window as any).__game = s;
