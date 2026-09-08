@@ -27,9 +27,9 @@ function Sheet() {
                 width: 190,
                 height: 150,
                 backgroundImage: `url(${ENEMY_ART[d.key][0]})`,
-                backgroundSize: "auto 100%",
+                backgroundSize: "600% 100%",
                 backgroundRepeat: "no-repeat",
-                backgroundPosition: "center top",
+                backgroundPosition: "left top",
               }}
             />
             {d.name}
