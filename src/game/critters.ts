@@ -27,7 +27,7 @@ export type CritterEnemyKey =
   // ---- imps
   | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson"
   // ---- vermin & fliers
-  | "e_gnat" | "e_wasp" | "e_rat" | "e_bat" | "e_flyer"
+  | "e_gnat" | "e_rat" | "e_bat" | "e_flyer"
   // ---- slimes & fungus
   | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
   // ---- undead
@@ -102,10 +102,9 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
 
   /* ---------------- vermin & fliers: fast chip damage --------------------- */
   { key: "e_gnat", name: "Fuzz Stinger", body: "#c9b273", shade: "#6d5c2c", eye: "#fff3c9", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.66, legs: "none", pattern: "none", wings: true },
-  { key: "e_rat", name: "Sewer Rat", body: "#8d8479", shade: "#413b34", eye: "#ffd24a", shape: "wide", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.78, legs: "many", pattern: "none", brow: "angry" },
-  { key: "e_wasp", name: "Hive Wasp", body: "#e0a63c", shade: "#7a5210", eye: "#fff3c9", shape: "insect", crown: "antenna", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.8, legs: "none", pattern: "stripes", wings: true, brow: "angry" },
+  { key: "e_rat", name: "Gloom Stalker", body: "#5b5f76", shade: "#252838", eye: "#ff7a9c", shape: "wide", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.78, legs: "many", pattern: "none", brow: "angry" },
   { key: "e_bat", name: "Night Bat", body: "#6b5aa8", shade: "#2f2650", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.82, legs: "none", pattern: "none", wings: true, brow: "angry" },
-  { key: "e_flyer", name: "Sky Harrier", body: "#5f8fbf", shade: "#26445f", eye: "#eaf6ff", shape: "orb", crown: "fin", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: true, size: 1.02, legs: "none", pattern: "plates", wings: true, brow: "angry" },
+  { key: "e_flyer", name: "Sporewing", body: "#a86a44", shade: "#4d2c1a", eye: "#f0e2c0", shape: "mound", crown: "fin", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: true, size: 1.02, legs: "none", pattern: "plates", wings: true, brow: "angry" },
 
   /* ---------------- slimes & fungus --------------------------------------- */
   { key: "e_sticklooter", name: "Sticklooter", body: "#6fc9d6", shade: "#256a76", eye: "#0f2a2e", shape: "jelly", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "spots" },
@@ -126,7 +125,7 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   { key: "e_bringer", name: "Bringer of Death", body: "#4a3a6b", shade: "#1d1530", eye: "#7cf7d8", shape: "tall", crown: "scythes", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.4, legs: "two", pattern: "plates", brow: "angry", core: "#7cf7d8" },
 
   /* ---------------- bosses ------------------------------------------------ */
-  { key: "e_slime_boss", name: "Ooze Sovereign", body: "#63c98a", shade: "#215a3a", eye: "#ffe07a", shape: "blob", crown: "crown", mouth: "maw", eyes: 2, arms: false, tail: false, size: 1.6, legs: "none", pattern: "spots", glow: "rgba(99,201,138,0.42)" },
+  { key: "e_slime_boss", name: "Magma Sovereign", body: "#e0762c", shade: "#6b2a0c", eye: "#ffe07a", shape: "blob", crown: "crown", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.6, legs: "two", pattern: "plates", glow: "rgba(224,118,44,0.42)" },
   { key: "e_gollux", name: "Gollux", body: "#b58a4a", shade: "#57391a", eye: "#ff7a4a", shape: "block", crown: "hornsteel", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.7, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(181,138,74,0.42)" },
   { key: "e_demon", name: "Abyss Demon", body: "#8c2f3c", shade: "#3a0e16", eye: "#ffb03a", shape: "tall", crown: "horns", mouth: "maw", eyes: 2, arms: true, claws: true, tail: true, size: 1.75, legs: "two", pattern: "plates", brow: "angry", core: "#ff7a2a", glow: "rgba(255,106,42,0.4)" },
   { key: "e_demon_slime", name: "Demon Slime", body: "#c33f5c", shade: "#5c1424", eye: "#ffd24a", shape: "blob", crown: "horns", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.8, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(195,63,92,0.45)" },

@@ -35,9 +35,6 @@ import impCrimsonDeath from "@/assets/foes/imp_crimson-death.png";
 import gnatIdle from "@/assets/foes/gnat-idle.png";
 import gnatWalk from "@/assets/foes/gnat-walk.png";
 import gnatDeath from "@/assets/foes/gnat-death.png";
-import waspIdle from "@/assets/foes/wasp-idle.png";
-import waspWalk from "@/assets/foes/wasp-walk.png";
-import waspDeath from "@/assets/foes/wasp-death.png";
 import ratIdle from "@/assets/foes/rat-idle.png";
 import ratWalk from "@/assets/foes/rat-walk.png";
 import ratDeath from "@/assets/foes/rat-death.png";
@@ -94,7 +91,6 @@ export const ENEMY_ART: Record<CritterEnemyKey, ArtStrips> = {
   e_imp_crimson: [impCrimsonIdle, impCrimsonWalk, impCrimsonDeath],
 
   e_gnat: [gnatIdle, gnatWalk, gnatDeath],
-  e_wasp: [waspIdle, waspWalk, waspDeath],
   e_rat: [ratIdle, ratWalk, ratDeath],
   e_bat: [batIdle, batWalk, batDeath],
   e_flyer: [flyerIdle, flyerWalk, flyerDeath],

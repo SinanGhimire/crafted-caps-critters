@@ -38,7 +38,7 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   // ---- vermin & fliers
   e_gnat: { tier: 1, radius: 18, speed: [136, 176], hp: 6, score: 15, height: 92, damage: 8, minWave: 1, weight: 2.8 },
   e_rat: { tier: 1, radius: 20, speed: [150, 190], hp: 7, score: 14, height: 90, damage: 8, minWave: 1, weight: 2.6 },
-  e_wasp: { tier: 2, radius: 21, speed: [148, 190], hp: 12, score: 26, height: 100, damage: 11, minWave: 3, weight: 2.4 },
+  
   e_bat: { tier: 2, radius: 22, speed: [146, 188], hp: 13, score: 28, height: 106, damage: 11, minWave: 4, weight: 2.4 },
   e_flyer: { tier: 3, radius: 26, speed: [140, 180], hp: 26, score: 62, height: 126, damage: 15, minWave: 8, weight: 1.6 },
 
