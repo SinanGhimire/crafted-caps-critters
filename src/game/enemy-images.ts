@@ -44,8 +44,44 @@ const CLASSIC: Record<string, [string, string, string]> = {
 
 export const CLASSIC_KEYS = Object.keys(CLASSIC);
 
+/* -------- slime & cultist sheets sliced into idle / walk / death strips ---- */
+const SHEETS = import.meta.glob<{ default: string }>("@/assets/foes5/*.png", {
+  eager: true,
+}) as Record<string, { default: string }>;
+
+const SHEET_SRC: Record<string, string> = Object.fromEntries(
+  Object.entries(SHEETS).map(([path, mod]) => [
+    path.split("/").pop()!.replace(/\.png$/, ""),
+    mod.default,
+  ]),
+);
+
+/** key -> [file stem prefix, idle frames, walk frames, death frames] */
+const SHEET: Record<string, [string, number, number, number]> = {
+  e_slime_green: ["slime_green", 10, 10, 10],
+  e_slime_blue: ["slime_blue", 10, 10, 10],
+  e_slime_yellow: ["slime_yellow", 10, 10, 10],
+  e_slime_red: ["slime_red", 10, 10, 10],
+  e_slime_purple: ["slime_purple", 10, 10, 10],
+  e_slime_black: ["slime_black", 10, 10, 10],
+  e_tiny_green: ["tiny_green", 5, 5, 5],
+  e_tiny_blue: ["tiny_blue", 5, 5, 5],
+  e_tiny_red: ["tiny_red", 5, 5, 5],
+  e_cultist: ["cultist", 15, 9, 17],
+};
+
+function sheetSrc(stem: string): [string, string, string] {
+  return [
+    SHEET_SRC[stem + "-idle"] ?? "",
+    SHEET_SRC[stem + "-walk"] ?? "",
+    SHEET_SRC[stem + "-death"] ?? "",
+  ];
+}
+
 /** Preview image (first frame source) + how many frames it holds. */
 export function enemyPreview(key: string): { src: string; frames: number } | null {
+  const sh = SHEET[key];
+  if (sh) return { src: SHEET_SRC[sh[0] + "-idle"] ?? "", frames: sh[1] };
   if (ENEMY_IMG[key]) return { src: ENEMY_IMG[key]!, frames: 1 };
   const c = CLASSIC[key];
   return c ? { src: pack(c[0]), frames: CLASSIC_FRAMES[0] } : null;
@@ -53,6 +89,8 @@ export function enemyPreview(key: string): { src: string; frames: number } | nul
 
 /** [idle, walk, death] urls for a foe, or null when it has no artwork. */
 export function enemyImageSrc(key: string): [string, string, string] | null {
+  const sh = SHEET[key];
+  if (sh) return sheetSrc(sh[0]);
   const src = ENEMY_IMG[key];
   if (src) return [src, src, src];
   const c = CLASSIC[key];
@@ -61,5 +99,7 @@ export function enemyImageSrc(key: string): [string, string, string] | null {
 
 /** Frame counts matching `enemyImageSrc`. */
 export function enemyFrames(key: string): [number, number, number] {
+  const sh = SHEET[key];
+  if (sh) return [sh[1], sh[2], sh[3]];
   return CLASSIC[key] ? [...CLASSIC_FRAMES] : [1, 1, 1];
 }
