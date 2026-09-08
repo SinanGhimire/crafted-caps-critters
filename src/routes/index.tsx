@@ -462,6 +462,31 @@ function Game() {
     );
   }
 
+  if (screen === "tree") {
+    return (
+      <ClassTree
+        cls={cls}
+        onSelectClass={setCls}
+        onBack={() => {
+          playSfx("ui");
+          setScreen("art");
+        }}
+        onSfx={() => playSfx("ui")}
+      />
+    );
+  }
+
+  if (screen === "levels") {
+    return (
+      <Progression
+        onBack={() => {
+          playSfx("ui");
+          setScreen("art");
+        }}
+      />
+    );
+  }
+
   if (screen === "art") {
     return (
       <>
