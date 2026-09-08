@@ -51,6 +51,10 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 5, weight: 2.2 },
   e_skel_gold: { tier: 3, radius: 28, speed: [112, 152], hp: 32, score: 54, height: 144, damage: 17, minWave: 8, weight: 1.7 },
 
+  // ---- my own additions
+  e_wisp: { tier: 2, radius: 20, speed: [158, 200], hp: 12, score: 26, height: 96, damage: 10, minWave: 3, weight: 2.2 },
+  e_beetle: { tier: 3, radius: 28, speed: [86, 112], hp: 40, score: 60, height: 118, damage: 16, minWave: 6, weight: 1.9 },
+
   // ---- bosses (never rolled by the wave pool)
   e_slime_boss: { tier: 5, radius: 44, speed: [66, 88], hp: 150, score: 520, height: 214, damage: 28, minWave: 999, weight: 0 },
   e_boss_spore: { tier: 5, radius: 45, speed: [72, 94], hp: 260, score: 700, height: 224, damage: 32, minWave: 999, weight: 0 },
