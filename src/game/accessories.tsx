@@ -188,10 +188,12 @@ function brimPath(shape: HatShape, brim: number) {
       return `<path d="M44 66 Q100 58 156 66 L156 88 Q100 80 44 88 Z" fill="SHADE" ${EDGE}/>`;
     case "hood":
       return `<path d="M44 66 Q100 78 156 66 L154 92 Q100 104 46 92 Z" fill="SHADE" ${EDGE}/>`;
+    // Portraits and the arena are both head-on views, so peaks are drawn
+    // symmetric — a one-sided peak reads as a hat with its front sliced off.
     case "cap":
-      return `<path d="M92 74 Q${w(160)} 74 ${w(178)} 90 Q${w(150)} 102 92 96 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(30)} 78 Q100 64 ${w(170)} 78 Q100 104 ${w(30)} 78 Z" fill="SHADE" ${EDGE}/>`;
     case "flatcap":
-      return `<path d="M52 76 Q${w(140)} 72 ${w(170)} 84 Q${w(130)} 96 60 92 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(34)} 78 Q100 66 ${w(166)} 78 Q100 100 ${w(34)} 78 Z" fill="SHADE" ${EDGE}/>`;
     case "fedora":
       return `<path d="M${w(30)} 80 Q100 66 ${w(170)} 80 Q100 100 ${w(30)} 80 Z" fill="SHADE" ${EDGE}/>`;
     case "cowboy":
