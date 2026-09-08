@@ -411,7 +411,7 @@ function Game() {
       window.removeEventListener("keyup", onKeyUp);
       window.removeEventListener("blur", onBlur);
     };
-  }, [ready, restartKey, screen, character, touch, mode, cls]);
+  }, [ready, restartKey, screen, character, touch, mode, cls, heroLevel]);
 
   const weapon = WEAPONS[hud.weapon];
 
@@ -475,6 +475,7 @@ function Game() {
           onOpen={(t: ArtTarget) => {
             playSfx("ui");
             if (t.kind === "tab") setPanel(t.tab);
+            else if (t.kind === "screen") setScreen(t.screen);
             else if (t.kind === "modal") setPanel(t.modal as PanelKey);
           }}
           muted={muted}
