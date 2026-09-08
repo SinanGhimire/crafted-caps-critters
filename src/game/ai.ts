@@ -7,7 +7,17 @@ import type { CritterEnemyKey } from "./critters";
  * readable places instead of one giant table.
  */
 export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
-  // vermin & fliers
+  // classic pack
+  e_scarlet: "chase",
+  e_moss: "swarm",
+  e_amber: "chase",
+  e_wisp: "zigzag",
+  e_violet: "charge",
+  e_toxin: "trail",
+  e_furbat: "zigzag",
+  e_crimson: "charge",
+
+
 
   // crawlers
   e_spider: "swarm",
