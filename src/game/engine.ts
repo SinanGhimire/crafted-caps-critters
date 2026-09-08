@@ -1,3 +1,4 @@
+import { FLYING_FOES } from "./enemy-art";
 import { breedName, rollBreed } from "./breeds";
 import type { ActorKey, AnimKey, Sprites, Strip } from "./assets";
 import { PACK_KEYS } from "./assets";
@@ -597,7 +598,7 @@ function archetypeFor(w: Weapon): NonNullable<Weapon["archetype"]> {
 function finishWeapon(w: Weapon) {
   w.class = "gun";
   w.archetype = archetypeFor(w);
-  w.bulletSprite = undefined;
+  delete w.bulletSprite; // bullets are drawn procedurally
 }
 
 for (const w of Object.values(WEAPONS)) finishWeapon(w);
@@ -3677,6 +3678,11 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
       // death squash + a short white blow-out on the first beat
       ctx.save();
       ctx.globalAlpha = Math.max(0, 1 - k * 0.9);
+      // procedural death: the body tips over, sinks and squashes as it fades
+      ctx.translate(e.x, e.y);
+      ctx.rotate(e.facing * k * 1.15);
+      ctx.scale(1 + k * 0.18, 1 - k * 0.32);
+      ctx.translate(-e.x, -e.y + k * h * 0.12);
       drawFrame(ctx, strip, f, e.x, e.y, h, e.facing === -1);
       if (k < 0.22) {
         ctx.globalAlpha = (1 - k / 0.22) * 0.75;
@@ -3749,10 +3755,27 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
       ? ((e.gaitT ?? e.animT) * strip.frames) % strip.frames
       : (e.animT * 4.5) % strip.frames;
 
+    // ---- procedural life: walk bounce, body lean, foot-plant squash, hover
+    const flying = FLYING_FOES.has(st.sprite as never);
+    const gait = (e.gaitT ?? e.animT) * Math.PI * 2;
+    const bob = flying
+      ? Math.sin(e.animT * 3.4) * h * 0.05
+      : moving
+        ? Math.abs(Math.sin(gait)) * h * 0.055
+        : Math.sin(e.animT * 2.6) * h * 0.012;
+    const lean = flying
+      ? Math.sin(e.animT * 2.2) * 0.05
+      : moving
+        ? Math.sin(gait) * 0.07
+        : 0;
+    const plant = moving && !flying ? Math.max(0, -Math.cos(gait * 2)) * 0.05 : 0;
+    const breathe = flying || moving ? 0 : Math.sin(e.animT * 2.6) * 0.02;
+
     ctx.save();
     ctx.globalAlpha = Math.max(0.08, 1 - e.fade);
-    ctx.translate(e.x, e.y);
-    ctx.scale(sx, sy);
+    ctx.translate(e.x, e.y - bob);
+    ctx.rotate(lean * e.facing);
+    ctx.scale(sx * (1 + plant - breathe), sy * (1 - plant + breathe));
     drawFrame(ctx, strip, frame, 0, 0, h, e.facing === -1);
     if (hurtK > 0.01) {
       // hit flash: silhouette-matched white pop instead of a washed-out blend
@@ -4097,23 +4120,17 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
   }
   ctx.restore();
 
-  // ammo art on top of the glow: every gun class throws its own round
+  // bright hot core on top of the glow — pure light, no ammo art
   for (const b of s.bullets) {
-    if (!b.sprite) continue;
-    const art = sprites.singles[b.sprite];
-    if (!art || !art.width) continue;
-    const f = firstFrame(art);
-    const h = Math.max(9, b.radius * 2.1);
-    const w2 = h * (f.w / f.h);
+    const r = Math.max(1.6, b.radius * 0.45);
     ctx.save();
-    ctx.globalAlpha = b.fromEcho ? 0.55 : 1;
-    ctx.translate(b.x, b.y);
-    ctx.rotate(b.angle + Math.PI / 2);
-    ctx.imageSmoothingEnabled = false;
-    ctx.drawImage(f.img, -w2 / 2, -h / 2, w2, h);
+    ctx.globalAlpha = b.fromEcho ? 0.5 : 0.95;
+    ctx.fillStyle = "#ffffff";
+    ctx.beginPath();
+    ctx.arc(b.x, b.y, r, 0, Math.PI * 2);
+    ctx.fill();
     ctx.restore();
   }
-
 
   // enemy projectiles — glowing orbs, bolts and arcing mortar shells
   ctx.save();

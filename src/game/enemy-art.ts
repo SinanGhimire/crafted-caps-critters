@@ -21,6 +21,8 @@ import e_slime_skull from "@/assets/foes2/e_slime_skull.png";
 import e_mushroom from "@/assets/foes2/e_mushroom.png";
 import e_skel_white from "@/assets/foes2/e_skel_white.png";
 import e_skel_gold from "@/assets/foes2/e_skel_gold.png";
+import e_wisp from "@/assets/foes2/e_wisp.png";
+import e_beetle from "@/assets/foes2/e_beetle.png";
 import e_slime_boss from "@/assets/foes2/e_slime_boss.png";
 import e_boss_spore from "@/assets/foes2/e_boss_spore.png";
 import e_boss_bone from "@/assets/foes2/e_boss_bone.png";
@@ -42,6 +44,8 @@ export const ENEMY_ART: Record<CritterEnemyKey, ArtStrips> = {
   e_mushroom: [e_mushroom, e_mushroom, e_mushroom],
   e_skel_white: [e_skel_white, e_skel_white, e_skel_white],
   e_skel_gold: [e_skel_gold, e_skel_gold, e_skel_gold],
+  e_wisp: [e_wisp, e_wisp, e_wisp],
+  e_beetle: [e_beetle, e_beetle, e_beetle],
   e_slime_boss: [e_slime_boss, e_slime_boss, e_slime_boss],
   e_boss_spore: [e_boss_spore, e_boss_spore, e_boss_spore],
   e_boss_bone: [e_boss_bone, e_boss_bone, e_boss_bone],
@@ -49,4 +53,4 @@ export const ENEMY_ART: Record<CritterEnemyKey, ArtStrips> = {
 };
 
 /** Foes that stay airborne: they hover instead of stepping. */
-export const FLYING_FOES = new Set<CritterEnemyKey>(["e_gnat", "e_bat", "e_flyer"]);
+export const FLYING_FOES = new Set<CritterEnemyKey>(["e_gnat", "e_bat", "e_flyer", "e_wisp"]);
