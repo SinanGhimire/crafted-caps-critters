@@ -700,9 +700,9 @@ function Game() {
             paddingBottom: "max(0.375rem, env(safe-area-inset-bottom))",
           }}
         >
-          {/* TOP: Brotato-style minimal — HP bar + level, coins below, tiny controls */}
-          <div className="flex items-start justify-between gap-2 px-1 pt-1 sm:px-3 sm:pt-2">
-            <div className="min-w-0 flex-1 max-w-[52%]">
+          {/* TOP: Brotato-style minimal — HP bar + level on left, timer centered, pause only on right */}
+          <div className="relative grid grid-cols-3 items-start gap-2 px-1 pt-1 sm:px-3 sm:pt-2">
+            <div className="min-w-0">
               <div className="relative h-4 w-full overflow-hidden rounded-sm border-2 border-ink bg-[oklch(0.14_0.03_20/85%)]">
                 <div
                   className="h-full transition-[width] duration-150"
@@ -732,38 +732,26 @@ function Game() {
               </div>
             </div>
 
-            <div className="flex shrink-0 items-center gap-1.5">
-              <div className="flex flex-col items-center leading-none" aria-live="polite">
-                <span className="font-display text-base leading-none text-white/90 tabular-nums [text-shadow:0_2px_3px_oklch(0_0_0/80%)]">
-                  {Math.ceil(hud.waveTimer)}
-                </span>
-                <span className="font-display text-[8px] uppercase tracking-[0.18em] text-white/45">
-                  W{hud.wave}
-                </span>
-              </div>
-              <div className="pointer-events-auto flex items-center gap-1">
-                <button
-                  onClick={() => {
-                    const st = stateRef.current;
-                    if (!st.over) st.paused = !st.paused;
-                  }}
-                  aria-label="Pause game"
-                  className="grid h-7 w-7 place-items-center rounded-md border border-[oklch(1_0_0/15%)] bg-[oklch(0.08_0.02_292/45%)]"
-                >
-                  <Pause className="h-3.5 w-3.5 text-white/70" strokeWidth={2.75} aria-hidden />
-                </button>
-                <button
-                  onClick={toggleMute}
-                  aria-label={muted ? "Unmute sound" : "Mute sound"}
-                  className="grid h-7 w-7 place-items-center rounded-md border border-[oklch(1_0_0/15%)] bg-[oklch(0.08_0.02_292/45%)]"
-                >
-                  {muted ? (
-                    <VolumeX className="h-3.5 w-3.5 text-white/70" strokeWidth={2.75} aria-hidden />
-                  ) : (
-                    <Volume2 className="h-3.5 w-3.5 text-white/70" strokeWidth={2.75} aria-hidden />
-                  )}
-                </button>
-              </div>
+            <div className="flex flex-col items-center justify-start leading-none" aria-live="polite">
+              <span className="font-display text-lg leading-none text-white/90 tabular-nums [text-shadow:0_2px_3px_oklch(0_0_0/80%)]">
+                {Math.ceil(hud.waveTimer)}
+              </span>
+              <span className="font-display text-[9px] uppercase tracking-[0.18em] text-white/45">
+                W{hud.wave}
+              </span>
+            </div>
+
+            <div className="flex justify-end">
+              <button
+                onClick={() => {
+                  const st = stateRef.current;
+                  if (!st.over) st.paused = !st.paused;
+                }}
+                aria-label="Pause game"
+                className="grid h-8 w-8 place-items-center rounded-md border border-[oklch(1_0_0/15%)] bg-[oklch(0.08_0.02_292/45%)]"
+              >
+                <Pause className="h-4 w-4 text-white/70" strokeWidth={2.75} aria-hidden />
+              </button>
             </div>
           </div>
 
