@@ -2107,7 +2107,7 @@ function killEnemy(s: GameState, e: Enemy) {
     }
   }
   if (e.role === "brood") s.popups.push({ x: e.x, y: e.y - 90, life: 2, text: "NEST DESTROYED" });
-  if (s.mode === "survival" && s.wave === 20 && (e.species === "e_demon_slime" || e.species === "e_nightborne")) {
+  if (s.mode === "survival" && s.wave === 20 && e.species === "e_nightborne") {
     s.won = true;
     s.over = true;
     s.popups.push({ x: e.x, y: e.y - 120, life: 3, text: "SURVIVAL CLEARED!" });
