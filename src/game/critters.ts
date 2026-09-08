@@ -26,10 +26,14 @@ export type CritterBrow = "none" | "angry" | "sad" | "flat";
 export type CritterEnemyKey =
   // ---- vermin & fliers
   | "e_gnat" | "e_bat" | "e_flyer"
+  // ---- crawlers
+  | "e_spider" | "e_worm"
   // ---- slimes & fungus
   | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
   // ---- undead
   | "e_skel_white" | "e_skel_gold"
+  // ---- specialists
+  | "e_bomber" | "e_caster" | "e_brute"
   // ---- boss
   | "e_boss_bone";
 
@@ -90,9 +94,13 @@ export const DEATH_FRAMES = 10;
  */
 export const CRITTER_ENEMIES: CritterDesign[] = [
   /* ---------------- vermin & fliers: fast chip damage --------------------- */
-  { key: "e_gnat", name: "Fuzz Stinger", body: "#c9b273", shade: "#6d5c2c", eye: "#fff3c9", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.66, legs: "none", pattern: "none", wings: true },
-  { key: "e_bat", name: "Night Bat", body: "#6b5aa8", shade: "#2f2650", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.82, legs: "none", pattern: "none", wings: true, brow: "angry" },
-  { key: "e_flyer", name: "Sporewing", body: "#a86a44", shade: "#4d2c1a", eye: "#f0e2c0", shape: "mound", crown: "fin", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: true, size: 1.02, legs: "none", pattern: "plates", wings: true, brow: "angry" },
+  { key: "e_gnat", name: "Green Stinger", body: "#a8cf3c", shade: "#4e6b16", eye: "#fff3c9", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.66, legs: "none", pattern: "none", wings: true },
+  { key: "e_bat", name: "Night Bat", body: "#3e4382", shade: "#1e2148", eye: "#ffd24a", shape: "orb", crown: "ears", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.82, legs: "none", pattern: "none", wings: true, brow: "angry" },
+  { key: "e_flyer", name: "Gazer", body: "#8fd3ca", shade: "#2f6f68", eye: "#f0e2c0", shape: "orb", crown: "horns", mouth: "fangs", eyes: 1, arms: false, tail: true, size: 1.02, legs: "none", pattern: "none", wings: false, brow: "angry" },
+
+  /* ---------------- crawlers ---------------------------------------------- */
+  { key: "e_spider", name: "Widowling", body: "#3c3c66", shade: "#1c1c33", eye: "#ffffff", shape: "orb", crown: "none", mouth: "fangs", eyes: 3, arms: false, tail: false, size: 0.86, legs: "many", pattern: "none", brow: "angry" },
+  { key: "e_worm", name: "Gnaw Grub", body: "#ef8fa4", shade: "#8f4257", eye: "#ffffff", shape: "tall", crown: "none", mouth: "maw", eyes: 2, arms: false, tail: false, size: 0.95, legs: "none", pattern: "none" },
 
   /* ---------------- slimes & fungus --------------------------------------- */
   { key: "e_sticklooter", name: "Sticklooter", body: "#6fc9d6", shade: "#256a76", eye: "#0f2a2e", shape: "jelly", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.8, legs: "none", pattern: "spots" },
@@ -102,6 +110,11 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   /* ---------------- undead ------------------------------------------------ */
   { key: "e_skel_white", name: "Bone Soldier", body: "#e8e8ee", shade: "#8b8b98", eye: "#9fd8ff", shape: "tall", crown: "none", mouth: "fangs", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "none", brow: "angry" },
   { key: "e_skel_gold", name: "Gilded Bones", body: "#e8c56a", shade: "#8c6f1f", eye: "#fff0b8", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.08, legs: "two", pattern: "plates", brow: "angry" },
+
+  /* ---------------- specialists ------------------------------------------- */
+  { key: "e_bomber", name: "Fuse Fiend", body: "#f2662a", shade: "#8f3210", eye: "#fff0d0", shape: "orb", crown: "none", mouth: "grin", eyes: 2, arms: false, tail: false, size: 0.92, legs: "two", pattern: "none", brow: "angry", glow: "rgba(242,102,42,0.35)" },
+  { key: "e_caster", name: "Hex Acolyte", body: "#6b3fa0", shade: "#361b57", eye: "#a8ef5c", shape: "mound", crown: "none", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.0, legs: "two", pattern: "none", core: "#a8ef5c" },
+  { key: "e_brute", name: "Slab Brute", body: "#5a6272", shade: "#2c313c", eye: "#ffffff", shape: "block", crown: "none", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.35, legs: "two", pattern: "plates", brow: "angry" },
 
   /* ---------------- boss: the commander ----------------------------------- */
   { key: "e_boss_bone", name: "Marshal Ossein", body: "#f0cd74", shade: "#8c6f1f", eye: "#fff6cf", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.75, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(240,205,116,0.4)" },

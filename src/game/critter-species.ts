@@ -35,6 +35,15 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   e_bat: { tier: 2, radius: 22, speed: [146, 188], hp: 13, score: 28, height: 106, damage: 11, minWave: 3, weight: 2.8 },
   e_flyer: { tier: 3, radius: 26, speed: [140, 180], hp: 26, score: 62, height: 126, damage: 15, minWave: 7, weight: 1.8 },
 
+  // ---- crawlers
+  e_spider: { tier: 2, radius: 24, speed: [126, 168], hp: 15, score: 30, height: 104, damage: 11, minWave: 2, weight: 3.0 },
+  e_worm: { tier: 2, radius: 26, speed: [88, 118], hp: 22, score: 38, height: 116, damage: 14, minWave: 5, weight: 2.2 },
+
+  // ---- specialists
+  e_bomber: { tier: 3, radius: 26, speed: [150, 190], hp: 20, score: 60, height: 118, damage: 26, minWave: 6, weight: 1.6 },
+  e_caster: { tier: 3, radius: 26, speed: [84, 110], hp: 28, score: 66, height: 124, damage: 14, minWave: 8, weight: 1.5 },
+  e_brute: { tier: 4, radius: 38, speed: [70, 92], hp: 82, score: 140, height: 176, damage: 24, minWave: 9, weight: 1.1 },
+
   // ---- slimes & fungus
   e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.4 },
   e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 6, weight: 2.0 },

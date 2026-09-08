@@ -12,6 +12,15 @@ export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
   e_bat: "zigzag",
   e_flyer: "dash",
 
+  // crawlers
+  e_spider: "swarm",
+  e_worm: "burrow",
+
+  // specialists
+  e_bomber: "bomber",
+  e_caster: "shooter",
+  e_brute: "chase",
+
   // slimes & fungus
   e_sticklooter: "swarm",
   e_slime_skull: "split",
