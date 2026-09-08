@@ -89,10 +89,7 @@ export const DEATH_FRAMES = 10;
  * version of a creature the player already knows.
  */
 export const CRITTER_ENEMIES: CritterDesign[] = [
-  /* ---------------- imp line: the baseline horde -------------------------- */
-  { key: "e_imp_violet", name: "Imp Runt", body: "#a06bd6", shade: "#4c2c78", eye: "#f2e6ff", shape: "orb", crown: "none", mouth: "none", eyes: 2, arms: false, tail: false, size: 0.72, legs: "two", pattern: "none" },
-  { key: "e_imp_bile", name: "Bile Imp", body: "#9fc24a", shade: "#4c6318", eye: "#eaffb8", shape: "orb", crown: "horns", mouth: "fangs", eyes: 2, arms: false, tail: true, size: 0.84, legs: "two", pattern: "spots", brow: "angry" },
-  { key: "e_imp_crimson", name: "Crimson Imp", body: "#d4544f", shade: "#6d1f1c", eye: "#ffe0d0", shape: "orb", crown: "hornsteel", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 0.96, legs: "two", pattern: "plates", brow: "angry" },
+  /* ---------------- vermin & fliers: fast chip damage --------------------- */
 
   /* ---------------- vermin & fliers: fast chip damage --------------------- */
   { key: "e_gnat", name: "Fuzz Stinger", body: "#c9b273", shade: "#6d5c2c", eye: "#fff3c9", shape: "orb", crown: "none", mouth: "fangs", eyes: 2, arms: false, tail: false, size: 0.66, legs: "none", pattern: "none", wings: true },
