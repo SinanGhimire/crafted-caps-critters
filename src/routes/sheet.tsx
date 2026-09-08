@@ -1,5 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { ENEMY_ART } from "@/game/enemy-art";
+import { echoStrips, IDLE_FRAMES } from "@/game/echo-art";
 import { CRITTER_ENEMIES } from "@/game/critters";
 import { ClassPortrait } from "@/components/ClassPortrait";
 import { CLASSES, type ClassKey } from "@/game/classes";
@@ -26,8 +26,8 @@ function Sheet() {
               style={{
                 width: 190,
                 height: 150,
-                backgroundImage: `url(${ENEMY_ART[d.key as keyof typeof ENEMY_ART][0]})`,
-                backgroundSize: "600% 100%",
+                backgroundImage: `url(${echoStrips(d)[0]})`,
+                backgroundSize: `${IDLE_FRAMES * 100}% 100%`,
                 backgroundRepeat: "no-repeat",
                 backgroundPosition: "left top",
               }}
