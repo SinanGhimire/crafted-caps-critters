@@ -24,22 +24,20 @@ export type CritterPattern = "none" | "spots" | "stripes" | "plates" | "belly";
 export type CritterBrow = "none" | "angry" | "sad" | "flat";
 
 export type CritterEnemyKey =
-  // ---- critters
-  | "e_mushroom"
-  // ---- undead
-  | "e_skel_white" | "e_skel_gold"
   // ---- imps
-  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson" | "e_gnat"
-  // ---- vermin
-  | "e_bat"
-  // ---- slimes
-  | "e_sticklooter" | "e_slime_skull"
+  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson"
+  // ---- vermin & fliers
+  | "e_gnat" | "e_wasp" | "e_rat" | "e_bat" | "e_flyer"
+  // ---- slimes & fungus
+  | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
+  // ---- undead
+  | "e_skel_white" | "e_skel_gold" | "e_wizard"
+  // ---- golems
+  | "e_golem_blue" | "e_golem_ember" | "e_golem_armor"
+  // ---- heavies
+  | "e_bringer"
   // ---- bosses
-  | "e_nightborne" | "e_demon_slime"
-  // ---- tier ascensions (Brotato-style upgraded versions of the base chibi)
-  | "e_imp_infernal" | "e_bonelord" | "e_wraithwing"
-  // ---- graveyard shift
-  | "e_blob_gray" | "e_blob_pup" | "e_zombie" | "e_ghost" | "e_hound";
+  | "e_slime_boss" | "e_gollux" | "e_demon" | "e_demon_slime" | "e_nightborne";
 
 export type CritterHeroKey = "templar" | "reaper" | "oracle" | "seraph" | "warchief" | "sprout";
 
