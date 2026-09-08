@@ -1,6 +1,5 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { useEffect, useState } from "react";
-import { ENEMY_IMG } from "@/game/enemy-images";
+import { ENEMY_ART } from "@/game/enemy-art";
 import { CRITTER_ENEMIES } from "@/game/critters";
 import { ClassPortrait } from "@/components/ClassPortrait";
 import { CLASSES, type ClassKey } from "@/game/classes";
@@ -17,8 +16,6 @@ export const Route = createFileRoute("/sheet")({
 });
 
 function Sheet() {
-  const [ready, setReady] = useState(false);
-  useEffect(() => setReady(true), []);
   const keys = Object.keys(CLASSES) as ClassKey[];
   return (
     <div style={{ background: "#14121a", padding: 16, color: "#fff", fontFamily: "sans-serif" }}>
@@ -29,10 +26,10 @@ function Sheet() {
               style={{
                 width: 190,
                 height: 150,
-                backgroundImage: ready && ENEMY_IMG[d.key] ? `url(${ENEMY_IMG[d.key]})` : undefined,
-                backgroundSize: "contain",
+                backgroundImage: `url(${ENEMY_ART[d.key as keyof typeof ENEMY_ART][0]})`,
+                backgroundSize: "600% 100%",
                 backgroundRepeat: "no-repeat",
-                backgroundPosition: "center",
+                backgroundPosition: "left top",
               }}
             />
             {d.name}

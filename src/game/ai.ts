@@ -7,40 +7,13 @@ import type { CritterEnemyKey } from "./critters";
  * readable places instead of one giant table.
  */
 export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
-  // classic pack
-  e_scarlet: "chase",
-  e_moss: "swarm",
-  e_amber: "chase",
-  e_wisp: "zigzag",
-  e_violet: "charge",
-  e_toxin: "trail",
-  e_furbat: "zigzag",
-  e_crimson: "charge",
-
-
-
-  // crawlers
-  e_spider: "swarm",
-  e_worm: "burrow",
-
-  // specialists
-  e_bomber: "bomber",
-  e_caster: "shooter",
-  e_brute: "chase",
-  e_cultist: "shooter",
-
-  // slime pack
-  e_slime_green: "swarm",
-  e_slime_blue: "chase",
-  e_slime_yellow: "zigzag",
-  e_slime_red: "charge",
-  e_slime_purple: "split",
-  e_slime_black: "chase",
-  e_tiny_green: "swarm",
-  e_tiny_blue: "swarm",
-  e_tiny_red: "swarm",
+  // vermin & fliers
+  e_gnat: "zigzag",
+  e_bat: "zigzag",
+  e_flyer: "dash",
 
   // slimes & fungus
+  e_sticklooter: "swarm",
   e_slime_skull: "split",
   e_mushroom: "trail",
 

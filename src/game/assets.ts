@@ -6,7 +6,7 @@ import {
   critterSrc,
   type CritterEnemyKey,
 } from "./critters";
-import { enemyImageSrc, enemyFrames } from "./enemy-images";
+import { ENEMY_ART } from "./enemy-art";
 
 
 
@@ -90,8 +90,7 @@ function proceduralActorSrc(key: ActorKey): [string, string, string] {
  * The procedural chibi is only a safety net for a key without artwork.
  */
 async function actorSrc(key: ActorKey): Promise<[string, string, string]> {
-  const design = CRITTER_MAP[key];
-  return enemyImageSrc(key) ?? (design ? proceduralActorSrc(key) : ["", "", ""]);
+  return ENEMY_ART[key] ?? proceduralActorSrc(key);
 }
 
 
@@ -206,7 +205,7 @@ export function loadSprites(): Promise<Sprites> {
 
     const [actorAnims, playerAnims, singleImgs] = await Promise.all([
       // one drawing per foe: a single frame that the renderer animates itself
-      Promise.all(actorKeys.map(async (k) => loadAnims(await actorSrc(k), enemyFrames(k)))),
+      Promise.all(actorKeys.map(async (k) => loadAnims(await actorSrc(k), [1, 1, 1]))),
       Promise.all(playerKeys.map((k) => loadAnims(playerSrc(k), PLAYER_FRAMES))),
       Promise.all(singleKeys.map((k) => loadImage(SINGLE_SRC[k] ?? ""))),
     ]);

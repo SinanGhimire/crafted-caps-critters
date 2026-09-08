@@ -30,44 +30,15 @@ interface CritterTuning {
 }
 
 const TUNING: Record<CritterEnemyKey, CritterTuning> = {
-  // ---- classic pack
-  e_scarlet: { tier: 1, radius: 22, speed: [104, 138], hp: 9, score: 14, height: 98, damage: 9, minWave: 1, weight: 3.6 },
-  e_moss: { tier: 1, radius: 21, speed: [124, 160], hp: 7, score: 15, height: 94, damage: 8, minWave: 1, weight: 3.4 },
-  e_amber: { tier: 2, radius: 26, speed: [96, 126], hp: 20, score: 32, height: 112, damage: 13, minWave: 3, weight: 2.8 },
-  e_wisp: { tier: 2, radius: 20, speed: [150, 192], hp: 12, score: 26, height: 92, damage: 10, minWave: 2, weight: 2.8 },
-  e_violet: { tier: 3, radius: 28, speed: [118, 152], hp: 30, score: 52, height: 126, damage: 16, minWave: 5, weight: 2.2 },
-  e_toxin: { tier: 3, radius: 29, speed: [100, 130], hp: 34, score: 56, height: 130, damage: 15, minWave: 6, weight: 2.0 },
-  e_furbat: { tier: 2, radius: 19, speed: [162, 205], hp: 11, score: 24, height: 88, damage: 10, minWave: 3, weight: 2.6 },
-  e_crimson: { tier: 4, radius: 32, speed: [110, 144], hp: 56, score: 96, height: 146, damage: 20, minWave: 8, weight: 1.5 },
-
-
-
-  // ---- crawlers
-  e_spider: { tier: 1, radius: 24, speed: [126, 168], hp: 13, score: 26, height: 104, damage: 10, minWave: 1, weight: 3.4 },
-  e_worm: { tier: 2, radius: 26, speed: [88, 118], hp: 22, score: 38, height: 116, damage: 14, minWave: 5, weight: 2.2 },
-
-  // ---- specialists
-  e_bomber: { tier: 3, radius: 26, speed: [150, 190], hp: 20, score: 60, height: 118, damage: 26, minWave: 6, weight: 1.6 },
-  e_caster: { tier: 3, radius: 26, speed: [84, 110], hp: 28, score: 66, height: 124, damage: 14, minWave: 8, weight: 1.5 },
-  e_brute: { tier: 4, radius: 38, speed: [70, 92], hp: 82, score: 140, height: 176, damage: 24, minWave: 9, weight: 1.1 },
-
-  // ---- slime pack
-  e_slime_green: { tier: 1, radius: 22, speed: [96, 126], hp: 8, score: 14, height: 92, damage: 8, minWave: 1, weight: 3.6 },
-  e_slime_blue: { tier: 2, radius: 24, speed: [104, 136], hp: 18, score: 28, height: 100, damage: 12, minWave: 3, weight: 3.0 },
-  e_slime_yellow: { tier: 2, radius: 24, speed: [132, 170], hp: 15, score: 30, height: 100, damage: 11, minWave: 3, weight: 2.8 },
-  e_slime_red: { tier: 3, radius: 26, speed: [120, 158], hp: 30, score: 52, height: 110, damage: 16, minWave: 5, weight: 2.2 },
-  e_slime_purple: { tier: 3, radius: 28, speed: [100, 132], hp: 38, score: 62, height: 118, damage: 17, minWave: 6, weight: 2.0 },
-  e_slime_black: { tier: 4, radius: 32, speed: [92, 120], hp: 70, score: 120, height: 132, damage: 22, minWave: 9, weight: 1.2 },
-  e_tiny_green: { tier: 1, radius: 15, speed: [130, 168], hp: 4, score: 8, height: 62, damage: 6, minWave: 1, weight: 3.0 },
-  e_tiny_blue: { tier: 1, radius: 15, speed: [140, 180], hp: 6, score: 10, height: 62, damage: 7, minWave: 2, weight: 2.6 },
-  e_tiny_red: { tier: 2, radius: 16, speed: [150, 194], hp: 9, score: 14, height: 66, damage: 9, minWave: 4, weight: 2.4 },
-
-  // ---- cultist
-  e_cultist: { tier: 3, radius: 26, speed: [88, 116], hp: 30, score: 70, height: 128, damage: 15, minWave: 7, weight: 1.6 },
+  // ---- vermin & fliers
+  e_gnat: { tier: 1, radius: 18, speed: [136, 176], hp: 6, score: 15, height: 92, damage: 8, minWave: 1, weight: 3.4 },
+  e_bat: { tier: 2, radius: 22, speed: [146, 188], hp: 13, score: 28, height: 106, damage: 11, minWave: 3, weight: 2.8 },
+  e_flyer: { tier: 3, radius: 26, speed: [140, 180], hp: 26, score: 62, height: 126, damage: 15, minWave: 7, weight: 1.8 },
 
   // ---- slimes & fungus
+  e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.4 },
   e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 6, weight: 2.0 },
-  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 2, weight: 3.0 },
+  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 2, weight: 2.6 },
 
   // ---- undead
   e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 4, weight: 2.6 },
