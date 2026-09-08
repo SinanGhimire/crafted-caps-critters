@@ -24,18 +24,14 @@ export type CritterPattern = "none" | "spots" | "stripes" | "plates" | "belly";
 export type CritterBrow = "none" | "angry" | "sad" | "flat";
 
 export type CritterEnemyKey =
-  // ---- imps
-  | "e_imp_violet" | "e_imp_bile" | "e_imp_crimson"
   // ---- vermin & fliers
-  | "e_gnat" | "e_rat" | "e_bat" | "e_flyer"
+  | "e_gnat" | "e_bat" | "e_flyer"
   // ---- slimes & fungus
   | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
   // ---- undead
   | "e_skel_white" | "e_skel_gold"
-  // ---- my own additions
-  | "e_wisp" | "e_beetle"
-  // ---- bosses
-  | "e_slime_boss" | "e_boss_spore" | "e_boss_bone" | "e_boss_imp";
+  // ---- boss
+  | "e_boss_bone";
 
 export type CritterHeroKey = "templar" | "reaper" | "oracle" | "seraph" | "warchief" | "sprout";
 
