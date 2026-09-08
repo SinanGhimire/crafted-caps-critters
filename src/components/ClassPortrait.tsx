@@ -36,8 +36,8 @@ export function CharacterFigure({
   shirt?: string;
   className?: string;
 }) {
-  const art = SKIN_ART[skin] ?? SKIN_ART.bald!;
-  const anchors = HERO_ANCHORS[skin] ?? HERO_ANCHORS.bald!;
+  const art = SKIN_ART[skin] ?? SKIN_ART["bald"]!;
+  const anchors = HERO_ANCHORS[skin] ?? HERO_ANCHORS["bald"]!;
   const a = anchors.idle[0]!;
   const fit = HERO_HEAD_FITS[skin] ?? { scale: 1, x: 0, y: 0 };
 

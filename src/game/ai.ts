@@ -38,6 +38,9 @@ export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
   e_zombie: "leech",
   e_ghost: "cloak",
   e_hound: "dash",
+  e_imp_infernal: "charge",
+  e_bonelord: "charge",
+  e_wraithwing: "zigzag",
 
   // boss
 };
