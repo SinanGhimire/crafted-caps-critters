@@ -6,7 +6,7 @@ import {
   critterSrc,
   type CritterEnemyKey,
 } from "./critters";
-import { echoStrips, IDLE_FRAMES as E_IDLE, WALK_FRAMES as E_WALK, DEATH_FRAMES as E_DEATH } from "./echo-art";
+import { enemyImageSrc } from "./enemy-images";
 
 
 
@@ -91,7 +91,7 @@ function proceduralActorSrc(key: ActorKey): [string, string, string] {
  */
 async function actorSrc(key: ActorKey): Promise<[string, string, string]> {
   const design = CRITTER_MAP[key];
-  return design ? echoStrips(design) : proceduralActorSrc(key);
+  return enemyImageSrc(key) ?? (design ? proceduralActorSrc(key) : ["", "", ""]);
 }
 
 
@@ -206,7 +206,7 @@ export function loadSprites(): Promise<Sprites> {
 
     const [actorAnims, playerAnims, singleImgs] = await Promise.all([
       // one drawing per foe: a single frame that the renderer animates itself
-      Promise.all(actorKeys.map(async (k) => loadAnims(await actorSrc(k), [E_IDLE, E_WALK, E_DEATH]))),
+      Promise.all(actorKeys.map(async (k) => loadAnims(await actorSrc(k), [1, 1, 1]))),
       Promise.all(playerKeys.map((k) => loadAnims(playerSrc(k), PLAYER_FRAMES))),
       Promise.all(singleKeys.map((k) => loadImage(SINGLE_SRC[k] ?? ""))),
     ]);
