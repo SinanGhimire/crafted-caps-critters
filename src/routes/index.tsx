@@ -77,6 +77,8 @@ interface Hud {
   paused: boolean;
   materials: number;
   phase: "wave" | "shop";
+  playerScreenX: number;
+  playerScreenY: number;
 }
 
 const INITIAL_HUD: Hud = {
@@ -100,6 +102,8 @@ const INITIAL_HUD: Hud = {
   paused: false,
   materials: 0,
   phase: "wave",
+  playerScreenX: 50,
+  playerScreenY: 50,
 };
 
 function Stick({
