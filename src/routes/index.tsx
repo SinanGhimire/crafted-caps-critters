@@ -28,7 +28,11 @@ import type { CharacterKey, GameState, RunMode, WeaponKey } from "@/game/types";
 import { RARITY_COLOR, UPGRADE_MAP } from "@/game/upgrades";
 import { WaveShop } from "@/components/WaveShop";
 import { SpriteIcon } from "@/components/SpriteIcon";
-import { useProfile } from "@/game/profile";
+import { levelFor, useProfile } from "@/game/profile";
+import { ClassTree } from "@/components/ClassTree";
+import { Progression } from "@/components/Progression";
+import { metaBonus, xpForRun } from "@/game/progression";
+import { setMetaBonus } from "@/game/engine";
 
 export const Route = createFileRoute("/")({
   head: () => ({
@@ -169,7 +173,7 @@ function Game() {
   });
   const [ready, setReady] = useState(false);
   const [loadingProgress, setLoadingProgress] = useState(0);
-  const [screen, setScreen] = useState<"art" | "select" | "play">("art");
+  const [screen, setScreen] = useState<"art" | "select" | "play" | "tree" | "levels">("art");
   const [mode, setMode] = useState<RunMode>("survival");
   const [panel, setPanel] = useState<PanelKey | null>("gift");
   const [character, setCharacter] = useState<CharacterKey>("bald");
