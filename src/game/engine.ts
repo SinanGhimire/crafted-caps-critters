@@ -580,17 +580,10 @@ export const WEAPONS = { ...BASE_WEAPONS, ...PACK_WEAPONS } as Record<WeaponKey,
 
 /* ------------------------- class pass: gun tuning -------------------------- */
 
-/** Pick the ammo art that matches a gun's punch and fire rate. */
-function bulletArtFor(w: Weapon): string {
-  if (w.bulletRadius >= 10 || w.damage >= 24) return "bl_grenade";
-  if (w.damage >= 14) return hash32(w.key) % 2 ? "bl_large_bullet" : "bl_large_bullet2";
-  if (w.damage >= 6 || w.pellets > 1) {
-    return hash32(w.key) % 2 ? "bl_medium_bullet" : "bl_medium_bullet2";
-  }
-  const small = ["bl_small_bullet", "bl_small_bullet2", "bl_small_bullet3"];
-  return small[hash32(w.key) % 3]!;
-}
-
+/**
+ * Bullets are drawn procedurally (see the bullet pass in the renderer) — no
+ * pixel ammo art, so nothing ever reads as a grenade or a floating ammo box.
+ */
 function archetypeFor(w: Weapon): NonNullable<Weapon["archetype"]> {
   if (w.visual === "beam" || w.visual === "orb" || w.visual === "ring") return "energy";
   if (w.bulletRadius >= 10 || w.damage >= 22) return "heavy";
@@ -604,7 +597,7 @@ function archetypeFor(w: Weapon): NonNullable<Weapon["archetype"]> {
 function finishWeapon(w: Weapon) {
   w.class = "gun";
   w.archetype = archetypeFor(w);
-  w.bulletSprite = bulletArtFor(w);
+  w.bulletSprite = undefined;
 }
 
 for (const w of Object.values(WEAPONS)) finishWeapon(w);
@@ -675,7 +668,6 @@ export function openShop(s: GameState) {
   s.phase = "shop";
   s.shopRerolls = 0;
   s.shopOffers = rollSlotOffers(s);
-  s.itemOffers = rollItems(s.ownedItems, 4);
   s.sfx.push("level");
 }
 
@@ -685,7 +677,6 @@ export function rerollShop(s: GameState) {
   s.materials -= cost;
   s.shopRerolls += 1;
   s.shopOffers = rollSlotOffers(s);
-  s.itemOffers = rollItems(s.ownedItems, 4);
   return true;
 }
 
