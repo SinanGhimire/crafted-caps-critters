@@ -179,7 +179,8 @@ function Game() {
   const [character, setCharacter] = useState<CharacterKey>("bald");
   const [cls, setCls] = useState<ClassKey>("vagrant");
   const [best, setBest] = useState(0);
-  const { patch: patchProfile } = useProfile();
+  const { profile, patch: patchProfile } = useProfile();
+  const heroLevel = levelFor(profile.xp);
   const [muted, setMutedState] = useState(false);
   const [touch, setTouch] = useState(false);
   const [hud, setHud] = useState<Hud>(INITIAL_HUD);
@@ -201,6 +202,27 @@ function Game() {
       owned: [...new Set([...p.owned, ...PLAYER_CHARACTERS.map((c) => `hero:${c.key}`)])],
     }));
   }, [hud.won, patchProfile]);
+
+  // Every finished run banks permanent hero XP, exactly once.
+  const xpRef = useRef(false);
+  const [runXp, setRunXp] = useState(0);
+  useEffect(() => {
+    if (!hud.over) {
+      xpRef.current = false;
+      setRunXp(0);
+      return;
+    }
+    if (xpRef.current) return;
+    xpRef.current = true;
+    const gain = xpForRun({
+      score: hud.score,
+      wave: hud.wave,
+      kills: hud.kills,
+      won: hud.won,
+    });
+    setRunXp(gain);
+    patchProfile((p) => ({ ...p, xp: p.xp + gain }));
+  }, [hud.over, hud.score, hud.wave, hud.kills, hud.won, patchProfile]);
 
   useEffect(() => {
     setMutedState(loadMuted());
