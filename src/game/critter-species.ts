@@ -30,36 +30,22 @@ interface CritterTuning {
 }
 
 const TUNING: Record<CritterEnemyKey, CritterTuning> = {
-  // ---- imp line: the backbone of every wave
-  e_imp_violet: { tier: 1, radius: 24, speed: [132, 170], hp: 8, score: 13, height: 116, damage: 9, minWave: 1, weight: 3.4 },
-  e_imp_bile: { tier: 2, radius: 27, speed: [118, 152], hp: 15, score: 26, height: 128, damage: 12, minWave: 3, weight: 2.8 },
-  e_imp_crimson: { tier: 3, radius: 30, speed: [126, 162], hp: 26, score: 48, height: 142, damage: 16, minWave: 6, weight: 2.2 },
-
   // ---- vermin & fliers
-  e_gnat: { tier: 1, radius: 18, speed: [136, 176], hp: 6, score: 15, height: 92, damage: 8, minWave: 1, weight: 2.8 },
-  e_rat: { tier: 1, radius: 20, speed: [150, 190], hp: 7, score: 14, height: 90, damage: 8, minWave: 1, weight: 2.6 },
-  
-  e_bat: { tier: 2, radius: 22, speed: [146, 188], hp: 13, score: 28, height: 106, damage: 11, minWave: 4, weight: 2.4 },
-  e_flyer: { tier: 3, radius: 26, speed: [140, 180], hp: 26, score: 62, height: 126, damage: 15, minWave: 8, weight: 1.6 },
+  e_gnat: { tier: 1, radius: 18, speed: [136, 176], hp: 6, score: 15, height: 92, damage: 8, minWave: 1, weight: 3.4 },
+  e_bat: { tier: 2, radius: 22, speed: [146, 188], hp: 13, score: 28, height: 106, damage: 11, minWave: 3, weight: 2.8 },
+  e_flyer: { tier: 3, radius: 26, speed: [140, 180], hp: 26, score: 62, height: 126, damage: 15, minWave: 7, weight: 1.8 },
 
   // ---- slimes & fungus
-  e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.0 },
-  e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 7, weight: 1.8 },
-  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 3, weight: 2.2 },
+  e_sticklooter: { tier: 1, radius: 22, speed: [112, 146], hp: 10, score: 16, height: 100, damage: 9, minWave: 1, weight: 3.4 },
+  e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 6, weight: 2.0 },
+  e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 2, weight: 2.6 },
 
   // ---- undead
-  e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 5, weight: 2.2 },
-  e_skel_gold: { tier: 3, radius: 28, speed: [112, 152], hp: 32, score: 54, height: 144, damage: 17, minWave: 8, weight: 1.7 },
+  e_skel_white: { tier: 2, radius: 25, speed: [94, 124], hp: 18, score: 30, height: 132, damage: 13, minWave: 4, weight: 2.6 },
+  e_skel_gold: { tier: 3, radius: 28, speed: [112, 152], hp: 32, score: 54, height: 144, damage: 17, minWave: 7, weight: 1.9 },
 
-  // ---- my own additions
-  e_wisp: { tier: 2, radius: 20, speed: [158, 200], hp: 12, score: 26, height: 96, damage: 10, minWave: 3, weight: 2.2 },
-  e_beetle: { tier: 3, radius: 28, speed: [86, 112], hp: 40, score: 60, height: 118, damage: 16, minWave: 6, weight: 1.9 },
-
-  // ---- bosses (never rolled by the wave pool)
-  e_slime_boss: { tier: 5, radius: 44, speed: [66, 88], hp: 150, score: 520, height: 214, damage: 28, minWave: 999, weight: 0 },
-  e_boss_spore: { tier: 5, radius: 45, speed: [72, 94], hp: 260, score: 700, height: 224, damage: 32, minWave: 999, weight: 0 },
+  // ---- boss (never rolled by the wave pool)
   e_boss_bone: { tier: 5, radius: 44, speed: [88, 116], hp: 340, score: 840, height: 228, damage: 35, minWave: 999, weight: 0 },
-  e_boss_imp: { tier: 5, radius: 46, speed: [84, 112], hp: 460, score: 1100, height: 232, damage: 38, minWave: 999, weight: 0 },
 };
 
 
