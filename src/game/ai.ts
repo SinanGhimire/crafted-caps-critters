@@ -7,42 +7,42 @@ import type { CritterEnemyKey } from "./critters";
  * readable places instead of one giant table.
  */
 export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
-
-  // critters
+  // imps
   e_imp_violet: "swarm",
   e_imp_bile: "chase",
   e_imp_crimson: "dash",
+
+  // vermin & fliers
   e_gnat: "zigzag",
+  e_rat: "swarm",
+  e_wasp: "zigzag",
+  e_bat: "zigzag",
+  e_flyer: "dash",
+
+  // slimes & fungus
+  e_sticklooter: "swarm",
+  e_slime_skull: "split",
   e_mushroom: "trail",
 
   // undead
   e_skel_white: "chase",
   e_skel_gold: "charge",
+  e_wizard: "shooter",
 
   // golems
+  e_golem_blue: "chase",
+  e_golem_ember: "charge",
+  e_golem_armor: "shield",
 
-  // vermin & arcane
-  e_bat: "zigzag",
+  // heavies
+  e_bringer: "charge",
 
   // bosses
-  e_nightborne: "dash",
+  e_slime_boss: "rhino",
+  e_gollux: "titan",
+  e_demon: "charge",
   e_demon_slime: "rhino",
-
-  // slimes & roots
-  e_sticklooter: "swarm",
-  e_slime_skull: "leap",
-
-  // graveyard shift
-  e_blob_gray: "split",
-  e_blob_pup: "swarm",
-  e_zombie: "leech",
-  e_ghost: "cloak",
-  e_hound: "dash",
-  e_imp_infernal: "charge",
-  e_bonelord: "charge",
-  e_wraithwing: "zigzag",
-
-  // boss
+  e_nightborne: "dash",
 };
 
 /** One-line mechanic blurb — used by the bestiary UI. */
