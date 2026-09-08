@@ -51,6 +51,20 @@ const TUNING: Record<CritterEnemyKey, CritterTuning> = {
   e_caster: { tier: 3, radius: 26, speed: [84, 110], hp: 28, score: 66, height: 124, damage: 14, minWave: 8, weight: 1.5 },
   e_brute: { tier: 4, radius: 38, speed: [70, 92], hp: 82, score: 140, height: 176, damage: 24, minWave: 9, weight: 1.1 },
 
+  // ---- slime pack
+  e_slime_green: { tier: 1, radius: 22, speed: [96, 126], hp: 8, score: 14, height: 92, damage: 8, minWave: 1, weight: 3.6 },
+  e_slime_blue: { tier: 2, radius: 24, speed: [104, 136], hp: 18, score: 28, height: 100, damage: 12, minWave: 3, weight: 3.0 },
+  e_slime_yellow: { tier: 2, radius: 24, speed: [132, 170], hp: 15, score: 30, height: 100, damage: 11, minWave: 3, weight: 2.8 },
+  e_slime_red: { tier: 3, radius: 26, speed: [120, 158], hp: 30, score: 52, height: 110, damage: 16, minWave: 5, weight: 2.2 },
+  e_slime_purple: { tier: 3, radius: 28, speed: [100, 132], hp: 38, score: 62, height: 118, damage: 17, minWave: 6, weight: 2.0 },
+  e_slime_black: { tier: 4, radius: 32, speed: [92, 120], hp: 70, score: 120, height: 132, damage: 22, minWave: 9, weight: 1.2 },
+  e_tiny_green: { tier: 1, radius: 15, speed: [130, 168], hp: 4, score: 8, height: 62, damage: 6, minWave: 1, weight: 3.0 },
+  e_tiny_blue: { tier: 1, radius: 15, speed: [140, 180], hp: 6, score: 10, height: 62, damage: 7, minWave: 2, weight: 2.6 },
+  e_tiny_red: { tier: 2, radius: 16, speed: [150, 194], hp: 9, score: 14, height: 66, damage: 9, minWave: 4, weight: 2.4 },
+
+  // ---- cultist
+  e_cultist: { tier: 3, radius: 26, speed: [88, 116], hp: 30, score: 70, height: 128, damage: 15, minWave: 7, weight: 1.6 },
+
   // ---- slimes & fungus
   e_slime_skull: { tier: 3, radius: 32, speed: [104, 136], hp: 34, score: 58, height: 132, damage: 17, minWave: 6, weight: 2.0 },
   e_mushroom: { tier: 2, radius: 25, speed: [96, 126], hp: 16, score: 34, height: 114, damage: 12, minWave: 2, weight: 3.0 },
