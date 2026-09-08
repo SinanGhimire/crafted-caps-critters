@@ -13,7 +13,7 @@
 
 import type { CritterDesign } from "./critters";
 
-export const FRAME = 112;
+export const FRAME = 144;
 export const IDLE_FRAMES = 10;
 export const WALK_FRAMES = 20;
 export const DEATH_FRAMES = 30;
@@ -128,15 +128,15 @@ function drawWings(g: CanvasRenderingContext2D, d: CritterDesign, p: Pose, bw: n
   const shade = shadeOf(d);
   for (const s of [-1, 1]) {
     g.save();
-    g.translate(s * bw * 0.62, cy - 4);
+    g.translate(s * bw * 0.40, cy - 6);
     g.scale(s, 1);
     g.rotate(-0.5 + open * 0.6);
     inked(g, shade, () => {
       g.moveTo(0, 0);
-      g.quadraticCurveTo(26, -20, 40, -4);
-      g.quadraticCurveTo(28, 2, 30, 14);
-      g.quadraticCurveTo(18, 6, 12, 16);
-      g.quadraticCurveTo(6, 6, 0, 10);
+      g.quadraticCurveTo(22, -18, 34, -3);
+      g.quadraticCurveTo(24, 2, 26, 12);
+      g.quadraticCurveTo(15, 5, 10, 14);
+      g.quadraticCurveTo(5, 5, 0, 9);
     }, 5);
     g.restore();
   }
@@ -311,7 +311,7 @@ function drawCritter(g: CanvasRenderingContext2D, d: CritterDesign, p: Pose) {
   const size = 0.9 + (d.size ?? 1) * 0.18;
   const bw = 62 * size * p.sx;
   const bh = 58 * size * p.sy;
-  const baseY = FRAME - 10;
+  const baseY = FRAME - 22;
   const cy = baseY - 14 - bh / 2 + p.bob;
 
   g.save();
