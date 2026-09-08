@@ -2087,7 +2087,7 @@ function killEnemy(s: GameState, e: Enemy) {
 
   // ---- blueprint death mechanics
   if (e.role === "split" && !e.minion) {
-    const spawn = e.species === "e_slime_skull" ? "e_sticklooter" : "e_imp_violet";
+    const spawn = "e_sticklooter";
     for (let i = 0; i < 3; i++) spawnMinion(s, e, spawn, 0.85);
     s.popups.push({ x: e.x, y: e.y - 70, life: 0.9, text: "SPLIT!" });
   }
@@ -2109,7 +2109,7 @@ function killEnemy(s: GameState, e: Enemy) {
     }
   }
   if (e.role === "brood") s.popups.push({ x: e.x, y: e.y - 90, life: 2, text: "NEST DESTROYED" });
-  if (s.mode === "survival" && s.wave === 20 && e.species === "e_boss_imp") {
+  if (s.mode === "survival" && s.wave === 20 && e.species === "e_boss_bone") {
     s.won = true;
     s.over = true;
     s.popups.push({ x: e.x, y: e.y - 120, life: 3, text: "SURVIVAL CLEARED!" });
@@ -2701,7 +2701,7 @@ export function update(s: GameState, input: Input, dt: number) {
         if (e.cd <= 0 && e.spawned < (nest ? 14 : 5)) {
           e.cd = nest ? 1.1 : 3.6;
           e.spawned++;
-          spawnMinion(s, e, nest && Math.random() < 0.35 ? "e_imp_crimson" : "e_gnat", nest ? 0.9 : 0.8);
+          spawnMinion(s, e, nest && Math.random() < 0.35 ? "e_skel_white" : "e_gnat", nest ? 0.9 : 0.8);
         }
         break;
       }
@@ -2897,7 +2897,7 @@ export function update(s: GameState, input: Input, dt: number) {
         if (!e.didSplit && !e.minion && e.hp < e.maxHp * 0.5) {
           e.didSplit = true;
           for (let k = 0; k < 2; k++) {
-            const c = spawnMinion(s, e, "e_imp_violet", 0.55);
+            const c = spawnMinion(s, e, "e_sticklooter", 0.55);
             c.didSplit = true;
           }
           

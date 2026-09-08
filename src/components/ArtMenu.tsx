@@ -67,7 +67,6 @@ const LEFT_RAIL: RailItem[] = [
 ];
 
 const RIGHT_RAIL: RailItem[] = [
-  { id: "awards", label: "Awards", icon: Trophy, target: { kind: "modal", modal: "achievements" }, tint: "gold" },
   { id: "ranks", label: "Ranks", icon: Crown, target: { kind: "modal", modal: "leaderboard" }, badge: "!", tint: "crimson" },
 ];
 
