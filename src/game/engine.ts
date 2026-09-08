@@ -6,6 +6,7 @@ import { baseMods } from "./types";
 import { applyUpgrade, rollUpgrades, xpForLevel, RARITY_COLOR, UPGRADE_MAP } from "./upgrades";
 import { CRITTER_KEYS, CRITTER_STATS, CRITTER_TIER } from "./critter-species";
 import { AI_ROLE } from "./ai";
+import { ITEM_MAP, itemPrice, rollItems } from "./shop-items";
 import { CLASSES, classForSkin, type ClassKey } from "./classes";
 import { drawWorn, warmAccessories } from "./accessory-images";
 import type {
