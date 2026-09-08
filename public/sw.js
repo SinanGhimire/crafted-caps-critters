@@ -4,7 +4,7 @@
  * Strategy: cache-first for static assets, network-first for navigation.
  */
 
-const CACHE_NAME = "echo-v1";
+const CACHE_NAME = "echo-v2";
 const SHELL = [
   "/",
   "/manifest.json",
