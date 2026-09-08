@@ -1,78 +1,52 @@
 import type { CritterEnemyKey } from "./critters";
 
 /**
- * Hand-drawn enemy artwork — the original animated sprite strips.
- * Each entry is [idle 6, walk 8, death 10] frames, fed straight to the renderer.
+ * Enemy artwork — one hand-painted illustration per creature.
+ *
+ * The old pixel strips are gone. Each foe is a single clean, high-resolution
+ * drawing; the renderer gives it life procedurally (walk bounce, body lean,
+ * squash on foot-plant, idle breathing, hover for fliers and a tumble on
+ * death), so nothing ever slides across the floor.
  */
 
-import skelWhiteIdle from "@/assets/foes/skel_white-idle.png";
-import skelWhiteWalk from "@/assets/foes/skel_white-walk.png";
-import skelWhiteDeath from "@/assets/foes/skel_white-death.png";
-import skelGoldIdle from "@/assets/foes/skel_gold-idle.png";
-import skelGoldWalk from "@/assets/foes/skel_gold-walk.png";
-import skelGoldDeath from "@/assets/foes/skel_gold-death.png";
+import e_imp_violet from "@/assets/foes2/e_imp_violet.png";
+import e_imp_bile from "@/assets/foes2/e_imp_bile.png";
+import e_imp_crimson from "@/assets/foes2/e_imp_crimson.png";
+import e_gnat from "@/assets/foes2/e_gnat.png";
+import e_rat from "@/assets/foes2/e_rat.png";
+import e_bat from "@/assets/foes2/e_bat.png";
+import e_flyer from "@/assets/foes2/e_flyer.png";
+import e_sticklooter from "@/assets/foes2/e_sticklooter.png";
+import e_slime_skull from "@/assets/foes2/e_slime_skull.png";
+import e_mushroom from "@/assets/foes2/e_mushroom.png";
+import e_skel_white from "@/assets/foes2/e_skel_white.png";
+import e_skel_gold from "@/assets/foes2/e_skel_gold.png";
+import e_slime_boss from "@/assets/foes2/e_slime_boss.png";
+import e_boss_spore from "@/assets/foes2/e_boss_spore.png";
+import e_boss_bone from "@/assets/foes2/e_boss_bone.png";
+import e_boss_imp from "@/assets/foes2/e_boss_imp.png";
 
-import mushroomIdle from "@/assets/foes/mushroom-idle.png";
-import mushroomWalk from "@/assets/foes/mushroom-walk.png";
-import mushroomDeath from "@/assets/foes/mushroom-death.png";
-
-import impVioletIdle from "@/assets/foes/imp_violet-idle.png";
-import impVioletWalk from "@/assets/foes/imp_violet-walk.png";
-import impVioletDeath from "@/assets/foes/imp_violet-death.png";
-import impBileIdle from "@/assets/foes/imp_bile-idle.png";
-import impBileWalk from "@/assets/foes/imp_bile-walk.png";
-import impBileDeath from "@/assets/foes/imp_bile-death.png";
-import impCrimsonIdle from "@/assets/foes/imp_crimson-idle.png";
-import impCrimsonWalk from "@/assets/foes/imp_crimson-walk.png";
-import impCrimsonDeath from "@/assets/foes/imp_crimson-death.png";
-
-import gnatIdle from "@/assets/foes/gnat-idle.png";
-import gnatWalk from "@/assets/foes/gnat-walk.png";
-import gnatDeath from "@/assets/foes/gnat-death.png";
-import ratIdle from "@/assets/foes/rat-idle.png";
-import ratWalk from "@/assets/foes/rat-walk.png";
-import ratDeath from "@/assets/foes/rat-death.png";
-import batIdle from "@/assets/foes/bat-idle.png";
-import batWalk from "@/assets/foes/bat-walk.png";
-import batDeath from "@/assets/foes/bat-death.png";
-import flyerIdle from "@/assets/foes/flyer-idle.png";
-import flyerWalk from "@/assets/foes/flyer-walk.png";
-import flyerDeath from "@/assets/foes/flyer-death.png";
-
-import sticklooterIdle from "@/assets/foes/sticklooter-idle.png";
-import sticklooterWalk from "@/assets/foes/sticklooter-walk.png";
-import sticklooterDeath from "@/assets/foes/sticklooter-death.png";
-import slimeSkullIdle from "@/assets/foes/slime_skull-idle.png";
-import slimeSkullWalk from "@/assets/foes/slime_skull-walk.png";
-import slimeSkullDeath from "@/assets/foes/slime_skull-death.png";
-
-import slimeBossIdle from "@/assets/foes/slime_boss-idle.png";
-import slimeBossWalk from "@/assets/foes/slime_boss-walk.png";
-import slimeBossDeath from "@/assets/foes/slime_boss-death.png";
-
-/** [idle, walk, death] strip urls. */
+/** [idle, walk, death] urls — one drawing serves all three, animated in code. */
 export type ArtStrips = [string, string, string];
 
 export const ENEMY_ART: Record<CritterEnemyKey, ArtStrips> = {
-  e_imp_violet: [impVioletIdle, impVioletWalk, impVioletDeath],
-  e_imp_bile: [impBileIdle, impBileWalk, impBileDeath],
-  e_imp_crimson: [impCrimsonIdle, impCrimsonWalk, impCrimsonDeath],
-
-  e_gnat: [gnatIdle, gnatWalk, gnatDeath],
-  e_rat: [ratIdle, ratWalk, ratDeath],
-  e_bat: [batIdle, batWalk, batDeath],
-  e_flyer: [flyerIdle, flyerWalk, flyerDeath],
-
-  e_sticklooter: [sticklooterIdle, sticklooterWalk, sticklooterDeath],
-  e_slime_skull: [slimeSkullIdle, slimeSkullWalk, slimeSkullDeath],
-  e_mushroom: [mushroomIdle, mushroomWalk, mushroomDeath],
-
-  e_skel_white: [skelWhiteIdle, skelWhiteWalk, skelWhiteDeath],
-  e_skel_gold: [skelGoldIdle, skelGoldWalk, skelGoldDeath],
-
-  // bosses: grown-up versions of families the player already knows
-  e_slime_boss: [slimeBossIdle, slimeBossWalk, slimeBossDeath],
-  e_boss_spore: [mushroomIdle, mushroomWalk, mushroomDeath],
-  e_boss_bone: [skelGoldIdle, skelGoldWalk, skelGoldDeath],
-  e_boss_imp: [impCrimsonIdle, impCrimsonWalk, impCrimsonDeath],
+  e_imp_violet: [e_imp_violet, e_imp_violet, e_imp_violet],
+  e_imp_bile: [e_imp_bile, e_imp_bile, e_imp_bile],
+  e_imp_crimson: [e_imp_crimson, e_imp_crimson, e_imp_crimson],
+  e_gnat: [e_gnat, e_gnat, e_gnat],
+  e_rat: [e_rat, e_rat, e_rat],
+  e_bat: [e_bat, e_bat, e_bat],
+  e_flyer: [e_flyer, e_flyer, e_flyer],
+  e_sticklooter: [e_sticklooter, e_sticklooter, e_sticklooter],
+  e_slime_skull: [e_slime_skull, e_slime_skull, e_slime_skull],
+  e_mushroom: [e_mushroom, e_mushroom, e_mushroom],
+  e_skel_white: [e_skel_white, e_skel_white, e_skel_white],
+  e_skel_gold: [e_skel_gold, e_skel_gold, e_skel_gold],
+  e_slime_boss: [e_slime_boss, e_slime_boss, e_slime_boss],
+  e_boss_spore: [e_boss_spore, e_boss_spore, e_boss_spore],
+  e_boss_bone: [e_boss_bone, e_boss_bone, e_boss_bone],
+  e_boss_imp: [e_boss_imp, e_boss_imp, e_boss_imp],
 };
+
+/** Foes that stay airborne: they hover instead of stepping. */
+export const FLYING_FOES = new Set<CritterEnemyKey>(["e_gnat", "e_bat", "e_flyer"]);
