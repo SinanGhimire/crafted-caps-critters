@@ -31,13 +31,9 @@ export type CritterEnemyKey =
   // ---- slimes & fungus
   | "e_sticklooter" | "e_slime_skull" | "e_mushroom"
   // ---- undead
-  | "e_skel_white" | "e_skel_gold" | "e_wizard"
-  // ---- golems
-  | "e_golem_blue" | "e_golem_ember" | "e_golem_armor"
-  // ---- heavies
-  | "e_bringer"
+  | "e_skel_white" | "e_skel_gold"
   // ---- bosses
-  | "e_slime_boss" | "e_gollux" | "e_demon" | "e_demon_slime" | "e_nightborne";
+  | "e_slime_boss" | "e_boss_spore" | "e_boss_bone" | "e_boss_imp";
 
 export type CritterHeroKey = "templar" | "reaper" | "oracle" | "seraph" | "warchief" | "sprout";
 
@@ -114,22 +110,12 @@ export const CRITTER_ENEMIES: CritterDesign[] = [
   /* ---------------- undead ------------------------------------------------ */
   { key: "e_skel_white", name: "Bone Soldier", body: "#e8e8ee", shade: "#8b8b98", eye: "#9fd8ff", shape: "tall", crown: "none", mouth: "fangs", eyes: 2, arms: true, tail: false, size: 0.95, legs: "two", pattern: "none", brow: "angry" },
   { key: "e_skel_gold", name: "Gilded Bones", body: "#e8c56a", shade: "#8c6f1f", eye: "#fff0b8", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.08, legs: "two", pattern: "plates", brow: "angry" },
-  { key: "e_wizard", name: "Grave Warlock", body: "#5a4a9c", shade: "#241d49", eye: "#8bf7c8", shape: "tall", crown: "fin", mouth: "grin", eyes: 2, arms: true, tail: false, size: 1.05, legs: "two", pattern: "none", brow: "flat", core: "#8bf7c8" },
-
-  /* ---------------- golems: armoured mid-game ----------------------------- */
-  { key: "e_golem_blue", name: "Frost Golem", body: "#6aa8d6", shade: "#254a6b", eye: "#eaf6ff", shape: "block", crown: "shards", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.14, legs: "two", pattern: "plates", brow: "flat" },
-  { key: "e_golem_ember", name: "Ember Golem", body: "#c9552f", shade: "#5f1d0e", eye: "#ffd24a", shape: "block", crown: "shards", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.2, legs: "two", pattern: "plates", brow: "angry", core: "#ff8a2a" },
-  { key: "e_golem_armor", name: "Bulwark Golem", body: "#8a93a6", shade: "#3c4353", eye: "#ffe07a", shape: "block", crown: "pavise", mouth: "none", eyes: 2, arms: true, tail: false, size: 1.32, legs: "two", pattern: "plates", brow: "flat" },
-
-  /* ---------------- heavies ----------------------------------------------- */
-  { key: "e_bringer", name: "Bringer of Death", body: "#4a3a6b", shade: "#1d1530", eye: "#7cf7d8", shape: "tall", crown: "scythes", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.4, legs: "two", pattern: "plates", brow: "angry", core: "#7cf7d8" },
 
   /* ---------------- bosses ------------------------------------------------ */
   { key: "e_slime_boss", name: "Magma Sovereign", body: "#e0762c", shade: "#6b2a0c", eye: "#ffe07a", shape: "blob", crown: "crown", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.6, legs: "two", pattern: "plates", glow: "rgba(224,118,44,0.42)" },
-  { key: "e_gollux", name: "Gollux", body: "#b58a4a", shade: "#57391a", eye: "#ff7a4a", shape: "block", crown: "hornsteel", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.7, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(181,138,74,0.42)" },
-  { key: "e_demon", name: "Abyss Demon", body: "#8c2f3c", shade: "#3a0e16", eye: "#ffb03a", shape: "tall", crown: "horns", mouth: "maw", eyes: 2, arms: true, claws: true, tail: true, size: 1.75, legs: "two", pattern: "plates", brow: "angry", core: "#ff7a2a", glow: "rgba(255,106,42,0.4)" },
-  { key: "e_demon_slime", name: "Demon Slime", body: "#c33f5c", shade: "#5c1424", eye: "#ffd24a", shape: "blob", crown: "horns", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.8, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(195,63,92,0.45)" },
-  { key: "e_nightborne", name: "NightBorne", body: "#3b2a55", shade: "#170f26", eye: "#ff3b5c", shape: "tall", crown: "spikes", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.7, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(255,59,92,0.4)" },
+  { key: "e_boss_spore", name: "Sporelord", body: "#e0603f", shade: "#6d2418", eye: "#fff0d0", shape: "mound", crown: "crown", mouth: "maw", eyes: 2, arms: true, claws: true, tail: false, size: 1.7, legs: "two", pattern: "spots", glow: "rgba(224,96,63,0.4)" },
+  { key: "e_boss_bone", name: "Bone Marshal", body: "#f0cd74", shade: "#8c6f1f", eye: "#fff6cf", shape: "tall", crown: "crown", mouth: "fangs", eyes: 2, arms: true, claws: true, tail: false, size: 1.75, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(240,205,116,0.4)" },
+  { key: "e_boss_imp", name: "Crimson Tyrant", body: "#e0554f", shade: "#6d1f1c", eye: "#ffe0d0", shape: "orb", crown: "hornsteel", mouth: "maw", eyes: 2, arms: true, claws: true, tail: true, size: 1.8, legs: "two", pattern: "plates", brow: "angry", glow: "rgba(224,85,79,0.42)" },
 ];
 
 
