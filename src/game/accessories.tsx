@@ -239,7 +239,7 @@ function detailArt(detail: HatDetail, spec: HatSpec) {
     case "patch":
       return `<path d="M74 34 L104 30 L108 56 L78 60 Z" fill="${A}" ${THIN}/><path d="M78 40 L102 37 M79 48 L103 45" stroke="${OUTLINE}" stroke-width="3" opacity=".6"/>`;
     case "goggles":
-      return `<path d="M40 70 H160" stroke="${OUTLINE}" stroke-width="9" stroke-linecap="round"/><circle cx="74" cy="70" r="17" fill="${A}" ${EDGE}/><circle cx="128" cy="70" r="17" fill="${A}" ${EDGE}/><circle cx="68" cy="64" r="5" fill="#fff" opacity=".55"/>`;
+      return `<path d="M38 70 H162" stroke="${OUTLINE}" stroke-width="9" stroke-linecap="round"/><circle cx="73" cy="70" r="17" fill="${A}" ${EDGE}/><circle cx="127" cy="70" r="17" fill="${A}" ${EDGE}/><circle cx="67" cy="64" r="5" fill="#fff" opacity=".55"/>`;
     case "feather":
       return `<path d="M124 62 Q150 40 168 6 Q150 34 138 64 Z" fill="${A}" ${EDGE}/>`;
     case "pin":

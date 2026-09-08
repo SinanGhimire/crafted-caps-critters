@@ -48,12 +48,34 @@ export function CharacterFigure({
   const originX = headCx - HEAD_CX * s;
   const originY = headTop - HEAD_TOP * s;
 
-  const pad = art.h * 0.34;
   const worn = sortAccessories(accessories).slice(0, 1);
+
+  // The hat art box is wider and taller than the hero frame (horns, feathers,
+  // candles, ear flaps all live outside the skull), so the viewBox is the union
+  // of the sprite box and the placed hat box — nothing can be clipped.
+  let minX = 0;
+  let minY = 0;
+  let maxX = art.w;
+  let maxY = art.h;
+  for (const id of worn) {
+    const hat = ACCESSORIES[id];
+    if (!hat) continue;
+    const hx = originX + hat.x * s;
+    const hy = originY + hat.top * s;
+    minX = Math.min(minX, hx);
+    minY = Math.min(minY, hy);
+    maxX = Math.max(maxX, hx + hat.w * s);
+    maxY = Math.max(maxY, hy + hat.h * s);
+  }
+  const m = art.w * 0.06;
+  minX -= m;
+  minY -= m;
+  maxX += m;
+  maxY += m * 1.4;
 
   return (
     <svg
-      viewBox={`${-pad / 2} ${-pad} ${art.w + pad} ${art.h + pad * 1.1}`}
+      viewBox={`${minX} ${minY} ${maxX - minX} ${maxY - minY}`}
       preserveAspectRatio="xMidYMid meet"
       className={className}
       style={{ position: "absolute", inset: 0, height: "100%", width: "100%" }}
