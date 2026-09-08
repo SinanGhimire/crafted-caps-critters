@@ -8,8 +8,6 @@ import type { CritterEnemyKey } from "./critters";
  */
 export const AI_ROLE: Record<CritterEnemyKey, AiRole> = {
   // vermin & fliers
-  e_gnat: "zigzag",
-  e_bat: "zigzag",
   e_flyer: "dash",
 
   // crawlers

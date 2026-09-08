@@ -2701,7 +2701,7 @@ export function update(s: GameState, input: Input, dt: number) {
         if (e.cd <= 0 && e.spawned < (nest ? 14 : 5)) {
           e.cd = nest ? 1.1 : 3.6;
           e.spawned++;
-          spawnMinion(s, e, nest && Math.random() < 0.35 ? "e_skel_white" : "e_gnat", nest ? 0.9 : 0.8);
+          spawnMinion(s, e, nest && Math.random() < 0.35 ? "e_skel_white" : "e_spider", nest ? 0.9 : 0.8);
         }
         break;
       }
