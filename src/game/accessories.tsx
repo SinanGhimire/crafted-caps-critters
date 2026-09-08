@@ -181,6 +181,13 @@ function crownPath(shape: HatShape, tall: number) {
   }
 }
 
+/**
+ * The brim / peak. Drawn LAST in `makeHatUrl` so the crown and the coloured
+ * band can never paint over it — that overlap is what made every peak look
+ * sliced off halfway. Peaks are symmetric because both the portrait and the
+ * arena are head-on views, and they reach well below the fit line so the whole
+ * front of the hat is visible.
+ */
 function brimPath(shape: HatShape, brim: number) {
   const w = (v: number) => 100 + (v - 100) * brim;
   switch (shape) {
@@ -188,41 +195,39 @@ function brimPath(shape: HatShape, brim: number) {
       return `<path d="M44 66 Q100 58 156 66 L156 88 Q100 80 44 88 Z" fill="SHADE" ${EDGE}/>`;
     case "hood":
       return `<path d="M44 66 Q100 78 156 66 L154 92 Q100 104 46 92 Z" fill="SHADE" ${EDGE}/>`;
-    // Portraits and the arena are both head-on views, so peaks are drawn
-    // symmetric — a one-sided peak reads as a hat with its front sliced off.
     case "cap":
-      return `<path d="M${w(30)} 78 Q100 64 ${w(170)} 78 Q100 104 ${w(30)} 78 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(26)} 74 Q100 62 ${w(174)} 74 Q100 116 ${w(26)} 74 Z" fill="SHADE" ${EDGE}/>`;
     case "flatcap":
-      return `<path d="M${w(34)} 78 Q100 66 ${w(166)} 78 Q100 100 ${w(34)} 78 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(30)} 74 Q100 62 ${w(170)} 74 Q100 112 ${w(30)} 74 Z" fill="SHADE" ${EDGE}/>`;
     case "fedora":
-      return `<path d="M${w(30)} 80 Q100 66 ${w(170)} 80 Q100 100 ${w(30)} 80 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(26)} 76 Q100 62 ${w(174)} 76 Q100 112 ${w(26)} 76 Z" fill="SHADE" ${EDGE}/>`;
     case "cowboy":
-      return `<path d="M${w(22)} 74 Q52 92 84 80 Q100 86 116 80 Q148 92 ${w(178)} 74 Q160 104 100 96 Q40 104 ${w(22)} 74 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(20)} 72 Q52 92 84 80 Q100 86 116 80 Q148 92 ${w(180)} 72 Q160 112 100 104 Q40 112 ${w(20)} 72 Z" fill="SHADE" ${EDGE}/>`;
     case "tricorn":
-      return `<path d="M${w(28)} 82 Q56 62 62 46 Q100 70 138 46 Q144 62 ${w(172)} 82 Q100 104 ${w(28)} 82 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(24)} 80 Q56 60 62 44 Q100 70 138 44 Q144 60 ${w(176)} 80 Q100 112 ${w(24)} 80 Z" fill="SHADE" ${EDGE}/>`;
     case "bowler":
-      return `<path d="M${w(40)} 78 Q100 68 ${w(160)} 78 Q100 96 ${w(40)} 78 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(34)} 76 Q100 64 ${w(166)} 76 Q100 106 ${w(34)} 76 Z" fill="SHADE" ${EDGE}/>`;
     case "wizard":
-      return `<path d="M${w(26)} 80 Q100 64 ${w(174)} 80 Q100 102 ${w(26)} 80 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(24)} 78 Q100 62 ${w(176)} 78 Q100 112 ${w(24)} 78 Z" fill="SHADE" ${EDGE}/>`;
     case "bucket":
-      return `<path d="M${w(38)} 76 Q100 66 ${w(162)} 76 L${w(150)} 96 Q100 88 ${w(50)} 96 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(34)} 74 Q100 62 ${w(166)} 74 L${w(152)} 102 Q100 94 ${w(48)} 102 Z" fill="SHADE" ${EDGE}/>`;
     case "top":
-      return `<path d="M${w(36)} 78 Q100 68 ${w(164)} 78 Q100 96 ${w(36)} 78 Z" fill="SHADE" ${EDGE}/>`;
+      return `<path d="M${w(32)} 76 Q100 64 ${w(168)} 76 Q100 104 ${w(32)} 76 Z" fill="SHADE" ${EDGE}/>`;
   }
 }
 
-/** the coloured band every hat wears just above the fit line */
+/** the coloured band every hat wears, kept clear of the brim below it */
 function bandPath(shape: HatShape) {
   switch (shape) {
     case "beanie":
     case "hood":
       return "";
     case "wizard":
-      return `<path d="M64 68 Q100 78 136 68" fill="none" stroke="ACCENT" stroke-width="8"/>`;
+      return `<path d="M64 60 Q100 70 136 60" fill="none" stroke="ACCENT" stroke-width="8"/>`;
     case "top":
-      return `<rect x="56" y="56" width="88" height="18" fill="ACCENT" ${THIN}/>`;
+      return `<rect x="56" y="50" width="88" height="18" fill="ACCENT" ${THIN}/>`;
     default:
-      return `<path d="M52 58 Q100 70 148 58 L150 76 Q100 86 50 76 Z" fill="ACCENT" ${THIN}/>`;
+      return `<path d="M52 46 Q100 58 148 46 L150 64 Q100 74 50 64 Z" fill="ACCENT" ${THIN}/>`;
   }
 }
 
@@ -241,7 +246,7 @@ function detailArt(detail: HatDetail, spec: HatSpec) {
     case "patch":
       return `<path d="M74 34 L104 30 L108 56 L78 60 Z" fill="${A}" ${THIN}/><path d="M78 40 L102 37 M79 48 L103 45" stroke="${OUTLINE}" stroke-width="3" opacity=".6"/>`;
     case "goggles":
-      return `<path d="M38 70 H162" stroke="${OUTLINE}" stroke-width="9" stroke-linecap="round"/><circle cx="73" cy="70" r="17" fill="${A}" ${EDGE}/><circle cx="127" cy="70" r="17" fill="${A}" ${EDGE}/><circle cx="67" cy="64" r="5" fill="#fff" opacity=".55"/>`;
+      return `<path d="M40 56 H160" stroke="${OUTLINE}" stroke-width="9" stroke-linecap="round"/><circle cx="74" cy="56" r="16" fill="${A}" ${EDGE}/><circle cx="126" cy="56" r="16" fill="${A}" ${EDGE}/><circle cx="68" cy="50" r="5" fill="#fff" opacity=".55"/>`;
     case "feather":
       return `<path d="M124 62 Q150 40 168 6 Q150 34 138 64 Z" fill="${A}" ${EDGE}/>`;
     case "pin":
@@ -291,13 +296,15 @@ function makeHatUrl(spec: HatSpec) {
     .replace(/SHADE/g, spec.shade)
     .replace(/ACCENT/g, spec.accent);
   const band = bandPath(spec.shape).replace(/ACCENT/g, spec.accent);
+  // Paint order matters: crown, then band, then the brim ON TOP (a real peak
+  // sits in front of the hat), then the flourish.
   const svg =
     `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -40 200 170">` +
-    brimSvg +
     `<path d="${crown}" fill="${spec.main}" ${EDGE}/>` +
     // cel shade nudged to the right of the crown for volume
     `<g opacity=".22" transform="translate(16 4)"><path d="${crown}" fill="${spec.shade}"/></g>` +
     band +
+    brimSvg +
     detailArt(spec.detail, spec) +
     `</svg>`;
   return `data:image/svg+xml;charset=utf-8,${encodeURIComponent(svg)}`;
