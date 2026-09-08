@@ -264,6 +264,8 @@ function Game() {
     const ctx = canvas.getContext("2d");
     if (!ctx) return;
 
+    // Permanent account bonuses apply to every run.
+    setMetaBonus(metaBonus(heroLevel));
     stateRef.current = createState(character, mode, cls);
     const input = inputRef.current;
     input.firing = false;
@@ -280,7 +282,12 @@ function Game() {
       const cssW = Math.max(1, rect.width);
       const cssH = Math.max(1, rect.height);
       const aspect = cssW / cssH;
-      const lh = Math.round(Math.min(1000, Math.max(520, 720 * Math.sqrt(16 / 9 / aspect))));
+      // Phones get a larger logical view: everything renders smaller so more
+      // of the arena fits on a small screen.
+      const zoomOut = cssW < 820 ? 1.28 : 1;
+      const lh = Math.round(
+        Math.min(1400, Math.max(520, 720 * Math.sqrt(16 / 9 / aspect) * zoomOut)),
+      );
       const lw = Math.round(lh * aspect);
       setViewport(lw, lh);
       canvas.width = Math.floor(lw * dpr);
