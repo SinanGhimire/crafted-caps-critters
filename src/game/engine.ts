@@ -4199,7 +4199,7 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
     const light = ctx.createRadialGradient(mx, my, 0, mx, my, 190);
     const col = WEAPONS[p.weapon].color;
     light.addColorStop(0, "rgba(255,246,214,0.28)");
-    light.addColorStop(0.35, `${col}22`);
+    light.addColorStop(0.35, withAlpha(col, 0.13));
     light.addColorStop(1, "rgba(0,0,0,0)");
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
