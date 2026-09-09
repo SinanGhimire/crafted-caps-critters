@@ -66,6 +66,22 @@ const MUZZLE_DISTANCE = 64;
  */
 export const GUN_Y = 44;
 
+/**
+ * Alpha-blend any CSS colour safely. Weapon colours can be hex OR hsl(...),
+ * so string-concatenating a hex alpha suffix would throw inside canvas calls
+ * (and hard-freeze the render loop). color-mix handles both formats.
+ */
+export function withAlpha(color: string, alpha: number): string {
+  const a = Math.max(0, Math.min(1, alpha));
+  if (/^#[0-9a-fA-F]{6}$/.test(color)) {
+    const hex = Math.round(a * 255)
+      .toString(16)
+      .padStart(2, "0");
+    return color + hex;
+  }
+  return `color-mix(in srgb, ${color} ${Math.round(a * 100)}%, transparent)`;
+}
+
 /* ---- aim assist balance knobs ---- */
 /** how far the auto-targeting can reach (world px) */
 const AUTO_RANGE = 360;
