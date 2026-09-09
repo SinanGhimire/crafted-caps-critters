@@ -365,6 +365,10 @@ export interface Turret extends Vec {
   kind?: "turret" | "mine";
   /** mines cannot trigger until this reaches 0 */
   arm?: number;
+  /** turret art tier, 1-5 */
+  tier?: number;
+  /** shoot-animation clock, seconds */
+  anim?: number;
 }
 
 
