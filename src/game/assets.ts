@@ -7,6 +7,7 @@ import {
   type CritterEnemyKey,
 } from "./critters";
 import { ENEMY_ART, ENEMY_FRAMES } from "./enemy-art";
+import { TURRET_SRC } from "./turret-art";
 
 
 
@@ -142,6 +143,7 @@ export const BULLET_SRC: Record<string, string> = Object.fromEntries(
 
 export const SINGLE_SRC: Record<string, string> = {
   ...PACK_SRC,
+  ...TURRET_SRC,
   ...BULLET_SRC,
   floorTiles: floorTilesPng,
   gun: gunRiflePng,
