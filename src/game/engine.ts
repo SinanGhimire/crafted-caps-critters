@@ -66,6 +66,29 @@ const MUZZLE_DISTANCE = 64;
  */
 export const GUN_Y = 44;
 
+/**
+ * Alpha-blend any CSS colour safely. Weapon colours can be hex OR hsl(...),
+ * so string-concatenating a hex alpha suffix threw inside canvas calls and
+ * hard-froze the render loop (the "shop freeze" after buying a gun).
+ */
+export function withAlpha(color: string, alpha: number): string {
+  const a = Math.max(0, Math.min(1, alpha));
+  if (/^#[0-9a-fA-F]{6}$/.test(color)) {
+    return color + Math.round(a * 255).toString(16).padStart(2, "0");
+  }
+  if (/^#[0-9a-fA-F]{3}$/.test(color)) {
+    const [r, g, b] = [1, 2, 3].map((i) => color[i]!);
+    return `#${r}${r}${g}${g}${b}${b}${Math.round(a * 255).toString(16).padStart(2, "0")}`;
+  }
+  const hsl = color.match(
+    /^hsla?\(\s*([\d.]+)(?:deg)?[\s,]+([\d.]+)%[\s,]+([\d.]+)%/i,
+  );
+  if (hsl) return `hsla(${hsl[1]}, ${hsl[2]}%, ${hsl[3]}%, ${a})`;
+  const rgb = color.match(/^rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)/i);
+  if (rgb) return `rgba(${rgb[1]}, ${rgb[2]}, ${rgb[3]}, ${a})`;
+  return color;
+}
+
 /* ---- aim assist balance knobs ---- */
 /** how far the auto-targeting can reach (world px) */
 const AUTO_RANGE = 360;
@@ -3419,24 +3442,41 @@ function drawTurret(
   const fade = t.life < 2.5 && Math.floor(time * 8) % 2 === 0 ? 0.45 : 1;
   ctx.save();
   ctx.globalAlpha = fade;
-  // base
-  ctx.fillStyle = "#241f31";
-  ctx.strokeStyle = "#8fd6ff";
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.ellipse(t.x, t.y, 20, 11, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.stroke();
-  // post + gun
-  ctx.fillStyle = "#3a3350";
-  ctx.fillRect(t.x - 5, t.y - 20, 10, 18);
-  drawGun(ctx, sprites, t.weapon, t.x, t.y - 24, t.aim, Math.cos(t.aim) >= 0 ? 1 : -1, 0, t.muzzle > 0);
+
+  const art = sprites.singles[`tr_${t.tier ?? 1}`];
+  if (art && art.width > 0) {
+    // 15-frame shoot cycle: it runs while the turret is firing, then rests on
+    // frame 0 so idle emplacements sit still instead of twitching.
+    const fw = art.width / TURRET_FRAMES;
+    const fh = art.height;
+    const firing = (t.anim ?? 0) > 0;
+    const frame = firing
+      ? Math.min(TURRET_FRAMES - 1, Math.floor((t.anim ?? 0) * TURRET_FRAMES * 1.6))
+      : 0;
+    const h = 78;
+    const w = (fw / fh) * h;
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(art, frame * fw, 0, fw, fh, t.x - w / 2, t.y - h + 8, w, h);
+  } else {
+    // base
+    ctx.fillStyle = "#241f31";
+    ctx.strokeStyle = "#8fd6ff";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(t.x, t.y, 20, 11, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "#3a3350";
+    ctx.fillRect(t.x - 5, t.y - 20, 10, 18);
+    drawGun(ctx, sprites, t.weapon, t.x, t.y - 24, t.aim, Math.cos(t.aim) >= 0 ? 1 : -1, 0, t.muzzle > 0);
+  }
+
   // health pip
   const hp = Math.max(0, t.hp / t.maxHp);
   ctx.fillStyle = "rgba(0,0,0,0.55)";
-  ctx.fillRect(t.x - 16, t.y - 36, 32, 4);
+  ctx.fillRect(t.x - 16, t.y - 88, 32, 4);
   ctx.fillStyle = "#8fd6ff";
-  ctx.fillRect(t.x - 16, t.y - 36, 32 * hp, 4);
+  ctx.fillRect(t.x - 16, t.y - 88, 32 * hp, 4);
   ctx.restore();
 }
 
@@ -4199,7 +4239,7 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
     const light = ctx.createRadialGradient(mx, my, 0, mx, my, 190);
     const col = WEAPONS[p.weapon].color;
     light.addColorStop(0, "rgba(255,246,214,0.28)");
-    light.addColorStop(0.35, `${col}22`);
+    light.addColorStop(0.35, withAlpha(col, 0.13));
     light.addColorStop(1, "rgba(0,0,0,0)");
     ctx.save();
     ctx.globalCompositeOperation = "lighter";
