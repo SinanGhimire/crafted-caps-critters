@@ -3442,24 +3442,41 @@ function drawTurret(
   const fade = t.life < 2.5 && Math.floor(time * 8) % 2 === 0 ? 0.45 : 1;
   ctx.save();
   ctx.globalAlpha = fade;
-  // base
-  ctx.fillStyle = "#241f31";
-  ctx.strokeStyle = "#8fd6ff";
-  ctx.lineWidth = 2;
-  ctx.beginPath();
-  ctx.ellipse(t.x, t.y, 20, 11, 0, 0, Math.PI * 2);
-  ctx.fill();
-  ctx.stroke();
-  // post + gun
-  ctx.fillStyle = "#3a3350";
-  ctx.fillRect(t.x - 5, t.y - 20, 10, 18);
-  drawGun(ctx, sprites, t.weapon, t.x, t.y - 24, t.aim, Math.cos(t.aim) >= 0 ? 1 : -1, 0, t.muzzle > 0);
+
+  const art = sprites.singles[`tr_${t.tier ?? 1}`];
+  if (art && art.width > 0) {
+    // 15-frame shoot cycle: it runs while the turret is firing, then rests on
+    // frame 0 so idle emplacements sit still instead of twitching.
+    const fw = art.width / TURRET_FRAMES;
+    const fh = art.height;
+    const firing = (t.anim ?? 0) > 0;
+    const frame = firing
+      ? Math.min(TURRET_FRAMES - 1, Math.floor((t.anim ?? 0) * TURRET_FRAMES * 1.6))
+      : 0;
+    const h = 78;
+    const w = (fw / fh) * h;
+    ctx.imageSmoothingEnabled = true;
+    ctx.drawImage(art, frame * fw, 0, fw, fh, t.x - w / 2, t.y - h + 8, w, h);
+  } else {
+    // base
+    ctx.fillStyle = "#241f31";
+    ctx.strokeStyle = "#8fd6ff";
+    ctx.lineWidth = 2;
+    ctx.beginPath();
+    ctx.ellipse(t.x, t.y, 20, 11, 0, 0, Math.PI * 2);
+    ctx.fill();
+    ctx.stroke();
+    ctx.fillStyle = "#3a3350";
+    ctx.fillRect(t.x - 5, t.y - 20, 10, 18);
+    drawGun(ctx, sprites, t.weapon, t.x, t.y - 24, t.aim, Math.cos(t.aim) >= 0 ? 1 : -1, 0, t.muzzle > 0);
+  }
+
   // health pip
   const hp = Math.max(0, t.hp / t.maxHp);
   ctx.fillStyle = "rgba(0,0,0,0.55)";
-  ctx.fillRect(t.x - 16, t.y - 36, 32, 4);
+  ctx.fillRect(t.x - 16, t.y - 88, 32, 4);
   ctx.fillStyle = "#8fd6ff";
-  ctx.fillRect(t.x - 16, t.y - 36, 32 * hp, 4);
+  ctx.fillRect(t.x - 16, t.y - 88, 32 * hp, 4);
   ctx.restore();
 }
 
