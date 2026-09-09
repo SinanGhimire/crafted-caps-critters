@@ -68,18 +68,25 @@ export const GUN_Y = 44;
 
 /**
  * Alpha-blend any CSS colour safely. Weapon colours can be hex OR hsl(...),
- * so string-concatenating a hex alpha suffix would throw inside canvas calls
- * (and hard-freeze the render loop). color-mix handles both formats.
+ * so string-concatenating a hex alpha suffix threw inside canvas calls and
+ * hard-froze the render loop (the "shop freeze" after buying a gun).
  */
 export function withAlpha(color: string, alpha: number): string {
   const a = Math.max(0, Math.min(1, alpha));
   if (/^#[0-9a-fA-F]{6}$/.test(color)) {
-    const hex = Math.round(a * 255)
-      .toString(16)
-      .padStart(2, "0");
-    return color + hex;
+    return color + Math.round(a * 255).toString(16).padStart(2, "0");
   }
-  return `color-mix(in srgb, ${color} ${Math.round(a * 100)}%, transparent)`;
+  if (/^#[0-9a-fA-F]{3}$/.test(color)) {
+    const [r, g, b] = [1, 2, 3].map((i) => color[i]!);
+    return `#${r}${r}${g}${g}${b}${b}${Math.round(a * 255).toString(16).padStart(2, "0")}`;
+  }
+  const hsl = color.match(
+    /^hsla?\(\s*([\d.]+)(?:deg)?[\s,]+([\d.]+)%[\s,]+([\d.]+)%/i,
+  );
+  if (hsl) return `hsla(${hsl[1]}, ${hsl[2]}%, ${hsl[3]}%, ${a})`;
+  const rgb = color.match(/^rgba?\(\s*([\d.]+)[\s,]+([\d.]+)[\s,]+([\d.]+)/i);
+  if (rgb) return `rgba(${rgb[1]}, ${rgb[2]}, ${rgb[3]}, ${a})`;
+  return color;
 }
 
 /* ---- aim assist balance knobs ---- */
