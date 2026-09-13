@@ -7,6 +7,12 @@ import { baseMods } from "./types";
 import { applyUpgrade, rollUpgrades, xpForLevel, RARITY_COLOR, UPGRADE_MAP } from "./upgrades";
 import { CRITTER_KEYS, CRITTER_STATS, CRITTER_TIER } from "./critter-species";
 import { AI_ROLE } from "./ai";
+import { TURRET_FRAMES, TURRET_TIERS } from "./turret-art";
+
+/** Pick the turret model whose barrel matches a class weapon. */
+function turretTierFor(weapon: string): number {
+  return TURRET_TIERS.find((t) => t.weapon === weapon)?.tier ?? 1;
+}
 import { ITEM_MAP, itemPrice, rollItems } from "./shop-items";
 import { CLASSES, classForSkin, type ClassKey } from "./classes";
 import { drawWorn, warmAccessories } from "./accessory-images";
@@ -3455,7 +3461,7 @@ function drawTurret(
     const fh = art.height;
     const firing = (t.anim ?? 0) > 0;
     const frame = firing
-      ? Math.min(TURRET_FRAMES - 1, Math.floor((t.anim ?? 0) * TURRET_FRAMES * 1.6))
+      ? Math.min(TURRET_FRAMES - 1, Math.floor((1 - (t.anim ?? 0) / 0.42) * TURRET_FRAMES))
       : 0;
     const h = 78;
     const w = (fw / fh) * h;
