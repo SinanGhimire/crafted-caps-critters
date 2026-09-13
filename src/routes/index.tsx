@@ -452,7 +452,7 @@ function Game() {
           <img
             src={echoWordmark.url}
             alt="Echo Vanguards"
-            className="w-64 max-w-[80vw] drop-shadow-[0_8px_24px_rgba(140,110,220,0.35)]"
+            className="h-auto w-[min(78vw,420px)] max-h-[46vh] object-contain drop-shadow-[0_8px_24px_rgba(140,110,220,0.35)]"
           />
           <div className="w-48 overflow-hidden rounded-full border-2 border-[#0a0812] bg-[#1a1428]">
             <div
