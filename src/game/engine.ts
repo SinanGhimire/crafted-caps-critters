@@ -91,7 +91,7 @@ export function withAlpha(color: string, alpha: number): string {
 
 /* ---- aim assist balance knobs ---- */
 /** how far the auto-targeting can reach (world px) */
-const AUTO_RANGE = 360;
+const AUTO_RANGE = 620;
 /** turret swing speed of the auto-aim, rad/s */
 const AIM_TURN_SPEED = 4.4;
 /** auto-fire is slower than firing yourself */
@@ -1331,6 +1331,8 @@ export function createState(
       cd: 0,
       muzzle: 0,
       weapon: WEAPONS[def.turretWeapon] ? def.turretWeapon : "pistol",
+      tier: turretTierFor(def.turretWeapon),
+      anim: 0,
       kind: "turret",
     });
   }
@@ -1488,8 +1490,8 @@ function chooseSpecies(wave: number): Species {
  * camera only has to pan a little to keep the player centred.
  */
 /** Brotato-style rectangular playfield (half extents). */
-export const ARENA_HW = 1080;
-export const ARENA_HH = 740;
+export const ARENA_HW = 880;
+export const ARENA_HH = 560;
 /** legacy radius used for coarse culling only */
 export const ARENA_R = Math.hypot(ARENA_HW, ARENA_HH);
 function arenaRadius(_wave: number, _level: number) {
@@ -1540,15 +1542,15 @@ function targetAlive(s: GameState) {
   // Endless keeps escalating instead of flattening into a capped late-game.
   // Survival is deliberately pressure-heavy so the 20-wave clear is earned.
   const base =
-    4 +
-    (s.wave - 1) * (s.mode === "endless" ? 1.8 : 1.65) +
+    8 +
+    (s.wave - 1) * (s.mode === "endless" ? 2.6 : 2.4) +
     Math.max(0, s.wave - 8) * (s.mode === "endless" ? 1.15 : 1.05) +
     Math.max(0, s.wave - 16) * 0.8 +
     s.level * 0.45;
   // 0 -> 1 across the wave: pressure builds toward the end of the wave
   const progress = Math.min(1, 1 - s.waveTimer / waveLength(s.wave));
-  const ramp = 0.45 + progress * 0.55;
-  return Math.min(110, Math.round(base * ramp) + 2);
+  const ramp = 0.7 + progress * 0.3;
+  return Math.min(150, Math.round(base * ramp) + 6);
 }
 
 
@@ -1718,7 +1720,7 @@ function dropHazard(
 
 /** Small welcome pulse when a wave starts (kept light — pressure is gradual). */
 function waveBurst(s: GameState) {
-  const n = Math.min(12, 2 + Math.round(s.wave * 0.55));
+  const n = Math.min(26, 6 + Math.round(s.wave * 1.1));
   for (let i = 0; i < n; i++) spawnEnemy(s);
   const survivalBoss =
     s.mode === "survival" &&
@@ -1906,7 +1908,7 @@ function fire(
     pistol: { spread: 0.8, speed: 1, life: 1.6, size: 1, wobble: 0, fan: false },
     smg: { spread: 1.5, speed: 0.92, life: 1.1, size: 0.8, wobble: 0, fan: false },
     rifle: { spread: 0.85, speed: 1.1, life: 1.8, size: 0.95, wobble: 0, fan: false },
-    shotgun: { spread: 2.4, speed: 0.82, life: 0.38, size: 0.85, wobble: 0, fan: true },
+    shotgun: { spread: 2.4, speed: 0.95, life: 0.62, size: 0.85, wobble: 0, fan: true },
     sniper: { spread: 0.18, speed: 1.9, life: 2.6, size: 0.7, wobble: 0, fan: false },
     heavy: { spread: 0.6, speed: 0.55, life: 2.4, size: 1.7, wobble: 0, fan: false },
     energy: { spread: 0.7, speed: 0.8, life: 2.2, size: 1.35, wobble: 5, fan: false },
@@ -2041,6 +2043,7 @@ function updateTurrets(s: GameState, dt: number) {
       }
     }
     t.cd -= dt;
+    if (t.anim && t.anim > 0) t.anim = Math.max(0, t.anim - dt);
     if (!best) continue;
     const want = Math.atan2(best.y - BODY_Y - t.y, best.x - t.x);
     let da = want - t.aim;
@@ -2051,6 +2054,7 @@ function updateTurrets(s: GameState, dt: number) {
       const w = WEAPONS[t.weapon];
       t.cd = Math.max(0.12, w.rate * 1.5);
       t.muzzle = 0.07;
+      t.anim = 0.42;
       fire(s, t.x, t.y - 24, t.aim, t.weapon, p.damageMult * 0.55, true, p.mods, 1);
     }
   }
@@ -2394,8 +2398,8 @@ export function update(s: GameState, input: Input, dt: number) {
     s.spawnTimer -= dt;
     if (s.spawnTimer <= 0 && alive < target) {
       // gradual trickle: pressure ramps smoothly instead of dumping a mob on you
-      s.spawnTimer = Math.max(0.75, 3.2 - s.wave * 0.075);
-      const batch = 1 + Math.floor(s.wave / 12);
+      s.spawnTimer = Math.max(0.35, 1.6 - s.wave * 0.06);
+      const batch = 2 + Math.floor(s.wave / 4);
       for (let i = 0; i < batch && alive + i < target; i++) spawnEnemy(s);
     }
   }
@@ -3979,9 +3983,11 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
     ? 0.82
     : 1 + Math.sin(p.animT * (p.moving ? 14 : 6)) * (p.moving ? 0.05 : 0.022);
   const ph = 212 * pSquash;
+  // the leg cycle runs at the speed the hero actually travels, so no moonwalk
+  const pGait = 8 * Math.max(0.6, p.speed / Math.max(1, p.baseSpeed));
   const pFrame = s.over
     ? Math.min(pStrip.frames - 1, p.animT * 8)
-    : (p.animT * (p.moving ? 8 : 6)) % pStrip.frames;
+    : (p.animT * (p.moving ? pGait : 6)) % pStrip.frames;
   drawFrame(ctx, pStrip, pFrame, p.x, p.y, ph, p.facing === -1);
   // the class's head & face gear rides on top of the body, frame by frame
   {
