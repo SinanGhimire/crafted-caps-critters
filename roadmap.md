@@ -24,3 +24,11 @@
 - [x] Phone view zooms out so sprites are smaller and spacing tighter
 - [x] Smoother enemy animation (frame cross-fade + smooth sampling)
 - [ ] APK build — blocked: this sandbox has no Java/Android SDK
+
+## Side-scroller conversion
+- [ ] Convert arena movement, physics, camera, collisions, enemy spawning, and combat to platform survival
+- [ ] Add mobile run/jump/aim controls and keep the compact pause HUD
+- [ ] Integrate compatible supplied UI frames and buttons without changing the menu artwork
+- [ ] Integrate supplied side-view enemy animations; omit top-down sprites that do not fit
+- [ ] Preserve wave bosses, shop, progression, classes, hats, turrets, and endless mode
+- [ ] Verify phone, tablet, and desktop gameplay plus shop stability
