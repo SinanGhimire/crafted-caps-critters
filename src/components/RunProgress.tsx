@@ -3,6 +3,9 @@ import { Button } from '@/components/ui/button';
 import { UPGRADE_MAP, applyUpgrade } from '@/game/upgrades';
 import { openShop } from '@/game/engine';
 import type { GameState } from '@/game/types';
+import leftArt from '@/assets/side-ui/control-left.png.asset.json';
+import rightArt from '@/assets/side-ui/control-right.png.asset.json';
+import jumpArt from '@/assets/side-ui/control-jump.png.asset.json';
 
 export function RunProgress({ state, refresh }: { state: GameState; refresh: () => void }) {
   if (state.phase !== 'transition' && state.phase !== 'upgrade') return null;
@@ -37,12 +40,12 @@ export function RunProgress({ state, refresh }: { state: GameState; refresh: () 
 export function PlatformControls({ move, jump }: { move: (value: number) => void; jump: (held: boolean) => void }) {
   return <div className="pointer-events-none absolute bottom-6 left-4 z-10 flex items-end gap-3">
     {[-1, 1].map((direction) => <Button key={direction} variant="outline" size="icon" aria-label={direction === -1 ? 'Run left' : 'Run right'}
-      className="pointer-events-auto h-14 w-14 touch-none border-2 border-pop-edge bg-background/75 text-foreground"
+      className="pointer-events-auto h-14 w-14 touch-none border-0 bg-transparent p-0 text-foreground hover:bg-transparent"
       onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); move(direction); }}
       onPointerUp={() => move(0)} onPointerCancel={() => move(0)}>
-      {direction === -1 ? <ChevronLeft /> : <ChevronRight />}
+      <img src={direction === -1 ? leftArt.url : rightArt.url} alt="" className="h-full w-full object-contain" />
     </Button>)}
-    <Button variant="outline" size="icon" aria-label="Jump" className="pointer-events-auto mb-12 h-14 w-14 touch-none border-2 border-gold bg-background/75 text-gold"
-      onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); jump(true); }} onPointerUp={() => jump(false)} onPointerCancel={() => jump(false)}><ArrowUp /></Button>
+    <Button variant="outline" size="icon" aria-label="Jump" className="pointer-events-auto mb-12 h-14 w-14 touch-none border-0 bg-transparent p-0 hover:bg-transparent"
+      onPointerDown={(e) => { e.currentTarget.setPointerCapture(e.pointerId); jump(true); }} onPointerUp={() => jump(false)} onPointerCancel={() => jump(false)}><img src={jumpArt.url} alt="" className="h-full w-full object-contain" /></Button>
   </div>;
 }

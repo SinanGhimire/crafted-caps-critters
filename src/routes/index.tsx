@@ -11,6 +11,8 @@ import { useEffect, useRef, useState } from "react";
 import { loadSprites, type Sprites } from "@/game/assets";
 import homeArtAsset from "@/assets/echo-home-art.png.asset.json";
 import echoWordmark from "@/assets/echo-loading.png.asset.json";
+import healthArt from "@/assets/side-ui/health-full.png.asset.json";
+import pauseArt from "@/assets/side-ui/pause-full.png.asset.json";
 import { initAudio, loadMuted, playSfx, setMuted, type SfxName } from "@/game/audio";
 import {
   WEAPONS,
@@ -707,15 +709,12 @@ function Game() {
           {/* TOP: Brotato-style minimal — HP bar + level on left, timer centered, pause only on right */}
           <div className="relative grid grid-cols-3 items-start gap-2 px-1 pt-1 sm:px-3 sm:pt-2">
             <div className="min-w-0">
-              <div className="relative h-4 w-full overflow-hidden rounded-sm border-2 border-ink bg-[oklch(0.14_0.03_20/85%)]">
+              <div className="relative h-6 w-full overflow-hidden rounded-sm border-2 border-ink bg-background">
+                <img src={healthArt.url} alt="" className="pointer-events-none absolute inset-0 h-full w-full" />
                 <div
-                  className="h-full transition-[width] duration-150"
+                  className="absolute inset-y-1 left-2 h-auto bg-destructive transition-[width] duration-150"
                   style={{
                     width: `${Math.max(0, Math.min(100, (hud.hp / Math.max(1, hud.maxHp)) * 100))}%`,
-                    background:
-                      hud.hp / Math.max(1, hud.maxHp) > 0.35
-                        ? "linear-gradient(180deg, oklch(0.72 0.21 27), oklch(0.5 0.2 27))"
-                        : "linear-gradient(180deg, oklch(0.75 0.21 27), oklch(0.4 0.18 27))",
                   }}
                 />
                 <span className="absolute inset-y-0 right-1 grid place-items-center font-display text-[9px] leading-none tabular-nums text-white/90 [text-shadow:0_1px_2px_oklch(0_0_0/90%)]">
@@ -752,9 +751,9 @@ function Game() {
                   if (!st.over) st.paused = !st.paused;
                 }}
                 aria-label="Pause game"
-                className="grid h-8 w-8 place-items-center rounded-md border border-[oklch(1_0_0/15%)] bg-[oklch(0.08_0.02_292/45%)]"
+                className="pointer-events-auto grid h-9 w-20 place-items-center border-0 bg-transparent p-0 hover:bg-transparent"
               >
-                <Pause className="h-4 w-4 text-white/70" strokeWidth={2.75} aria-hidden />
+                <img src={pauseArt.url} alt="" className="h-full w-full object-contain" />
               </Button>
             </div>
           </div>
