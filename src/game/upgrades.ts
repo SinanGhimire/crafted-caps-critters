@@ -189,7 +189,7 @@ export function rollUpgrades(taken: Record<string, number>, count = 3): string[]
 
 export function applyUpgrade(s: GameState, id: string) {
   const u = UPGRADE_MAP[id];
-  if (!u) return;
+  if (!u || (s.takenUpgrades[id] ?? 0) >= u.maxStacks) return;
   u.apply(s);
   s.takenUpgrades[id] = (s.takenUpgrades[id] ?? 0) + 1;
   s.paused = false;

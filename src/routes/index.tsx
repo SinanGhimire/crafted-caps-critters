@@ -1,3 +1,6 @@
+import { Button } from "@/components/ui/button";
+import { PlatformControls, RunProgress } from "@/components/RunProgress";
+import { environmentAt } from "@/game/side-content";
 import { createFileRoute } from "@tanstack/react-router";
 import { Pause } from "lucide-react";
 import { MenuPanel, type PanelKey } from "@/components/MenuPanel";
@@ -41,13 +44,13 @@ export const Route = createFileRoute("/")({
       {
         name: "description",
         content:
-          "Survive endless zombie waves. Your gun auto-tracks up close — hold fire to aim yourself for +35% damage. Past runs return as Echoes to fight beside you.",
+          "Run, jump and fight through layered worlds in Echo. Clear enemy waves, choose upgrades, unlock hero classes and face milestone bosses.",
       },
       { property: "og:title", content: "Echo Vanguards" },
       {
         property: "og:description",
         content:
-          "Survive endless zombie waves. Your gun auto-tracks up close — hold fire to aim yourself for +35% damage. Past runs return as Echoes to fight beside you.",
+          "Run, jump and fight through layered worlds in Echo. Clear enemy waves, choose upgrades, unlock hero classes and face milestone bosses.",
       },
       { property: "og:type", content: "website" },
       { name: "twitter:card", content: "summary_large_image" },
@@ -76,7 +79,10 @@ interface Hud {
   perks: { id: string; n: number }[];
   paused: boolean;
   materials: number;
-  phase: "wave" | "shop";
+  phase: GameState["phase"];
+  remaining?: number;
+  environment?: number;
+  boss?: { name: string; hp: number; maxHp: number } | undefined;
   playerScreenX: number;
   playerScreenY: number;
 }
@@ -225,7 +231,7 @@ function Game() {
       won: hud.won,
     });
     setRunXp(gain);
-    patchProfile((p) => ({ ...p, xp: p.xp + gain }));
+    patchProfile((p) => ({ ...p, xp: p.xp + gain, highestWave: Math.max(p.highestWave, hud.wave), bestScore: Math.max(p.bestScore, hud.score) }));
   }, [hud.over, hud.score, hud.wave, hud.kills, hud.won, patchProfile]);
 
   useEffect(() => {
@@ -286,12 +292,7 @@ function Game() {
       const cssW = Math.max(1, rect.width);
       const cssH = Math.max(1, rect.height);
       const aspect = cssW / cssH;
-      // Brotato-style closer camera: keep the logical view tight so sprites
-      // read big on phones.
-      const zoomOut = cssW < 560 ? 1.12 : cssW < 820 ? 1.05 : cssW < 1100 ? 0.95 : 0.85;
-      const lh = Math.round(
-        Math.min(2000, Math.max(520, 720 * Math.sqrt(16 / 9 / aspect) * zoomOut)),
-      );
+      const lh = Math.round(cssW < cssH ? Math.max(720, Math.min(900, cssH * 1.1)) : 660);
       const lw = Math.round(lh * aspect);
       setViewport(lw, lh);
       canvas.width = Math.floor(lw * dpr);
@@ -318,7 +319,7 @@ function Game() {
     };
     const onKeyDown = (e: KeyboardEvent) => {
       const k = e.key.toLowerCase();
-      if (["w", "a", "s", "d", " ", "q"].includes(k)) e.preventDefault();
+      if (["w", "a", "s", "d", " ", "q", "arrowup", "arrowdown", "arrowleft", "arrowright"].includes(k)) e.preventDefault();
       if (k === "escape" || k === "p") {
         const st = stateRef.current;
         if (!st.over) st.paused = !st.paused;
@@ -389,6 +390,9 @@ function Game() {
           paused: s.paused,
           materials: s.materials,
           phase: s.phase,
+          remaining: s.spawnRemaining + s.enemies.filter((e) => !e.dying).length,
+          environment: s.environment,
+          boss: (() => { const b = s.enemies.find((e) => e.boss && !e.dying); return b ? { name: b.name, hp: b.hp, maxHp: b.maxHp } : undefined; })(),
           playerScreenX: ((s.player.x - s.cam.x) / WORLD_W) * 100,
           playerScreenY: ((s.player.y - s.cam.y) / WORLD_H) * 100,
         });
@@ -686,7 +690,7 @@ function Game() {
         <canvas
           ref={canvasRef}
           className="h-full w-full md:rounded-2xl md:border-4 md:border-ink md:shadow-soft"
-          style={{ cursor: "crosshair", imageRendering: "pixelated", touchAction: "none" }}
+          style={{ cursor: "crosshair", imageRendering: "auto", touchAction: "none" }}
           aria-label="Game arena"
         />
 
@@ -734,15 +738,15 @@ function Game() {
 
             <div className="flex flex-col items-center justify-start leading-none" aria-live="polite">
               <span className="font-display text-lg leading-none text-white/90 tabular-nums [text-shadow:0_2px_3px_oklch(0_0_0/80%)]">
-                {Math.ceil(hud.waveTimer)}
+                WAVE {hud.wave}
               </span>
               <span className="font-display text-[9px] uppercase tracking-[0.18em] text-white/45">
-                W{hud.wave}
+                {hud.remaining ?? hud.enemies} LEFT
               </span>
             </div>
 
             <div className="flex justify-end">
-              <button
+              <Button variant="outline" size="icon"
                 onClick={() => {
                   const st = stateRef.current;
                   if (!st.over) st.paused = !st.paused;
@@ -751,10 +755,10 @@ function Game() {
                 className="grid h-8 w-8 place-items-center rounded-md border border-[oklch(1_0_0/15%)] bg-[oklch(0.08_0.02_292/45%)]"
               >
                 <Pause className="h-4 w-4 text-white/70" strokeWidth={2.75} aria-hidden />
-              </button>
+              </Button>
             </div>
           </div>
-
+          {hud.boss && <div className="mx-auto mt-4 max-w-md text-center"><p className="font-display text-xs text-gold">{hud.boss.name}</p><div className="mt-1 h-3 overflow-hidden rounded-sm border-2 border-ink bg-background"><div className="h-full bg-destructive" style={{ width: `${100 * hud.boss.hp / hud.boss.maxHp}%` }} /></div></div>}
 
           {/* BOTTOM: perks + weapon */}
           <div className="absolute bottom-0 left-0 right-0 flex flex-col items-center gap-0.5 px-2 pb-1 sm:px-4">
@@ -795,7 +799,7 @@ function Game() {
 
             {!touch && (
               <p className="text-center text-[8px] font-bold text-white/30">
-                WASD - hold click focus fire (+35%) - Esc pauses
+                {environmentAt(hud.environment ?? 0)?.name ?? "Echo frontier"}
               </p>
             )}
           </div>
@@ -803,21 +807,9 @@ function Game() {
         </div>
 
         {/* Touch sticks */}
-        {touch && !hud.over && (
+        {touch && !hud.over && !hud.paused && hud.phase === "wave" && (
           <>
-            <Stick
-              side="left"
-              onChange={(dx, dy) => {
-                const inp = inputRef.current;
-                inp.moveX = dx;
-                inp.moveY = dy;
-              }}
-              onEnd={() => {
-                const inp = inputRef.current;
-                inp.moveX = 0;
-                inp.moveY = 0;
-              }}
-            />
+            <PlatformControls move={(value) => { inputRef.current.moveX = value; }} jump={(held) => { inputRef.current.jump = held; }} />
             <Stick
               side="right"
               onChange={(dx, dy) => {
@@ -833,6 +825,8 @@ function Game() {
             />
           </>
         )}
+
+        <RunProgress state={stateRef.current} refresh={() => setHud((h) => ({ ...h, phase: stateRef.current.phase }))} />
 
         {/* Between-wave weapon shop */}
         {hud.phase === "shop" && !hud.over && (

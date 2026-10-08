@@ -122,6 +122,10 @@ export function baseMods(): Mods {
 }
 
 export interface Player extends Vec {
+  vy: number;
+  grounded: boolean;
+  jumpHeld: boolean;
+  coyote: number;
   radius: number;
   speed: number;
   baseSpeed: number;
@@ -146,6 +150,10 @@ export interface Player extends Vec {
 }
 
 export interface Enemy extends Vec {
+  grounded?: boolean;
+  boss?: boolean;
+  packKey?: string | undefined;
+  attackT?: number;
   radius: number;
   speed: number;
   hp: number;
@@ -373,6 +381,12 @@ export interface Turret extends Vec {
 
 
 export interface GameState {
+  spawnRemaining: number;
+  waveSpawned: number;
+  transitionTimer: number;
+  waveReward: number;
+  upgradeOffers: string[];
+  environment: number;
   player: Player;
   cam: Vec;
   lootTimer: number;
@@ -426,7 +440,7 @@ export interface GameState {
   sfx: string[];
   takenUpgrades: Record<string, number>;
   paused: boolean;
-  phase: "wave" | "shop";
+  phase: "wave" | "shop" | "transition" | "upgrade";
   /** weapons bought/found this run, always includes the starting weapon */
   arsenal: WeaponKey[];
   /** weapons on sale in the between-wave shop */

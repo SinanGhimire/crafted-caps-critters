@@ -1,3 +1,7 @@
+import { drawParallax, drawPlatforms } from "./stage-render";
+import { enemyAsset, encounterAsset, contentImage, isAirborne } from "./side-content";
+import { GROUND_Y, STAGE_HALF_WIDTH, JUMP_SPEED, stepPlatformBody, groundAt } from "./platform";
+import { waveConfig, waveComplete, WAVE_RULES } from "./waves";
 import { FLYING_FOES } from "./enemy-art";
 import { breedName, rollBreed } from "./breeds";
 import type { ActorKey, AnimKey, Sprites, Strip } from "./assets";
@@ -83,7 +87,7 @@ export function withAlpha(color: string, alpha: number): string {
     return color + Math.round(a * 255).toString(16).padStart(2, "0");
   }
   if (/^#[0-9a-fA-F]{3}$/.test(color)) {
-    const [r, g, b] = [1, 2, 3].map((i) => color[i]!);
+    const [r, g, b] = [1, 2, 3].map((i) => color[i] ?? "0");
     return `#${r}${r}${g}${g}${b}${b}${Math.round(a * 255).toString(16).padStart(2, "0")}`;
   }
   const hsl = color.match(
@@ -118,6 +122,7 @@ export interface Input {
   aimY?: number;
   /** touch play: lock the nearest zombie and fire automatically */
   autoAim?: boolean;
+  jump?: boolean;
 }
 
 /* ---------------------------------- weapons --------------------------------- */
@@ -697,6 +702,7 @@ function rollSlotOffers(s: GameState): WeaponKey[] {
 /** Freeze the fight and open the armoury between waves. */
 export function openShop(s: GameState) {
   s.phase = "shop";
+  s.paused = false;
   s.shopRerolls = 0;
   s.shopOffers = rollSlotOffers(s);
   s.sfx.push("level");
@@ -1329,7 +1335,7 @@ export function createState(
     const a = (i / Math.max(1, def.turrets)) * Math.PI * 2;
     startTurrets.push({
       x: Math.cos(a) * 90,
-      y: Math.sin(a) * 90,
+      y: GROUND_Y,
       hp: 60,
       maxHp: 60,
       life: Number.POSITIVE_INFINITY,
@@ -1344,11 +1350,21 @@ export function createState(
   }
 
   const state: GameState = {
-    cam: { x: -WORLD_W / 2, y: -WORLD_H / 2 },
+    spawnRemaining: waveConfig(1).enemiesToSpawn,
+    waveSpawned: 0,
+    transitionTimer: 0,
+    waveReward: 0,
+    upgradeOffers: [],
+    environment: 0,
+    cam: { x: -WORLD_W / 2, y: GROUND_Y - WORLD_H * 0.72 },
     lootTimer: 6,
     player: {
       x: 0,
-      y: 0,
+      y: GROUND_Y,
+      vy: 0,
+      grounded: true,
+      jumpHeld: false,
+      coyote: 0,
       radius: 22,
       speed,
       baseSpeed: speed,
@@ -1386,7 +1402,7 @@ export function createState(
     echoTimer: ECHO_INTERVAL,
     score: 0,
     wave: 1,
-    waveTimer: WAVE_LENGTH,
+    waveTimer: 0,
     spawnTimer: 0.2,
     phase: "wave",
     arsenal: [WEAPONS[def.weapon] ? def.weapon : "pistol"],
@@ -1421,8 +1437,9 @@ export function createState(
     floor: "dungeon",
     arenaR: arenaRadius(1, 1),
   };
-  // seed the arena lightly: a couple of scouts, not a crowd
-  for (let i = 0; i < 2; i++) spawnEnemy(state);
+  speciesBag = [];
+  bagWave = -1;
+  state.popups.push({ x: 0, y: GROUND_Y - 180, life: 2, text: "WAVE 1" });
   return state;
 }
 
@@ -1496,7 +1513,7 @@ function chooseSpecies(wave: number): Species {
  * camera only has to pan a little to keep the player centred.
  */
 /** Brotato-style rectangular playfield (half extents). */
-export const ARENA_HW = 880;
+export const ARENA_HW = STAGE_HALF_WIDTH;
 export const ARENA_HH = 560;
 /** legacy radius used for coarse culling only */
 export const ARENA_R = Math.hypot(ARENA_HW, ARENA_HH);
@@ -1510,7 +1527,7 @@ export function clampArena(v: Vec, pad = 0) {
   const hw = ARENA_HW - pad;
   const hh = ARENA_HH - pad;
   v.x = Math.max(-hw, Math.min(hw, v.x));
-  v.y = Math.max(-hh, Math.min(hh, v.y));
+  v.y = Math.max(-700, Math.min(GROUND_Y, v.y));
 }
 
 export function insideArena(x: number, y: number, pad = 0) {
@@ -1521,7 +1538,7 @@ export function insideArena(x: number, y: number, pad = 0) {
 export function arenaPoint(pad = 60): Vec {
   return {
     x: rand(-(ARENA_HW - pad), ARENA_HW - pad),
-    y: rand(-(ARENA_HH - pad), ARENA_HH - pad),
+    y: GROUND_Y - 8,
   };
 }
 
@@ -1572,40 +1589,24 @@ interface SpawnOpts {
 }
 
 function spawnEnemy(s: GameState, forceElite = false, opts: SpawnOpts = {}) {
-  // spawn spread evenly along the rugged arena border
-  const edge = arenaEdgePoint();
-  const x = opts.x ?? edge.x;
-  const y = opts.y ?? edge.y;
-
   const species = opts.species ?? chooseSpecies(s.wave);
   const st = STATS[species];
-  const elite =
-    forceElite || (s.wave >= 5 && Math.random() < Math.min(0.16, 0.02 + (s.wave - 5) * 0.012));
-  const breed = rollBreed(s.wave);
+  const config = waveConfig(s.wave);
+  const side = s.waveSpawned % 2 === 0 ? -1 : 1;
+  let x = opts.x ?? s.player.x + side * Math.max(360, Math.min(680, WORLD_W * 0.65));
+  x = Math.max(-ARENA_HW + 45, Math.min(ARENA_HW - 45, x));
+  if (!opts.minion && Math.abs(x - s.player.x) < 240) x = s.player.x - side * 360;
+  const pack = encounterAsset(s.wave, s.waveSpawned, forceElite && species === "e_boss_bone");
+  const y = isAirborne(species, pack?.key) ? GROUND_Y - 120 : Math.min(GROUND_Y, opts.y ?? GROUND_Y);
+  const elite = forceElite || (s.wave >= 8 && Math.random() < Math.min(0.12, 0.02 + (s.wave - 8) * 0.008));
+  const breed = rollBreed(Math.min(12, s.wave));
   const mul = opts.scale ?? 1;
-  const endlessRamp = s.mode === "endless" ? Math.pow(1.035, Math.max(0, s.wave - 1)) : 1;
-  const survivalRamp = s.mode === "survival" ? 1 + Math.max(0, s.wave - 1) * 0.018 : 1;
-  // Both modes keep getting tougher; Endless has no late-game ceiling.
-  const hp = Math.round(
-    st.hp *
-      3.4 *
-      (1 + (s.wave - 1) * 0.28 + Math.max(0, s.wave - 12) * 0.12) *
-      endlessRamp *
-      survivalRamp *
-      breed.hpMul *
-      (elite ? 2.8 : 1) *
-      mul,
-  );
-
+  const hp = Math.max(1, Math.round(st.hp * config.healthMultiplier * (elite ? 2 : 1) * mul));
   const e: Enemy = {
     x,
     y,
     radius: st.radius * breed.scaleMul * (elite ? 1.22 : 1) * mul,
-    speed:
-      (rand(st.speed[0], st.speed[1]) * 0.82 + s.wave * 1.6) *
-      breed.speedMul *
-      (elite ? 1.1 : 1),
-
+    speed: rand(st.speed[0], st.speed[1]) * 0.65 * config.speedMultiplier * (elite ? 1.1 : 1),
 
 
     hp,
@@ -1619,18 +1620,16 @@ function spawnEnemy(s: GameState, forceElite = false, opts: SpawnOpts = {}) {
     deathT: 0,
     attackCd: 0,
     elite,
-    xp: Math.max(1, Math.round((st.score * breed.scoreMul) / 8)) * (elite ? 4 : 1),
+    xp: elite ? 60 : speciesTier(species) >= 2 ? 25 : 10,
     breed: breed.id,
-    name: breedName(breed, species),
+    name: pack?.name ?? breedName(breed, species),
+    packKey: pack?.key,
+    attackT: 0,
     tint: "",
     aura: breed.aura,
-    damage:
-      st.damage *
-      breed.dmgMul *
-      (1 + (s.wave - 1) * 0.055 + Math.max(0, s.wave - 12) * 0.025) *
-      (opts.minion ? 0.8 : 1),
+    damage: st.damage * config.damageMultiplier * (opts.minion ? 0.8 : 1),
 
-    role: AI_ROLE[species],
+    role: pack ? (pack.flying ? "swarm" : /mage|priest|necromancer|robot|drone/i.test(pack.name) ? "shooter" : "chase") : AI_ROLE[species],
     state: "walk",
     stateT: 0,
     cd: rand(0.6, 2.2),
@@ -1648,6 +1647,7 @@ function spawnEnemy(s: GameState, forceElite = false, opts: SpawnOpts = {}) {
     minion: opts.minion ?? false,
   };
   s.enemies.push(e);
+  burst(s, e.x, e.y - 24, 8, st.color, 100);
   return e;
 }
 
@@ -1726,27 +1726,18 @@ function dropHazard(
 
 /** Small welcome pulse when a wave starts (kept light — pressure is gradual). */
 function waveBurst(s: GameState) {
-  const n = Math.min(26, 6 + Math.round(s.wave * 1.1));
-  for (let i = 0; i < n; i++) spawnEnemy(s);
-  const survivalBoss =
-    s.mode === "survival" &&
-    (s.wave === 5 || s.wave === 10 || s.wave === 16 || s.wave === 20);
-  const regularBoss = s.mode === "boss" && s.wave % 3 === 0;
-  if (survivalBoss || regularBoss) {
-    // One commander presides over every boss wave, growing bigger and meaner
-    // each time. New boss creatures land once their artwork arrives.
-    const bossSpecies = "e_boss_bone" as const;
-    spawnEnemy(s, true, {
-      species: bossSpecies,
-      scale: s.wave === 5 ? 1.45 : s.wave === 10 ? 1.85 : s.wave === 16 ? 2.05 : 2.45,
-    });
-    s.popups.push({
-      x: s.player.x,
-      y: s.player.y - 150,
-      life: 2.4,
-      text: `${s.wave === 5 ? "EASY" : s.wave === 16 ? "ELITE" : s.wave === 20 ? "FINAL" : "NORMAL"} BOSS`,
-    });
+  const config = waveConfig(s.wave);
+  s.spawnRemaining = config.enemiesToSpawn;
+  s.waveSpawned = 0;
+  if (config.boss) {
+    const boss = spawnEnemy(s, true, { species: "e_boss_bone", scale: 1.3 });
+    boss.boss = true;
+    boss.xp = 250;
+    boss.hp = boss.maxHp = Math.round(220 * config.healthMultiplier);
+    s.popups.push({ x: s.player.x, y: s.player.y - 180, life: 2.4, text: "BOSS WAVE" });
+    s.breather = 2;
   }
+
 }
 
 function dropXp(s: GameState, x: number, y: number, amount: number) {
@@ -2113,6 +2104,7 @@ function buildGrid(enemies: Enemy[]) {
 }
 
 function killEnemy(s: GameState, e: Enemy) {
+  if (e.dying) return;
   const st = STATS[e.species];
   e.dying = true;
   e.deathT = 0;
@@ -2154,10 +2146,8 @@ function killEnemy(s: GameState, e: Enemy) {
     }
   }
   if (e.role === "brood") s.popups.push({ x: e.x, y: e.y - 90, life: 2, text: "NEST DESTROYED" });
-  if (s.mode === "survival" && s.wave === 20 && e.species === "e_boss_bone") {
-    s.won = true;
-    s.over = true;
-    s.popups.push({ x: e.x, y: e.y - 120, life: 3, text: "SURVIVAL CLEARED!" });
+  if (e.boss) {
+    s.popups.push({ x: e.x, y: e.y - 120, life: 2.5, text: "BOSS DEFEATED" });
   }
 }
 
@@ -2165,6 +2155,7 @@ function killEnemy(s: GameState, e: Enemy) {
 
 export function update(s: GameState, input: Input, dt: number) {
   const p = s.player;
+  if (s.over || s.paused || s.phase === "shop" || s.phase === "upgrade") return;
   if (s.shake > 0) s.shake = Math.max(0, s.shake - dt * 26);
   if (s.muzzle > 0) s.muzzle -= dt;
   if (s.kick > 0) s.kick = Math.max(0, s.kick - dt * 90);
@@ -2190,52 +2181,44 @@ export function update(s: GameState, input: Input, dt: number) {
     q.life -= dt;
     if (q.life <= 0) s.particles.splice(i, 1);
   }
-  if (s.over || s.paused || s.phase === "shop") return;
+  if (s.phase === "transition") {
+    s.transitionTimer = Math.max(0, s.transitionTimer - dt);
+    if (s.transitionTimer === 0) openShop(s);
+    return;
+  }
   s.time += dt;
 
   /* -------------------------------- movement ------------------------------- */
   let dx = input.moveX ?? 0;
-  let dy = input.moveY ?? 0;
-  if (input.keys.has("w") || input.keys.has("arrowup")) dy -= 1;
-  if (input.keys.has("s") || input.keys.has("arrowdown")) dy += 1;
   if (input.keys.has("a") || input.keys.has("arrowleft")) dx -= 1;
   if (input.keys.has("d") || input.keys.has("arrowright")) dx += 1;
-  // Siren psychic ring: controls read backwards for a couple of seconds
-  if (s.invertT > 0) {
-    s.invertT -= dt;
-    dx = -dx;
-    dy = -dy;
-  }
+  if (s.invertT > 0) { s.invertT -= dt; dx = -dx; }
   if (s.drainT > 0) s.drainT -= dt;
-  // sludge slow wears off smoothly
-  if (p.speed < p.baseSpeed) p.speed = Math.min(p.baseSpeed, p.speed + p.baseSpeed * 0.9 * dt);
   if (s.enrageT > 0) s.enrageT -= dt;
-  const len = Math.hypot(dx, dy);
-  p.moving = len > 0.08;
-  if (len > 1) {
-    dx /= len;
-    dy /= len;
-  }
-  p.animT += dt * (p.moving ? 1 : 0.6);
+  if (p.speed < p.baseSpeed) p.speed = Math.min(p.baseSpeed, p.speed + p.baseSpeed * 0.9 * dt);
+  dx = Math.max(-1, Math.min(1, dx));
+  p.moving = Math.abs(dx) > 0.08;
+  p.animT += dt * (p.moving ? Math.abs(dx) : 0.6);
   p.bob += dt * (p.moving ? 12 : 3);
   p.x += dx * p.speed * dt;
-  p.y += dy * p.speed * dt;
-
-  // fixed rectangular border, same size for the whole run (Brotato-style arena)
+  p.coyote = p.grounded ? 0.12 : Math.max(0, p.coyote - dt);
+  const jump = input.jump || input.keys.has(" ") || input.keys.has("w") || input.keys.has("arrowup");
+  if (jump && !p.jumpHeld && p.coyote > 0) {
+    p.vy = -JUMP_SPEED;
+    p.grounded = false;
+    p.coyote = 0;
+    burst(s, p.x, p.y, 6, "#bfe6ff", 90);
+  }
+  if (!jump && p.jumpHeld && p.vy < -260) p.vy *= 0.55;
+  p.jumpHeld = Boolean(jump);
+  stepPlatformBody(p, dt, input.keys.has("s") || input.keys.has("arrowdown"));
   s.arenaR = arenaRadius(s.wave, s.level);
-  clampArena(p, p.radius + 10);
   if (p.invuln > 0) p.invuln -= dt;
-
-  // camera follows the player, then clamps to the arena so the view never
-  // drifts off into empty space past the border
-  const k = 1 - Math.pow(0.0001, dt);
-  s.cam.x += (p.x - WORLD_W / 2 - s.cam.x) * k;
-  s.cam.y += (p.y - WORLD_H / 2 - s.cam.y) * k;
-  const pad = 90;
-  const limX = ARENA_HW + pad - WORLD_W / 2;
-  const limY = ARENA_HH + pad - WORLD_H / 2;
-  s.cam.x = Math.max(-WORLD_W / 2 - limX, Math.min(-WORLD_W / 2 + limX, s.cam.x));
-  s.cam.y = Math.max(-WORLD_H / 2 - limY, Math.min(-WORLD_H / 2 + limY, s.cam.y));
+  const k = 1 - Math.pow(0.001, dt);
+  const lookAhead = dx * Math.min(90, WORLD_W * 0.12);
+  s.cam.x += (p.x + lookAhead - WORLD_W / 2 - s.cam.x) * k;
+  s.cam.x = Math.max(-ARENA_HW, Math.min(ARENA_HW - WORLD_W, s.cam.x));
+  s.cam.y = GROUND_Y - WORLD_H * (WORLD_W < WORLD_H ? 0.66 : 0.76);
 
 
   buildGrid(s.enemies);
@@ -2384,30 +2367,35 @@ export function update(s: GameState, input: Input, dt: number) {
   }
 
   /* --------------------------------- waves --------------------------------- */
-  s.waveTimer -= dt;
-  if (s.waveTimer <= 0) {
-    if (s.mode === "survival" && s.wave >= 20) {
-      // Wave 20 only ends when its final boss is defeated.
-      s.waveTimer = 9999;
-    } else {
-      // wave cleared: hold the fight and open the between-wave armoury
-      openShop(s);
-      return;
+  s.waveTimer += dt;
+  const config = waveConfig(s.wave);
+  const alive = s.enemies.filter((e) => !e.dying).length;
+  if (s.breather > 0) s.breather -= dt;
+  else if (s.spawnRemaining > 0 && alive < config.maximumEnemiesAlive) {
+    s.spawnTimer -= dt;
+    if (s.spawnTimer <= 0) {
+      spawnEnemy(s);
+      s.spawnRemaining -= 1;
+      s.waveSpawned += 1;
+      s.spawnTimer = config.spawnDelay;
     }
   }
-
-  const alive = s.enemies.reduce((n, e) => n + (e.dying ? 0 : 1), 0);
-  const target = targetAlive(s);
-  if (s.breather > 0) {
-    s.breather -= dt;
-  } else {
-    s.spawnTimer -= dt;
-    if (s.spawnTimer <= 0 && alive < target) {
-      // gradual trickle: pressure ramps smoothly instead of dumping a mob on you
-      s.spawnTimer = Math.max(0.35, 1.6 - s.wave * 0.06);
-      const batch = 2 + Math.floor(s.wave / 4);
-      for (let i = 0; i < batch && alive + i < target; i++) spawnEnemy(s);
-    }
+  if (waveComplete(s.spawnRemaining, s.enemies)) {
+    for (const pickup of s.pickups) if (pickup.kind === "xp") grantXp(s, pickup.amount ?? 1);
+    s.pickups = [];
+    s.waveReward = config.rewardAmount;
+    s.materials += s.waveReward;
+    p.hp = Math.min(p.maxHp, p.hp + Math.round(p.maxHp * 0.12));
+    s.ebullets = [];
+    s.hazards = [];
+    if (config.upgrade) {
+      s.upgradeOffers = rollUpgrades(s.takenUpgrades, 3);
+      s.phase = s.upgradeOffers.length ? "upgrade" : "transition";
+    } else s.phase = "transition";
+    s.transitionTimer = WAVE_RULES.preparationSeconds;
+    s.sfx.push("level");
+    s.popups.push({ x: p.x, y: p.y - 170, life: 2, text: "WAVE CLEARED" });
+    return;
   }
 
   /* -------------------------------- bullets -------------------------------- */
@@ -2427,7 +2415,7 @@ export function update(s: GameState, input: Input, dt: number) {
     b.y += b.vy * dt;
     b.life -= dt;
     // bullets pierce everything, they only die on timeout or at the border
-    if (b.life <= 0 || Math.hypot(b.x, b.y) > s.arenaR + 90) {
+    if (b.life <= 0 || Math.abs(b.x) > STAGE_HALF_WIDTH + 90) {
       s.bullets.splice(i, 1);
       continue;
     }
@@ -2486,6 +2474,7 @@ export function update(s: GameState, input: Input, dt: number) {
     const it = s.pickups[i]!;
     it.life -= dt;
     it.bob += dt * 3;
+    if (it.kind !== "xp") it.y = Math.min(GROUND_Y - 8, it.y);
     if (it.life <= 0) {
       s.pickups.splice(i, 1);
       continue;
@@ -2496,13 +2485,17 @@ export function update(s: GameState, input: Input, dt: number) {
       const dxo = p.x - it.x;
       const dyo = p.y - it.y;
       const dist = Math.hypot(dxo, dyo) || 1;
-      if (dist < 240) {
+      if (dist < 320) {
         const pullPower = 620 * (1 - dist / 300);
         it.vx = (it.vx ?? 0) + (dxo / dist) * pullPower * dt * 6;
         it.vy = (it.vy ?? 0) + (dyo / dist) * pullPower * dt * 6;
       }
       it.x += (it.vx ?? 0) * dt;
       it.y += (it.vy ?? 0) * dt;
+      if (dist >= 320) {
+        it.vy = Math.min(250, (it.vy ?? 0) + 600 * dt);
+        it.y = Math.min(GROUND_Y - 8, it.y);
+      }
       if (dist < p.radius + 18) {
         s.pickups.splice(i, 1);
         grantXp(s, it.amount ?? 1);
@@ -2582,6 +2575,7 @@ export function update(s: GameState, input: Input, dt: number) {
     const ang = Math.atan2(ty - e.y, tx - e.x);
     const dist = Math.hypot(tx - e.x, ty - e.y);
     e.animT += dt;
+    e.attackT = Math.max(0, (e.attackT ?? 0) - dt);
     if (e.hurt > 0) e.hurt -= dt;
     if (e.attackCd > 0) e.attackCd -= dt;
     if (e.buffed > 0) e.buffed -= dt;
@@ -2618,6 +2612,7 @@ export function update(s: GameState, input: Input, dt: number) {
           } else {
             enemyShot(s, e, ang, 260, dmg * 0.8);
           }
+          e.attackT = 0.5;
           s.sfx.push("hit");
         }
         break;
@@ -2989,13 +2984,27 @@ export function update(s: GameState, input: Input, dt: number) {
         mv = 1;
     }
 
-    const moveAng = ang + steer;
+    const moveAng = isAirborne(e.species, e.packKey) ? ang + steer : (tx < e.x ? Math.PI : 0);
     const stepSpd = e.speed * boost * mv;
     e.x += Math.cos(moveAng) * stepSpd * dt;
-    e.y += Math.sin(moveAng) * stepSpd * dt;
+    if (isAirborne(e.species, e.packKey)) {
+      e.y += Math.sin(moveAng) * stepSpd * dt;
+      e.y = Math.min(GROUND_Y - 38, e.y);
+    } else {
+      const body = { x: e.x, y: e.y, vy: e.vy, grounded: e.grounded ?? false, radius: e.radius };
+      // Ground enemies jump onto a ledge only when chasing a higher target.
+      if (body.grounded && ty < e.y - 70 && dist < 280 && e.cd2 <= 0) {
+        body.vy = -620;
+        e.cd2 = 2;
+      }
+      stepPlatformBody(body, dt);
+      e.y = body.y;
+      e.vy = body.vy;
+      e.grounded = body.grounded;
+    }
     // walk cycle advances with distance travelled, so big slow enemies lumber
     // and small fast ones scurry without ever looking like they slide
-    e.moveSpd = stepSpd;
+    e.moveSpd = Math.abs(stepSpd);
     e.gaitT = (e.gaitT ?? Math.random()) + (stepSpd / Math.max(18, e.radius * 3.4)) * dt;
     e.facing = tx < e.x ? -1 : 1;
 
@@ -3012,9 +3021,9 @@ export function update(s: GameState, input: Input, dt: number) {
         if (d > 0.001 && d < min) {
           const push = (min - d) / 2;
           e.x += (ox / d) * push;
-          e.y += (oy / d) * push;
+          if (isAirborne(e.species, e.packKey)) e.y += (oy / d) * push;
           o.x -= (ox / d) * push;
-          o.y -= (oy / d) * push;
+          if (isAirborne(o.species, o.packKey)) o.y -= (oy / d) * push;
         }
       }
     }
@@ -3042,6 +3051,7 @@ export function update(s: GameState, input: Input, dt: number) {
       // Reaper executes wounded prey; Leech drinks what it deals
       const low = p.hp / p.maxHp < 0.3;
       const contact = e.role === "reaper" && low ? dmg * 2 : dmg;
+      e.attackT = 0.4;
       if (hurtPlayer(s, contact)) {
         if (e.role === "leech") {
           e.hp = Math.min(e.maxHp, e.hp + contact * 2);
@@ -3103,7 +3113,7 @@ export function update(s: GameState, input: Input, dt: number) {
         continue;
       }
     }
-    if (b.life <= 0 || Math.hypot(b.x, b.y) > s.arenaR + 60) s.ebullets.splice(i, 1);
+    if (b.life <= 0 || Math.abs(b.x) > STAGE_HALF_WIDTH + 60) s.ebullets.splice(i, 1);
   }
 
   /* -------------------------------- hazards --------------------------------- */
@@ -3493,8 +3503,7 @@ function drawTurret(
 export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Sprites, time: number) {
   const p = s.player;
   const cam = s.cam;
-  const wrap = (v: number, center: number, span: number) =>
-    v + Math.round((center - v) / span) * span;
+  
 
   ctx.save();
   if (s.shake > 0.2) {
@@ -3505,238 +3514,28 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
     ctx.translate(-Math.cos(s.kickAng) * s.kick * 0.45, -Math.sin(s.kickAng) * s.kick * 0.45);
   }
 
-  // void beyond the arena
-  ctx.fillStyle = "#07070d";
-  ctx.fillRect(0, 0, WORLD_W, WORLD_H);
-
-  // ground — pixel tileset mosaic, clipped to the rugged arena shape
-  const floor = floorMosaic(sprites, s.floor);
+  drawParallax(ctx, s.environment, cam.x, WORLD_W, WORLD_H);
   ctx.save();
   ctx.translate(-cam.x, -cam.y);
-  ctx.beginPath();
-  ruggedPath(ctx);
-  ctx.clip();
-  const tw = floor.width;
-  const th = floor.height;
-  const startX = Math.floor(-ARENA_HW / tw) * tw;
-  const startY = Math.floor(-ARENA_HH / th) * th;
-  for (let x = startX; x < ARENA_HW + tw; x += tw) {
-    for (let y = startY; y < ARENA_HH + th; y += th) {
-      ctx.drawImage(floor, x, y, tw, th);
-    }
-  }
-  // soft vignette inside the walls so the edge reads as sunken stone
-  const vg = ctx.createLinearGradient(0, -ARENA_HH, 0, ARENA_HH);
-  vg.addColorStop(0, "rgba(0,0,0,0.22)");
-  vg.addColorStop(0.18, "rgba(0,0,0,0)");
-  vg.addColorStop(0.82, "rgba(0,0,0,0)");
-  vg.addColorStop(1, "rgba(0,0,0,0.22)");
-  ctx.fillStyle = vg;
-  ctx.fillRect(-ARENA_HW, -ARENA_HH, ARENA_HW * 2, ARENA_HH * 2);
-  ctx.restore();
+  drawPlatforms(ctx, s.environment, cam.x, WORLD_W);
 
-  // everything below scrolls with the camera
-  ctx.save();
-  ctx.translate(-cam.x, -cam.y);
-
-  /* --------------------------- rugged arena edge ---------------------------- */
-  ctx.save();
-  ctx.beginPath();
-  ruggedPath(ctx);
-  ctx.lineJoin = "round";
-  ctx.lineWidth = 16;
-  ctx.strokeStyle = "#15121d";
-  ctx.stroke();
-  ctx.lineWidth = 7;
-  ctx.strokeStyle = "#3b3450";
-  ctx.stroke();
-  ctx.lineWidth = 2.5;
-  ctx.strokeStyle = "rgba(180,205,255,0.35)";
-  ctx.stroke();
-  ctx.restore();
-
-
-  // arena furniture decals — panels, lane chevrons, vents and inset lights
-  const accent = floorSectorColor(s.floor);
-  for (const d of s.decor) {
-    if (d.kind === "rock1" || d.kind === "rock2" || d.kind === "rock3" || d.kind === "crystal")
-      continue;
-    const dx = wrap(d.x, cam.x + WORLD_W / 2, WORLD_W);
-    const dy = wrap(d.y, cam.y + WORLD_H / 2, WORLD_H);
-    ctx.save();
-    ctx.translate(dx, dy);
-    if (d.kind === "panel") {
-      // painted deck panel: filled pad, bright outline, corner registration ticks
-      const w = 210 * d.scale;
-      const h = 130 * d.scale;
-      ctx.rotate(d.rot);
-      ctx.globalAlpha = 0.22;
-      ctx.fillStyle = accent;
-      ctx.beginPath();
-      ctx.roundRect(-w / 2, -h / 2, w, h, 14);
-      ctx.fill();
-      ctx.globalAlpha = 0.5;
-      ctx.strokeStyle = accent;
-      ctx.lineWidth = 3;
-      ctx.stroke();
-      ctx.globalAlpha = 0.35;
-      ctx.lineWidth = 5;
-      const tick = 22 * d.scale;
-      for (const [sx2, sy2] of [
-        [-1, -1],
-        [1, -1],
-        [-1, 1],
-        [1, 1],
-      ] as [number, number][]) {
-        ctx.beginPath();
-        ctx.moveTo((sx2 * w) / 2 - sx2 * tick, (sy2 * h) / 2);
-        ctx.lineTo((sx2 * w) / 2, (sy2 * h) / 2);
-        ctx.lineTo((sx2 * w) / 2, (sy2 * h) / 2 - sy2 * tick);
-        ctx.stroke();
-      }
-    } else if (d.kind === "chevron") {
-      // hazard chevron pointing outward along a lane
-      ctx.rotate(d.rot);
-      ctx.globalAlpha = 0.3;
-      ctx.strokeStyle = accent;
-      ctx.lineWidth = 8;
-      ctx.lineCap = "butt";
-      ctx.lineJoin = "miter";
-      ctx.beginPath();
-      ctx.moveTo(-22, -26);
-      ctx.lineTo(14, 0);
-      ctx.lineTo(-22, 26);
-      ctx.stroke();
-    } else if (d.kind === "vent") {
-      // recessed grate: dark well with louvre bars and a rim
-      ctx.globalAlpha = 0.7;
-      ctx.fillStyle = "rgba(6,8,14,0.72)";
-      ctx.beginPath();
-      ctx.arc(0, 0, 34 * d.scale, 0, Math.PI * 2);
-      ctx.fill();
-      ctx.globalAlpha = 0.45;
-      ctx.strokeStyle = accent;
-      ctx.lineWidth = 3;
-      ctx.stroke();
-      ctx.globalAlpha = 0.3;
-      ctx.lineWidth = 4;
-      for (let i = -2; i <= 2; i++) {
-        const off = i * 11 * d.scale;
-        const half = Math.sqrt(Math.max(0, (30 * d.scale) ** 2 - off ** 2));
-        ctx.beginPath();
-        ctx.moveTo(-half, off);
-        ctx.lineTo(half, off);
-        ctx.stroke();
-      }
-    } else if (d.kind === "stud") {
-      // inset perimeter light, breathing slowly
-      const glow = 0.45 + Math.sin(time * 2 + d.rot * 3) * 0.2;
-      ctx.globalCompositeOperation = "lighter";
-      const halo = ctx.createRadialGradient(0, 0, 0, 0, 0, 26);
-      halo.addColorStop(0, `rgba(150,225,255,${(0.3 * glow).toFixed(3)})`);
-      halo.addColorStop(1, "rgba(150,225,255,0)");
-      ctx.fillStyle = halo;
-      ctx.fillRect(-26, -26, 52, 52);
-      ctx.fillStyle = `rgba(210,245,255,${(0.5 + glow * 0.4).toFixed(3)})`;
-      ctx.beginPath();
-      ctx.ellipse(0, 0, 5, 3.4, 0, 0, Math.PI * 2);
-      ctx.fill();
-    } else {
-      // sector gate glyph etched into the deck
-      ctx.globalAlpha = 0.26 + Math.sin(time * 1.6 + d.x) * 0.05;
-      ctx.strokeStyle = accent;
-      ctx.lineWidth = 4;
-      ctx.rotate(d.rot);
-      ctx.beginPath();
-      ctx.arc(0, 0, 46 * d.scale, -Math.PI * 0.62, Math.PI * 0.62);
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.arc(0, 0, 30 * d.scale, Math.PI * 0.4, Math.PI * 1.6);
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-  // pickups sit on the ground under the actors
   for (const it of s.pickups) drawPickup(ctx, sprites, it, time);
-
-  // stone blocks
-  const props = s.decor.filter(
-    (d) => d.kind === "rock1" || d.kind === "rock2" || d.kind === "rock3",
-  );
-  props.sort((a, b) => a.y - b.y);
-  for (const d of props) {
-    const img = sprites.singles[d.kind as "rock1" | "rock2" | "rock3"];
-    const h = 80 * d.scale;
-    const dx = wrap(d.x, cam.x + WORLD_W / 2, WORLD_W);
-    const dy = wrap(d.y, cam.y + WORLD_H / 2, WORLD_H);
-    drawShadow(ctx, dx, dy, h * 0.28);
-    if (img && img.width) {
-      const w = h * (img.width / img.height);
-      ctx.drawImage(img, dx - w / 2, dy - h, w, h);
-    }
-  }
-
-  // glowing crystal clusters: chunky faceted shards with a bloom halo
-  for (const d of s.decor) {
-    if (d.kind !== "crystal") continue;
-    const dx = wrap(d.x, cam.x + WORLD_W / 2, WORLD_W);
-    const dy = wrap(d.y, cam.y + WORLD_H / 2, WORLD_H);
-    const glow = 0.5 + Math.sin(time * 1.8 + d.x * 0.03) * 0.18;
-    ctx.save();
-    ctx.translate(dx, dy);
-    drawShadow(ctx, 0, 0, 20 * d.scale);
-    ctx.save();
-    ctx.globalCompositeOperation = "lighter";
-    const halo = ctx.createRadialGradient(0, -18 * d.scale, 0, 0, -18 * d.scale, 68 * d.scale);
-    halo.addColorStop(0, `rgba(130,220,255,${(0.22 * glow).toFixed(3)})`);
-    halo.addColorStop(1, "rgba(130,220,255,0)");
-    ctx.fillStyle = halo;
-    ctx.fillRect(-70 * d.scale, -90 * d.scale, 140 * d.scale, 140 * d.scale);
-    ctx.restore();
-    const shards: [number, number, number][] = [
-      [-13, 34, 0.8],
-      [0, 54, 1],
-      [12, 30, 0.7],
-    ];
-    for (const [ox, hh, w] of shards) {
-      const sh = hh * d.scale;
-      const sw = 9 * w * d.scale;
-      const x = ox * d.scale;
-      ctx.beginPath();
-      ctx.moveTo(x, -sh);
-      ctx.lineTo(x + sw, -sh * 0.42);
-      ctx.lineTo(x + sw * 0.6, 0);
-      ctx.lineTo(x - sw * 0.6, 0);
-      ctx.lineTo(x - sw, -sh * 0.42);
-      ctx.closePath();
-      const grad = ctx.createLinearGradient(x - sw, 0, x + sw, -sh);
-      grad.addColorStop(0, "#1b4f6e");
-      grad.addColorStop(0.55, `rgba(96,200,247,${(0.85 * glow + 0.15).toFixed(3)})`);
-      grad.addColorStop(1, "#d8f6ff");
-      ctx.fillStyle = grad;
-      ctx.fill();
-      ctx.lineWidth = 2.2;
-      ctx.strokeStyle = "rgba(8,16,26,0.85)";
-      ctx.stroke();
-      ctx.beginPath();
-      ctx.moveTo(x, -sh);
-      ctx.lineTo(x, 0);
-      ctx.strokeStyle = "rgba(226,250,255,0.35)";
-      ctx.lineWidth = 1.4;
-      ctx.stroke();
-    }
-    ctx.restore();
-  }
-
-
-
 
   const drawEnemy = (e: Enemy) => {
     const st = STATS[e.species];
-    const h = st.height * e.scale;
-    const strips =
-      sprites.strips[st.sprite] ?? Object.values(sprites.strips)[0];
+    const pack = enemyAsset(e.packKey);
+    const h = (pack ? (e.boss ? 200 : 104) : Math.min(130, st.height)) * e.scale;
+    const originals = sprites.strips[st.sprite] ?? Object.values(sprites.strips)[0];
+    const packed = pack ? {
+      idle: { img: contentImage(pack.idle), frames: pack.frames.idle },
+      walk: { img: contentImage(pack.walk), frames: pack.frames.walk },
+      death: { img: contentImage(pack.death), frames: pack.frames.death },
+    } : undefined;
+    const strips = packed?.idle.img && packed.walk.img && packed.death.img ? {
+      idle: { img: packed.idle.img, frames: packed.idle.frames },
+      walk: { img: packed.walk.img, frames: packed.walk.frames },
+      death: { img: packed.death.img, frames: packed.death.frames },
+    } : originals;
     if (!strips) return;
     if (e.dying) {
       const strip = strips.death;
@@ -3759,7 +3558,9 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
       return;
     }
     const moving = (e.moveSpd ?? 0) > 6 && e.state !== "wind" && e.state !== "under";
-    const strip = moving ? strips.walk : strips.idle;
+    const attacking = !e.dying && ((e.attackT ?? 0) > 0 || e.state === "wind" || e.state === "cast");
+    const attackImage = pack && attacking ? contentImage(pack.attack) : undefined;
+    const strip = attackImage && pack ? { img: attackImage, frames: pack.frames.attack } : moving ? strips.walk : strips.idle;
 
     // ---- burrow mound / cloak shimmer: enemy is fully or partly out of phase
     if (e.fade > 0.05) {
@@ -3818,12 +3619,12 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
     const sx = 1 + windK * 0.1 + dashK * 0.08 + hurtK * 0.07;
     const sy = 1 - windK * 0.12 + dashK * 0.06 - hurtK * 0.06;
 
-    const frame = moving
+    const frame = attackImage ? (e.animT * 10) % strip.frames : moving
       ? ((e.gaitT ?? e.animT) * strip.frames) % strip.frames
       : (e.animT * 4.5) % strip.frames;
 
     // ---- procedural life: walk bounce, body lean, foot-plant squash, hover
-    const flying = FLYING_FOES.has(st.sprite as never);
+    const flying = isAirborne(e.species, e.packKey);
     const gait = (e.gaitT ?? e.animT) * Math.PI * 2;
     const bob = flying
       ? Math.sin(e.animT * 3.4) * h * 0.05
@@ -3899,7 +3700,7 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
     const strip = strips[anim];
     const glitch = e.dead ? rand(-4, 4) : 0;
     const eSquash = 1 + Math.sin(e.animT * (e.moving ? 14 : 6)) * (e.moving ? 0.045 : 0.02);
-    const eh = 200 * eSquash;
+    const eh = 126 * eSquash;
     const frame = (e.animT * (e.moving ? 8 : 6)) % strip.frames;
     drawFrame(ctx, strip, frame, e.x + glitch, e.y, eh, e.facing === -1, "#6fd0ff");
     {
@@ -3988,7 +3789,7 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
   const pSquash = s.over
     ? 0.82
     : 1 + Math.sin(p.animT * (p.moving ? 14 : 6)) * (p.moving ? 0.05 : 0.022);
-  const ph = 212 * pSquash;
+  const ph = 132 * pSquash;
   // the leg cycle runs at the speed the hero actually travels, so no moonwalk
   const pGait = 8 * Math.max(0.6, p.speed / Math.max(1, p.baseSpeed));
   const pFrame = s.over
@@ -4355,13 +4156,14 @@ export function render(ctx: CanvasRenderingContext2D, s: GameState, sprites: Spr
 export function advanceWave(s: GameState) {
   const p = s.player;
   s.wave += 1;
-  s.waveTimer = waveLength(s.wave);
+  s.waveTimer = 0;
+  s.environment = Math.floor((s.wave - 1) / 3);
   s.spawnTimer = 0.4;
   p.hp = Math.min(p.maxHp, p.hp + Math.round(p.maxHp * 0.08));
   s.sfx.push("level");
   s.popups.push({ x: p.x, y: p.y - 120, life: 1.8, text: `WAVE ${s.wave}` });
 
-  // every wave guarantees one perk drop so progression never stalls
-  dropUpgradePack(s, p.x, p.y);
+  s.enemies = [];
+  s.bullets = [];
   waveBurst(s);
 }
