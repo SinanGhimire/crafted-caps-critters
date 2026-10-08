@@ -26,11 +26,11 @@
 - [ ] APK build — blocked: this sandbox has no Java/Android SDK
 
 ## Side-scroller conversion
-- [ ] Integrate all new supplied enemy packs and parallax environments, with matching platform tiles
-- [ ] Implement clear-count waves and approachable data-driven rewards from the supplied brief
-- [ ] Convert arena movement, physics, camera, collisions, enemy spawning, and combat to platform survival
-- [ ] Add mobile run/jump/aim controls and keep the compact pause HUD
-- [ ] Integrate compatible supplied UI frames and buttons without changing the menu artwork
-- [ ] Integrate supplied side-view enemy animations; omit top-down sprites that do not fit
-- [ ] Preserve wave bosses, shop, progression, classes, hats, turrets, and endless mode
-- [ ] Verify phone, tablet, and desktop gameplay plus shop stability
+- [x] Integrate compatible supplied enemy packs and all 70 parallax environments, with matching platform tiles
+- [x] Implement clear-count waves and approachable data-driven rewards from the supplied brief
+- [x] Convert arena movement, physics, camera, collisions, enemy spawning, and combat to platform survival
+- [x] Add mobile run/jump/aim controls and keep the compact pause HUD
+- [x] Integrate compatible supplied UI frames and buttons without changing the menu artwork
+- [x] Integrate 43 supplied side-view enemy families; omit incompatible top-down sprites
+- [x] Preserve shop, progression, classes, hats and turrets; apply the latest endless run and ten-wave boss rules
+- [x] Verify gameplay, pause, jumping, wave clearing, rewards and shop purchases in the browser
