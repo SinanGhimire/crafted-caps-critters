@@ -10,6 +10,10 @@ export const Route = createFileRoute("/sheet")({
     meta: [
       { title: "Echo art sheet" },
       { name: "description", content: "Internal art review sheet." },
+      { property: "og:title", content: "Echo character art collection" },
+      { property: "og:description", content: "Review Echo's characters and enemy artwork." },
+      { property: "og:type", content: "website" },
+      { name: "twitter:card", content: "summary_large_image" },
       { name: "robots", content: "noindex" },
     ],
   }),

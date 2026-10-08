@@ -1,6 +1,8 @@
 import { useCallback, useEffect, useState } from "react";
 
 export interface Profile {
+  highestWave: number;
+  bestScore: number;
   coins: number;
   gems: number;
   energy: number;
@@ -21,6 +23,8 @@ const KEY = "echo:profile";
 const ENERGY_MS = 90_000;
 
 export const DEFAULT_PROFILE: Profile = {
+  highestWave: 1,
+  bestScore: 0,
   coins: 12450,
   gems: 250,
   energy: 85,

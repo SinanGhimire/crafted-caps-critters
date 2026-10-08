@@ -1,0 +1,1839 @@
+{
+  "enemies": [
+    {
+      "key": "slime-fe3a5d",
+      "name": "Slime",
+      "attack": "/__l5e/assets-v1/a85a5e5b-abbb-438e-bbef-70995adfa0e6/slime-ba5742-attack.png",
+      "death": "/__l5e/assets-v1/89c5f5fd-5f52-4be8-b601-73a4f53fa68d/slime-ba5742-death.png",
+      "idle": "/__l5e/assets-v1/5cce9ef7-eaed-46ea-8b9c-bd6617fabe6d/slime-ba5742-idle.png",
+      "walk": "/__l5e/assets-v1/25360c57-c5b4-4ef1-8593-75d572085bc3/slime-ba5742-walk.png",
+      "frames": {
+        "attack": 19,
+        "death": 11,
+        "idle": 14,
+        "walk": 6
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "rat-aa57d7",
+      "name": "Rat",
+      "attack": "/__l5e/assets-v1/dcf07969-6e41-4e5f-a699-a19fee3b3773/rat-e372b6-attack.png",
+      "idle": "/__l5e/assets-v1/315523cd-e54e-431d-9d80-e163948b911a/rat-e372b6-idle.png",
+      "death": "/__l5e/assets-v1/d2831d1c-492b-4b8c-aef1-aa60326f03cd/rat-e372b6-death.png",
+      "walk": "/__l5e/assets-v1/7b2a8774-436c-414e-8a42-120bc620237f/rat-e372b6-walk.png",
+      "frames": {
+        "attack": 12,
+        "idle": 10,
+        "death": 6,
+        "walk": 8
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "goblin-983206",
+      "name": "Goblin",
+      "attack": "/__l5e/assets-v1/0b2c408b-3fa4-433b-aab2-943ab439576e/goblin-344ff4-attack.png",
+      "death": "/__l5e/assets-v1/3011f63a-0a0d-4874-88ef-813241476e9d/goblin-344ff4-death.png",
+      "idle": "/__l5e/assets-v1/81fb4d7d-8531-43b8-a91d-04e442ebd658/goblin-344ff4-idle.png",
+      "walk": "/__l5e/assets-v1/fa45d42e-18d8-44d8-bf4a-d33ab63a0d7c/goblin-344ff4-walk.png",
+      "frames": {
+        "attack": 8,
+        "death": 4,
+        "idle": 4,
+        "walk": 8
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "bat-b143d8",
+      "name": "Bat",
+      "attack": "/__l5e/assets-v1/e07bc5ba-3307-434d-a662-5030ca5b433e/bat-cdf1a3-attack.png",
+      "death": "/__l5e/assets-v1/9a1b9419-26d9-4a9b-9fea-021935bfa8c5/bat-cdf1a3-death.png",
+      "walk": "/__l5e/assets-v1/13f5a0b5-f444-4371-a1c2-57c670635856/bat-cdf1a3-walk.png",
+      "idle": "/__l5e/assets-v1/13f5a0b5-f444-4371-a1c2-57c670635856/bat-cdf1a3-walk.png",
+      "frames": {
+        "attack": 11,
+        "death": 4,
+        "walk": 3,
+        "idle": 3
+      },
+      "flying": true,
+      "boss": false
+    },
+    {
+      "key": "mushroom-d79396",
+      "name": "Mushroom",
+      "attack": "/__l5e/assets-v1/e1512094-1cb6-4c01-8b8c-072f182fc835/mushroom-f719b6-attack.png",
+      "death": "/__l5e/assets-v1/73079479-0078-4ff8-abb8-269abfc39b0e/mushroom-f719b6-death.png",
+      "idle": "/__l5e/assets-v1/89809c6e-e453-475b-807e-c79f9c3e33bd/mushroom-f719b6-idle.png",
+      "walk": "/__l5e/assets-v1/f30fe5ca-be08-4a8b-a5f0-c5f655a3c745/mushroom-f719b6-walk.png",
+      "frames": {
+        "attack": 8,
+        "death": 4,
+        "idle": 4,
+        "walk": 8
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "skeleton-265dd3",
+      "name": "Skeleton",
+      "attack": "/__l5e/assets-v1/7019f4cf-837d-4171-bf76-cec5916d77ac/skeleton-2116dc-attack.png",
+      "death": "/__l5e/assets-v1/336d6520-49b9-4024-8f7f-1195b9143619/skeleton-2116dc-death.png",
+      "idle": "/__l5e/assets-v1/37c88e0e-a5fe-4072-8473-1fda1f0abccb/skeleton-2116dc-idle.png",
+      "walk": "/__l5e/assets-v1/1615fdb8-d058-4f4d-b546-dc26bc113780/skeleton-2116dc-walk.png",
+      "frames": {
+        "attack": 8,
+        "death": 4,
+        "idle": 4,
+        "walk": 4
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "flying-eye-7e197e",
+      "name": "Flying Eye",
+      "walk": "/__l5e/assets-v1/26ca42ea-8677-4e72-9bec-d0bcb6a3a060/flying-eye-2d79e4-walk.png",
+      "idle": "/__l5e/assets-v1/26ca42ea-8677-4e72-9bec-d0bcb6a3a060/flying-eye-2d79e4-walk.png",
+      "attack": "/__l5e/assets-v1/26ca42ea-8677-4e72-9bec-d0bcb6a3a060/flying-eye-2d79e4-walk.png",
+      "death": "/__l5e/assets-v1/26ca42ea-8677-4e72-9bec-d0bcb6a3a060/flying-eye-2d79e4-walk.png",
+      "frames": {
+        "walk": 8,
+        "idle": 8,
+        "attack": 8,
+        "death": 8
+      },
+      "flying": true,
+      "boss": false
+    },
+    {
+      "key": "cultist-21c1e7",
+      "name": "Cultist",
+      "attack": "/__l5e/assets-v1/d22f3747-3616-4902-9896-b100805dacb6/cultist-d01fd4-attack.png",
+      "death": "/__l5e/assets-v1/6fc5a728-f915-45a5-804b-51fa98263680/cultist-d01fd4-death.png",
+      "idle": "/__l5e/assets-v1/f5ae23fd-4fba-4967-b38c-837899514371/cultist-d01fd4-idle.png",
+      "walk": "/__l5e/assets-v1/8e2f00be-0561-4cc3-b1c5-0008138cd2b1/cultist-d01fd4-walk.png",
+      "frames": {
+        "attack": 10,
+        "death": 12,
+        "idle": 6,
+        "walk": 8
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "skullwolf",
+      "name": "Skullwolf",
+      "boss": false,
+      "flying": false,
+      "idle": "/__l5e/assets-v1/aee20792-a4bb-4640-9706-ba648426104b/skullwolf-idle.png",
+      "walk": "/__l5e/assets-v1/7eac07f6-78f8-486c-b7f6-c944bc458797/skullwolf-walk.png",
+      "attack": "/__l5e/assets-v1/87badd9c-435c-4e1c-8718-f494dca6e4e7/skullwolf-attack.png",
+      "death": "/__l5e/assets-v1/560291c7-e1ea-4e3a-b9c2-76087503fb5a/skullwolf-death.png",
+      "frames": {
+        "idle": 6,
+        "walk": 7,
+        "attack": 5,
+        "death": 4
+      }
+    },
+    {
+      "key": "eye-drone",
+      "name": "Eye Drone",
+      "boss": false,
+      "flying": true,
+      "idle": "/__l5e/assets-v1/0a97d895-a19f-4bc7-9e17-aa01a0473fca/eye-drone-idle.png",
+      "walk": "/__l5e/assets-v1/13baebae-6e74-40ff-9886-438061817216/eye-drone-walk.png",
+      "attack": "/__l5e/assets-v1/5984b167-7eab-4f7d-99f1-8529507efb44/eye-drone-attack.png",
+      "death": "/__l5e/assets-v1/93adce13-755d-450b-833c-89aa78b9f81e/eye-drone-death.png",
+      "frames": {
+        "idle": 6,
+        "walk": 5,
+        "attack": 8,
+        "death": 12
+      }
+    },
+    {
+      "key": "bringer-of-death-530e25",
+      "name": "Bringer Of Death",
+      "attack": "/__l5e/assets-v1/805c897d-8d73-4ba5-9cb3-2041a2e24946/bringer-of-death-020e37-attack.png",
+      "death": "/__l5e/assets-v1/f281c9d8-e6c6-4027-bad6-523fa55d9ec1/bringer-of-death-020e37-death.png",
+      "idle": "/__l5e/assets-v1/0b386663-2860-49d3-9e1d-f59532e6bec4/bringer-of-death-020e37-idle.png",
+      "walk": "/__l5e/assets-v1/4a96137f-bb5b-4b4d-8067-a8b493bdb0c4/bringer-of-death-020e37-walk.png",
+      "frames": {
+        "attack": 19,
+        "death": 10,
+        "idle": 8,
+        "walk": 8
+      },
+      "flying": false,
+      "boss": true
+    },
+    {
+      "key": "old-golem-f3b40d",
+      "name": "Old Golem",
+      "attack": "/__l5e/assets-v1/95e39448-fc5d-4c75-8d91-c90bf0fbca1d/old-golem-8f7588-attack.png",
+      "death": "/__l5e/assets-v1/b3722f84-e124-414d-82b1-f5337da5d636/old-golem-8f7588-death.png",
+      "idle": "/__l5e/assets-v1/798a30c5-5705-4d66-991b-412885c662d7/old-golem-8f7588-idle.png",
+      "walk": "/__l5e/assets-v1/8a70b651-ae2f-4e58-8091-291e99340c13/old-golem-8f7588-walk.png",
+      "frames": {
+        "attack": 2,
+        "death": 10,
+        "idle": 6,
+        "walk": 8
+      },
+      "flying": false,
+      "boss": true
+    },
+    {
+      "key": "assassin-cultist-314729",
+      "name": "Assassin Cultist",
+      "attack": "/__l5e/assets-v1/2b052b0d-24d7-4677-b284-afac8d7a655a/assassin-cultist-6bd4be-attack.png",
+      "walk": "/__l5e/assets-v1/84f4d89d-db55-432a-853b-9786d9fbddf4/assassin-cultist-6bd4be-walk.png",
+      "death": "/__l5e/assets-v1/66fdbef8-9cf9-4224-9148-48ee486176ed/assassin-cultist-6bd4be-death.png",
+      "idle": "/__l5e/assets-v1/5cb550e5-856f-4883-955a-03b2f8b628cd/assassin-cultist-6bd4be-idle.png",
+      "frames": {
+        "attack": 13,
+        "walk": 16,
+        "death": 16,
+        "idle": 8
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "big-cultist-2fd992",
+      "name": "Big Cultist",
+      "attack": "/__l5e/assets-v1/65fd3ed0-b2be-4f4e-9184-6a60f18b6c25/big-cultist-c3d1f8-attack.png",
+      "death": "/__l5e/assets-v1/a664f890-5114-489a-9b88-ff58fcbfb7b5/big-cultist-c3d1f8-death.png",
+      "idle": "/__l5e/assets-v1/f3c0091c-d9ad-4263-9fe5-23678b0eea39/big-cultist-c3d1f8-idle.png",
+      "walk": "/__l5e/assets-v1/c48696f8-eb2d-41fd-a266-ef5aeddfae5e/big-cultist-c3d1f8-walk.png",
+      "frames": {
+        "attack": 20,
+        "death": 12,
+        "idle": 8,
+        "walk": 8
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "twisted-cultist-ed5fcc",
+      "name": "Twisted Cultist",
+      "attack": "/__l5e/assets-v1/860f1083-2071-4473-81b5-f005d31249f6/twisted-cultist-686d88-attack.png",
+      "death": "/__l5e/assets-v1/715a67f4-dd4c-4998-96f5-eabbf89d26cc/twisted-cultist-686d88-death.png",
+      "idle": "/__l5e/assets-v1/44e56f9c-a1f6-447f-97da-6cc8821fc9f7/twisted-cultist-686d88-idle.png",
+      "walk": "/__l5e/assets-v1/5424f963-b601-4620-8a58-cbf3bf1b46a2/twisted-cultist-686d88-walk.png",
+      "frames": {
+        "attack": 7,
+        "death": 12,
+        "idle": 12,
+        "walk": 16
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-1-4bba41",
+      "name": "Factory Titan 1",
+      "idle": "/__l5e/assets-v1/e16da25f-63eb-41e2-adca-97fb2fa2213b/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-1-c44f73-idle.png",
+      "attack": "/__l5e/assets-v1/a177e6f3-4d14-4158-be46-3a6fba13e59a/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-1-c44f73-attack.png",
+      "walk": "/__l5e/assets-v1/5040389f-ccf1-4429-9dc9-14ea277f1940/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-1-c44f73-walk.png",
+      "death": "/__l5e/assets-v1/cb580473-29c8-417f-8199-f529986a8556/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-1-c44f73-death.png",
+      "frames": {
+        "idle": 4,
+        "attack": 6,
+        "walk": 6,
+        "death": 6
+      },
+      "flying": false,
+      "boss": true
+    },
+    {
+      "key": "craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-2-000123",
+      "name": "Factory Titan 2",
+      "walk": "/__l5e/assets-v1/9571cf0d-64ca-4d7e-bf05-7edad24f8c64/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-2-77c56b-walk.png",
+      "idle": "/__l5e/assets-v1/443ae4bd-3651-45e8-9652-da303713a39a/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-2-77c56b-idle.png",
+      "death": "/__l5e/assets-v1/9839a11a-679c-48b7-ab32-916e4007691c/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-2-77c56b-death.png",
+      "attack": "/__l5e/assets-v1/3c952231-971b-4007-b88d-3e758b2e1f4b/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-2-77c56b-attack.png",
+      "frames": {
+        "walk": 4,
+        "idle": 6,
+        "death": 4,
+        "attack": 1
+      },
+      "flying": false,
+      "boss": true
+    },
+    {
+      "key": "craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-3-da77ed",
+      "name": "Factory Titan 3",
+      "idle": "/__l5e/assets-v1/52a6eab7-a8e9-46c8-a254-6b507d04797b/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-3-e63ceb-idle.png",
+      "attack": "/__l5e/assets-v1/d0e97034-821f-4c6b-9edd-da76abc2ab6e/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-3-e63ceb-attack.png",
+      "walk": "/__l5e/assets-v1/b70d018b-204d-4a03-b8a5-32846f5ded69/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-3-e63ceb-walk.png",
+      "death": "/__l5e/assets-v1/b6f1502b-a611-4439-a899-d24d9e07eed4/craftpix-net-412866-free-factory-boss-enemies-asset-pack-for-cyberpunk-extracted-3-e63ceb-death.png",
+      "frames": {
+        "idle": 4,
+        "attack": 6,
+        "walk": 6,
+        "death": 6
+      },
+      "flying": false,
+      "boss": true
+    },
+    {
+      "key": "destroyer-d2c4b2",
+      "name": "Destroyer",
+      "attack": "/__l5e/assets-v1/94a91ac8-bfc0-4d6e-a0aa-483233809ec4/destroyer-c37a9d-attack.png",
+      "death": "/__l5e/assets-v1/3d7f5b49-2008-4747-b978-11551d51f4bf/destroyer-c37a9d-death.png",
+      "idle": "/__l5e/assets-v1/2083ad30-7470-4a69-bf35-f488afafc5b1/destroyer-c37a9d-idle.png",
+      "walk": "/__l5e/assets-v1/09e03d68-7f08-4b4b-a90e-3b39c7876f1c/destroyer-c37a9d-walk.png",
+      "frames": {
+        "attack": 4,
+        "death": 7,
+        "idle": 5,
+        "walk": 8
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "infantryman-6d4a26",
+      "name": "Infantryman",
+      "attack": "/__l5e/assets-v1/0b039d43-ecae-4bb4-a6b3-9bca5a7a46f6/infantryman-73f3ef-attack.png",
+      "death": "/__l5e/assets-v1/6128abf5-b789-4a88-bdd0-d91d51d29574/infantryman-73f3ef-death.png",
+      "idle": "/__l5e/assets-v1/aaded40d-d024-468a-ad77-2cd2a0f95d44/infantryman-73f3ef-idle.png",
+      "walk": "/__l5e/assets-v1/fba884f9-7257-430b-b75b-93b659983fb3/infantryman-73f3ef-walk.png",
+      "frames": {
+        "attack": 17,
+        "death": 5,
+        "idle": 6,
+        "walk": 6
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "swordsman-56985a",
+      "name": "Swordsman",
+      "attack": "/__l5e/assets-v1/169cfed9-82f3-4022-bdae-268f0b1f15c5/swordsman-390c64-attack.png",
+      "death": "/__l5e/assets-v1/8bc27de0-a00d-4f1c-bed1-cc9cb3b53df5/swordsman-390c64-death.png",
+      "idle": "/__l5e/assets-v1/ff7de62b-7e10-4dbb-ba5c-a28c2fc0db1f/swordsman-390c64-idle.png",
+      "walk": "/__l5e/assets-v1/ff7de62b-7e10-4dbb-ba5c-a28c2fc0db1f/swordsman-390c64-idle.png",
+      "frames": {
+        "attack": 4,
+        "death": 4,
+        "idle": 5,
+        "walk": 5
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-1-233da8",
+      "name": "Dock Raider 1",
+      "idle": "/__l5e/assets-v1/1555f491-76e8-4245-9ac2-b9db15a3113a/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-1-1de671-idle.png",
+      "walk": "/__l5e/assets-v1/0421d248-b2c6-4481-ba1b-e55c996b6ae5/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-1-1de671-walk.png",
+      "attack": "/__l5e/assets-v1/330be801-d195-4a99-bc78-029ad061a7e8/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-1-1de671-attack.png",
+      "death": "/__l5e/assets-v1/f2fbcd78-47ad-4baa-8a4e-ab15f66f62d2/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-1-1de671-death.png",
+      "frames": {
+        "idle": 4,
+        "walk": 6,
+        "attack": 6,
+        "death": 6
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-2-9fbab8",
+      "name": "Dock Raider 2",
+      "idle": "/__l5e/assets-v1/fc622d37-f1d4-4c22-8068-3a02ed7bc27c/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-2-116a21-idle.png",
+      "walk": "/__l5e/assets-v1/a7aba95c-2cc9-49d0-b4c6-b2110dfbe349/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-2-116a21-walk.png",
+      "attack": "/__l5e/assets-v1/2ba9fb5b-6491-4498-ac1c-3a126e797fcb/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-2-116a21-attack.png",
+      "death": "/__l5e/assets-v1/bc277d83-33a5-4f52-9cd3-bea0f77d8fde/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-2-116a21-death.png",
+      "frames": {
+        "idle": 4,
+        "walk": 6,
+        "attack": 4,
+        "death": 6
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-3-fb5394",
+      "name": "Dock Raider 3",
+      "idle": "/__l5e/assets-v1/dd2e6d65-ce5d-4a8b-8b72-09d634f62568/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-3-476288-idle.png",
+      "walk": "/__l5e/assets-v1/eefb05f6-b641-4a1b-8c5e-6f1e79c6f38c/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-3-476288-walk.png",
+      "attack": "/__l5e/assets-v1/fc4788dc-439a-442f-8f3f-e31067143e30/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-3-476288-attack.png",
+      "death": "/__l5e/assets-v1/d974b283-c522-46fa-ba99-a4c75691a962/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-3-476288-death.png",
+      "frames": {
+        "idle": 4,
+        "walk": 6,
+        "attack": 6,
+        "death": 6
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-4-ab2ce4",
+      "name": "Dock Raider 4",
+      "idle": "/__l5e/assets-v1/552ad4ae-77f5-4f84-ba0c-fa0c6896588c/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-4-d12a6b-idle.png",
+      "walk": "/__l5e/assets-v1/3ffe4ecd-e383-4036-8042-4dde97685f9b/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-4-d12a6b-walk.png",
+      "attack": "/__l5e/assets-v1/9b757435-7a4b-46ae-8012-900f5ad81336/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-4-d12a6b-attack.png",
+      "death": "/__l5e/assets-v1/5c02d0f3-0d55-4ae5-a273-3fd1d8ed51d4/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-4-d12a6b-death.png",
+      "frames": {
+        "idle": 4,
+        "walk": 4,
+        "attack": 6,
+        "death": 4
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-5-e5148a",
+      "name": "Dock Raider 5",
+      "idle": "/__l5e/assets-v1/1cdae6a2-2616-4b3a-aa06-a9267a4d8bdd/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-5-55c31b-idle.png",
+      "walk": "/__l5e/assets-v1/5deee3e8-b399-415f-9b98-5a2572cb5bdc/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-5-55c31b-walk.png",
+      "attack": "/__l5e/assets-v1/0b8120cc-485f-4960-a46a-89d8e644f4a1/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-5-55c31b-attack.png",
+      "death": "/__l5e/assets-v1/8b0a250b-c63f-4507-9cdb-62a7ca7df954/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-5-55c31b-death.png",
+      "frames": {
+        "idle": 4,
+        "walk": 6,
+        "attack": 6,
+        "death": 6
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-6-fb52ab",
+      "name": "Dock Raider 6",
+      "idle": "/__l5e/assets-v1/37eaa19c-651f-4f3b-b908-815527f98708/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-6-83e61e-idle.png",
+      "walk": "/__l5e/assets-v1/c4a7087f-19f6-4a47-adc0-9bc85c0587c3/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-6-83e61e-walk.png",
+      "attack": "/__l5e/assets-v1/25101f03-7da2-47f7-82ed-6f4eb4c71dd3/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-6-83e61e-attack.png",
+      "death": "/__l5e/assets-v1/8a905f94-56a4-45c3-86ed-ee562129238a/craftpix-net-545114-free-pixel-enemies-character-pack-for-seaport-location-extracted-6-83e61e-death.png",
+      "frames": {
+        "idle": 4,
+        "walk": 6,
+        "attack": 6,
+        "death": 6
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "1-drones-1-3482ef",
+      "name": "Sentinel Drone 1",
+      "death": "/__l5e/assets-v1/a315d9e3-0547-45e7-9667-e4288835f561/1-drones-1-2e31ea-death.png",
+      "idle": "/__l5e/assets-v1/a481d8bc-4f1b-4716-a7e7-260cbfa63447/1-drones-1-2e31ea-idle.png",
+      "walk": "/__l5e/assets-v1/6f3812de-f490-470a-b308-0064c4826ee3/1-drones-1-2e31ea-walk.png",
+      "attack": "/__l5e/assets-v1/a481d8bc-4f1b-4716-a7e7-260cbfa63447/1-drones-1-2e31ea-idle.png",
+      "frames": {
+        "death": 6,
+        "idle": 4,
+        "walk": 4,
+        "attack": 4
+      },
+      "flying": true,
+      "boss": false
+    },
+    {
+      "key": "1-drones-3-81ab11",
+      "name": "Sentinel Drone 3",
+      "death": "/__l5e/assets-v1/3d9ee167-0b28-4402-95b6-450ba2ad793d/1-drones-3-c5f848-death.png",
+      "idle": "/__l5e/assets-v1/6a0ea277-1cdf-427c-b1ce-01a154adf333/1-drones-3-c5f848-idle.png",
+      "walk": "/__l5e/assets-v1/6a0ea277-1cdf-427c-b1ce-01a154adf333/1-drones-3-c5f848-idle.png",
+      "attack": "/__l5e/assets-v1/6a0ea277-1cdf-427c-b1ce-01a154adf333/1-drones-3-c5f848-idle.png",
+      "frames": {
+        "death": 8,
+        "idle": 4,
+        "walk": 4,
+        "attack": 4
+      },
+      "flying": true,
+      "boss": false
+    },
+    {
+      "key": "1-drones-4-37b8c3",
+      "name": "Sentinel Drone 4",
+      "death": "/__l5e/assets-v1/28b7410f-0b5b-45f7-96a8-dc423af113b6/1-drones-4-e0a986-death.png",
+      "idle": "/__l5e/assets-v1/aa756cfc-c465-499e-81e8-6f7f25baba57/1-drones-4-e0a986-idle.png",
+      "walk": "/__l5e/assets-v1/4dfeb722-2550-4230-8089-84742d6c88b9/1-drones-4-e0a986-walk.png",
+      "attack": "/__l5e/assets-v1/aa756cfc-c465-499e-81e8-6f7f25baba57/1-drones-4-e0a986-idle.png",
+      "frames": {
+        "death": 6,
+        "idle": 4,
+        "walk": 4,
+        "attack": 4
+      },
+      "flying": true,
+      "boss": false
+    },
+    {
+      "key": "1-drones-5-49e906",
+      "name": "Sentinel Drone 5",
+      "death": "/__l5e/assets-v1/5cd7f3e5-f72c-49b6-99ed-b57a93568f9c/1-drones-5-d283f4-death.png",
+      "idle": "/__l5e/assets-v1/ba7ee68a-2e78-49cf-9b4c-14fbf645f1aa/1-drones-5-d283f4-idle.png",
+      "walk": "/__l5e/assets-v1/830c5cc9-709b-4885-b21d-71c91751f6aa/1-drones-5-d283f4-walk.png",
+      "attack": "/__l5e/assets-v1/ba7ee68a-2e78-49cf-9b4c-14fbf645f1aa/1-drones-5-d283f4-idle.png",
+      "frames": {
+        "death": 6,
+        "idle": 4,
+        "walk": 4,
+        "attack": 4
+      },
+      "flying": true,
+      "boss": false
+    },
+    {
+      "key": "5-2-9bd0b9",
+      "name": "Sentinel Drone 2",
+      "death": "/__l5e/assets-v1/fa97e0e3-4645-43d3-9e3f-b14154f140f4/5-2-16f337-death.png",
+      "idle": "/__l5e/assets-v1/1475b167-f0ff-4408-a69a-287f613fccd9/5-2-16f337-idle.png",
+      "walk": "/__l5e/assets-v1/927a3a8b-b4df-4b4f-a322-6206dc384406/5-2-16f337-walk.png",
+      "attack": "/__l5e/assets-v1/1475b167-f0ff-4408-a69a-287f613fccd9/5-2-16f337-idle.png",
+      "frames": {
+        "death": 6,
+        "idle": 4,
+        "walk": 4,
+        "attack": 4
+      },
+      "flying": true,
+      "boss": false
+    },
+    {
+      "key": "1-drones-6-edf0c4",
+      "name": "Sentinel Drone 6",
+      "walk": "/__l5e/assets-v1/51e0e8c6-0cb7-499f-b078-ded41aa58c4e/1-drones-6-c027eb-walk.png",
+      "idle": "/__l5e/assets-v1/51e0e8c6-0cb7-499f-b078-ded41aa58c4e/1-drones-6-c027eb-walk.png",
+      "attack": "/__l5e/assets-v1/51e0e8c6-0cb7-499f-b078-ded41aa58c4e/1-drones-6-c027eb-walk.png",
+      "death": "/__l5e/assets-v1/51e0e8c6-0cb7-499f-b078-ded41aa58c4e/1-drones-6-c027eb-walk.png",
+      "frames": {
+        "walk": 4,
+        "idle": 4,
+        "attack": 4,
+        "death": 4
+      },
+      "flying": true,
+      "boss": false
+    },
+    {
+      "key": "cultist-priest-sprite-pack-45b176",
+      "name": "Cultist Priest Sprite Pack",
+      "attack": "/__l5e/assets-v1/48554f52-796c-407e-8069-24e1a33deccc/cultist-priest-sprite-pack-5fb638-attack.png",
+      "idle": "/__l5e/assets-v1/00630d0c-d2d9-4548-aad8-ad58c75cf042/cultist-priest-sprite-pack-5fb638-idle.png",
+      "walk": "/__l5e/assets-v1/d61b7090-6240-4e87-ac36-59d165e32874/cultist-priest-sprite-pack-5fb638-walk.png",
+      "death": "/__l5e/assets-v1/00630d0c-d2d9-4548-aad8-ad58c75cf042/cultist-priest-sprite-pack-5fb638-idle.png",
+      "frames": {
+        "attack": 5,
+        "idle": 5,
+        "walk": 6,
+        "death": 5
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "worm-f55c52",
+      "name": "Worm",
+      "attack": "/__l5e/assets-v1/a998e8a4-ebb1-4373-8788-299dd43e75d2/worm-c01ab4-attack.png",
+      "death": "/__l5e/assets-v1/3f2e4d64-a83d-4f02-9628-71f7a092bd84/worm-c01ab4-death.png",
+      "idle": "/__l5e/assets-v1/b53f312a-4490-4d0d-ba71-0a2f66a64be5/worm-c01ab4-idle.png",
+      "walk": "/__l5e/assets-v1/32c067a9-1b28-460b-9b02-ad28052622b5/worm-c01ab4-walk.png",
+      "frames": {
+        "attack": 16,
+        "death": 8,
+        "idle": 9,
+        "walk": 9
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "mimic-8afe5a",
+      "name": "Mimic",
+      "attack": "/__l5e/assets-v1/37f920a3-63c7-4896-aaab-862b8a8f9c6e/mimic-882ffb-attack.png",
+      "death": "/__l5e/assets-v1/2661073a-5ae1-4431-9b4c-426e59eadf1f/mimic-882ffb-death.png",
+      "idle": "/__l5e/assets-v1/2a1316b5-d4fc-41e6-9da1-d2a1e00fb0b2/mimic-882ffb-idle.png",
+      "walk": "/__l5e/assets-v1/da6a3dfe-6a8b-4f6c-ba0e-91025d33e3d1/mimic-882ffb-walk.png",
+      "frames": {
+        "attack": 14,
+        "death": 6,
+        "idle": 1,
+        "walk": 6
+      },
+      "flying": false,
+      "boss": false
+    },
+    {
+      "key": "necromancer",
+      "name": "Necromancer",
+      "boss": true,
+      "flying": false,
+      "idle": "/__l5e/assets-v1/5fd40257-7afd-47c3-b7f3-6f2f5ab3f9a6/necromancer-idle.png",
+      "walk": "/__l5e/assets-v1/41f872d2-ae94-42fc-bca6-85c00af2bbb4/necromancer-walk.png",
+      "attack": "/__l5e/assets-v1/49e419db-bbcf-422c-94f7-ec5ff5c71926/necromancer-attack.png",
+      "death": "/__l5e/assets-v1/87e19b68-65f8-4a93-9326-9293242f5bad/necromancer-death.png",
+      "frames": {
+        "idle": 50,
+        "walk": 10,
+        "attack": 47,
+        "death": 52
+      }
+    },
+    {
+      "key": "hallokin",
+      "name": "Hallokin",
+      "boss": true,
+      "flying": false,
+      "idle": "/__l5e/assets-v1/4dda0176-313c-4637-8891-bffaa86d1b15/hallokin-idle.png",
+      "walk": "/__l5e/assets-v1/c619b0bf-fc2e-4c6a-b7e4-c7682a76ce29/hallokin-walk.png",
+      "attack": "/__l5e/assets-v1/9eb0819b-a11d-4b83-a7bf-b0353300c71b/hallokin-attack.png",
+      "death": "/__l5e/assets-v1/4dda0176-313c-4637-8891-bffaa86d1b15/hallokin-idle.png",
+      "frames": {
+        "idle": 6,
+        "walk": 4,
+        "attack": 7,
+        "death": 6
+      }
+    },
+    {
+      "key": "wetlands-colossus",
+      "name": "Wetlands Colossus",
+      "boss": true,
+      "flying": false,
+      "idle": "/__l5e/assets-v1/d749a175-b6cb-4041-b87c-ca6c8ac4da6b/wetlands-colossus-idle.png",
+      "walk": "/__l5e/assets-v1/72267f8c-c63a-4766-a685-506718e5cb3c/wetlands-colossus-walk.png",
+      "attack": "/__l5e/assets-v1/2c5c0ebc-57af-41aa-a28c-d552f7ff68e8/wetlands-colossus-attack.png",
+      "death": "/__l5e/assets-v1/83478a1a-0521-48b0-a5c8-337a444ed9e4/wetlands-colossus-death.png",
+      "frames": {
+        "idle": 14,
+        "walk": 14,
+        "attack": 10,
+        "death": 33
+      }
+    },
+    {
+      "key": "blind-huntress",
+      "name": "Blind Huntress",
+      "boss": true,
+      "flying": false,
+      "idle": "/__l5e/assets-v1/b130bc4c-37fe-48e3-ab46-1278fa25b9fd/blind-huntress-idle.png",
+      "walk": "/__l5e/assets-v1/64865913-010f-4433-b006-86a4eb255f23/blind-huntress-walk.png",
+      "attack": "/__l5e/assets-v1/b0fcbffb-b433-4cb0-9f2b-7dde8317641a/blind-huntress-attack.png",
+      "death": "/__l5e/assets-v1/bcd27605-5b51-41ba-9ba9-019da154018e/blind-huntress-death.png",
+      "frames": {
+        "idle": 12,
+        "walk": 8,
+        "attack": 15,
+        "death": 10
+      }
+    },
+    {
+      "key": "shadeflit",
+      "name": "Shadeflit",
+      "boss": false,
+      "flying": true,
+      "idle": "/__l5e/assets-v1/356223c0-4a39-4b15-8a40-5193c54b5796/shadeflit-idle.png",
+      "walk": "/__l5e/assets-v1/cb07dba5-7752-486f-90fe-fab4efdff34d/shadeflit-walk.png",
+      "attack": "/__l5e/assets-v1/356223c0-4a39-4b15-8a40-5193c54b5796/shadeflit-idle.png",
+      "death": "/__l5e/assets-v1/356223c0-4a39-4b15-8a40-5193c54b5796/shadeflit-idle.png",
+      "frames": {
+        "idle": 6,
+        "walk": 6,
+        "attack": 6,
+        "death": 6
+      }
+    },
+    {
+      "key": "duskclaw",
+      "name": "Duskclaw",
+      "boss": false,
+      "flying": true,
+      "idle": "/__l5e/assets-v1/ccded736-6ccb-41ff-ac72-371c4800e17d/duskclaw-idle.png",
+      "attack": "/__l5e/assets-v1/d5474137-657c-4566-8d32-5aaf64655bfd/duskclaw-attack.png",
+      "walk": "/__l5e/assets-v1/ccded736-6ccb-41ff-ac72-371c4800e17d/duskclaw-idle.png",
+      "death": "/__l5e/assets-v1/ccded736-6ccb-41ff-ac72-371c4800e17d/duskclaw-idle.png",
+      "frames": {
+        "idle": 22,
+        "attack": 44,
+        "walk": 22,
+        "death": 22
+      }
+    },
+    {
+      "key": "nightborne",
+      "name": "Nightborne",
+      "boss": true,
+      "flying": false,
+      "idle": "/__l5e/assets-v1/eb5a30c9-c3c1-4e28-ad06-8fede7567fa5/nightborne-idle.png",
+      "walk": "/__l5e/assets-v1/f7a1ca61-8087-4898-b9f6-275bdf3aeb67/nightborne-walk.png",
+      "attack": "/__l5e/assets-v1/de1a2940-bfa9-4f25-a076-f8db155d6d85/nightborne-attack.png",
+      "death": "/__l5e/assets-v1/06d9c99f-86c0-4e8c-bf5a-52b138961c6d/nightborne-death.png",
+      "frames": {
+        "idle": 9,
+        "walk": 6,
+        "attack": 12,
+        "death": 23
+      }
+    }
+  ],
+  "backgrounds": [
+    {
+      "key": "legacy-fantasy-deadwind-pass",
+      "name": "Legacy Fantasy - Deadwind Pass",
+      "layers": [
+        "/__l5e/assets-v1/031f4908-165a-46ba-b311-0dfd9d56ac6b/fcade2c1dade.png",
+        "/__l5e/assets-v1/870fec49-5e59-4fc9-bb6d-81cb4eb90f95/6daa1f717cf5.png",
+        "/__l5e/assets-v1/fed12065-5b0c-4ec9-b48c-be906634de1a/0f70ff9044db.png"
+      ],
+      "palette": {
+        "body": "#13121e",
+        "edge": "#47465c",
+        "detail": "#2d2c3c"
+      }
+    },
+    {
+      "key": "legacy-fantasy-deep-cave",
+      "name": "Legacy Fantasy - Deep Cave",
+      "layers": [
+        "/__l5e/assets-v1/ad5fa7b9-0dd7-4fd6-a9ab-cdc1fb143038/d01634446963.png",
+        "/__l5e/assets-v1/42b688c4-572b-4fc3-9ed2-21aed82ebfa9/d819befdbae1.png",
+        "/__l5e/assets-v1/80450b4f-1459-40ed-8346-daad6c4cc3fd/1a02237d8476.png"
+      ],
+      "palette": {
+        "body": "#101f21",
+        "edge": "#425d62",
+        "detail": "#2a3d40"
+      }
+    },
+    {
+      "key": "legacy-fantasy-dusk-woods",
+      "name": "Legacy Fantasy - Dusk Woods",
+      "layers": [
+        "/__l5e/assets-v1/59ea3a67-a772-4439-b062-4602d3e3bddd/0397fcb749fc.png",
+        "/__l5e/assets-v1/d6428d56-6608-48dc-9195-00c8ad387f72/6b51dff88a8e.png",
+        "/__l5e/assets-v1/9ade3ee7-bb96-4b47-97fc-a11fc701320a/4a87603c5482.png",
+        "/__l5e/assets-v1/a018f208-8c43-4760-9fcf-2f00cef97342/676cecc254a5.png"
+      ],
+      "palette": {
+        "body": "#0f1414",
+        "edge": "#3d4949",
+        "detail": "#262e2f"
+      }
+    },
+    {
+      "key": "legacy-fantasy-forgotten-cemetery",
+      "name": "Legacy Fantasy - Forgotten Cemetery",
+      "layers": [
+        "/__l5e/assets-v1/633191ec-d64e-4668-8a18-b03a15874828/d6a4c18435d3.png"
+      ],
+      "palette": {
+        "body": "#261817",
+        "edge": "#6b504f",
+        "detail": "#473433"
+      }
+    },
+    {
+      "key": "legacy-fantasy-kingdom-fortress-update",
+      "name": "Legacy Fantasy - Kingdom Fortress (Update)",
+      "layers": [
+        "/__l5e/assets-v1/b002f927-f649-40cf-acb6-5eecd207a7f1/005e3240d0f5.png",
+        "/__l5e/assets-v1/d254b65f-6bc4-4502-916c-0e0ea4f72f4d/db253d2e4760.png"
+      ],
+      "palette": {
+        "body": "#171d25",
+        "edge": "#505b6a",
+        "detail": "#333b46"
+      }
+    },
+    {
+      "key": "legacy-fantasy-lonely-mine",
+      "name": "Legacy Fantasy - Lonely Mine",
+      "layers": [
+        "/__l5e/assets-v1/21b6ef29-79b5-4d21-8c3d-6822ddcf278d/2f9c475e9199.png",
+        "/__l5e/assets-v1/1d6126df-f552-404c-9f2b-cbea0a467e3f/22ca16400b49.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1e"
+      }
+    },
+    {
+      "key": "legacy-fantasy-sewer-canals",
+      "name": "Legacy Fantasy - Sewer Canals",
+      "layers": [
+        "/__l5e/assets-v1/ed1e8221-3b53-46af-8528-d0662d7c0f95/3d67b8299b63.png",
+        "/__l5e/assets-v1/03f5e146-85c2-4ccb-bf92-542656ca074d/7de3f7779320.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1f22"
+      }
+    },
+    {
+      "key": "legacy-fantasy-lost-glades",
+      "name": "Legacy Fantasy - Lost Glades",
+      "layers": [
+        "/__l5e/assets-v1/ebd7722c-76f0-4ac8-b956-da45dc490bd3/86fdf9c2ac77.png",
+        "/__l5e/assets-v1/58d6d434-b52c-42dc-9838-49b7cf7cec7d/53cece29c39f.png",
+        "/__l5e/assets-v1/3aaa71c8-1ed5-47a2-81e0-69bb45df8587/956ffdebbac0.png"
+      ],
+      "palette": {
+        "body": "#131113",
+        "edge": "#474447",
+        "detail": "#2d2b2d"
+      }
+    },
+    {
+      "key": "legacy-fantasy-kingdom-fortress-v1",
+      "name": "Legacy Fantasy VL.1 - Kingdom Fortress",
+      "layers": [
+        "/__l5e/assets-v1/52dc220c-85d6-4812-8346-37e615674164/cef66440e7b9.png",
+        "/__l5e/assets-v1/f5674cb6-04f3-4e12-813a-7db418573bda/8e6b07e6f0ea.png"
+      ],
+      "palette": {
+        "body": "#171d25",
+        "edge": "#505b6a",
+        "detail": "#333b46"
+      }
+    },
+    {
+      "key": "legacy-fantasy-strange-temple",
+      "name": "Legacy Fantasy VL.1 - Strange Temple",
+      "layers": [
+        "/__l5e/assets-v1/7413fd44-c085-4922-aa8b-5e8a9905634c/ecfd9b7807d6.png",
+        "/__l5e/assets-v1/4d065ec3-c206-4d63-afc5-cf3456475260/804205b89040.png"
+      ],
+      "palette": {
+        "body": "#190f16",
+        "edge": "#53404c",
+        "detail": "#362831"
+      }
+    },
+    {
+      "key": "legacy-fantasy-blood-mansion",
+      "name": "Legacy Fantasy - Blood Mansion",
+      "layers": [
+        "/__l5e/assets-v1/1bb62ad5-df81-4778-ad5b-d76395a92605/1243d9c0f2be.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#251e1f"
+      }
+    },
+    {
+      "key": "legacy-fantasy-castle-prison",
+      "name": "Legacy Fantasy - Castle Prison",
+      "layers": [
+        "/__l5e/assets-v1/90a8f405-e640-46f9-9830-bf7d1a4e76e1/6dbe1e9f53fe.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e2023"
+      }
+    },
+    {
+      "key": "cave-theme",
+      "name": "Cave Theme",
+      "layers": [
+        "/__l5e/assets-v1/61974988-40ee-40e8-8be3-c909a6720d79/d188a47a2e74.png",
+        "/__l5e/assets-v1/bca657cd-e950-4c62-9d13-663924c3586c/233bd5727ef7.png",
+        "/__l5e/assets-v1/2dbbc69e-7365-4417-ad00-acd15981367a/9e31c93bebf6.png",
+        "/__l5e/assets-v1/467aa68c-1b1f-4786-a242-6246144f6228/ed491551a33b.png",
+        "/__l5e/assets-v1/0fc49c9a-88e8-4ed9-b822-3907fe84407d/6c3364239a46.png",
+        "/__l5e/assets-v1/f4854524-0bf1-40cd-999a-996b8e7c4410/7664050242e0.png",
+        "/__l5e/assets-v1/fc1804d0-121d-4f6c-a2ac-317b61ca904b/8d5a2f162b82.png",
+        "/__l5e/assets-v1/bda61105-07a2-4c54-8672-f78e07035b55/f087f76de366.png",
+        "/__l5e/assets-v1/366b6ae8-2830-4e08-927d-44be51aa9c42/b3f4bab20cb4.png"
+      ],
+      "palette": {
+        "body": "#606060",
+        "edge": "#d9d9d9",
+        "detail": "#959595"
+      }
+    },
+    {
+      "key": "futuristic-city-parallax",
+      "name": "Futuristic City Parallax",
+      "layers": [
+        "/__l5e/assets-v1/82858c36-e902-4711-a991-abbc999e524f/a169865a735d.png",
+        "/__l5e/assets-v1/509edc44-b616-4cb4-87af-602497a48d67/ba3e8b49d722.png",
+        "/__l5e/assets-v1/448761ca-6ce8-4d6a-ac61-4482a8856473/c16c8d2eb3e2.png",
+        "/__l5e/assets-v1/9678f3d6-f69a-4246-aff6-1b864868e714/6bd148de98a2.png",
+        "/__l5e/assets-v1/25a85333-ae90-4216-b792-cccc16535df6/bb6ed766316a.png",
+        "/__l5e/assets-v1/95e2da1c-a0d5-4498-b0a1-2937211d969a/869ed58f58d7.png",
+        "/__l5e/assets-v1/09f6af30-83f2-4bf3-a91c-31aa717c2eb1/47a9284b8a45.png",
+        "/__l5e/assets-v1/93babe52-3c1a-468b-acef-d4822df3449f/aaa3684a60a5.png",
+        "/__l5e/assets-v1/701f0649-1051-4e3e-bcad-1968cae3e744/ed7626bca8c2.png"
+      ],
+      "palette": {
+        "body": "#151515",
+        "edge": "#4b4b4b",
+        "detail": "#303030"
+      }
+    },
+    {
+      "key": "parallax-industrial",
+      "name": "Parallax Industrial",
+      "layers": [
+        "/__l5e/assets-v1/907f3219-e1ef-43d4-a076-f31ac3192c69/c5d1a3bde215.png",
+        "/__l5e/assets-v1/9df67d72-3a9f-496c-ac90-041d4c0d666e/d9feb4d498fa.png",
+        "/__l5e/assets-v1/d6df11a8-c1f2-4a3c-bd37-aa76a2fe9b23/e52f85a903a6.png",
+        "/__l5e/assets-v1/a71bd38e-2c65-402e-89f5-97485e04e5a0/7f1f57210d6b.png"
+      ],
+      "palette": {
+        "body": "#29312d",
+        "edge": "#708079",
+        "detail": "#4a5550"
+      }
+    },
+    {
+      "key": "post-soviet-city-parallax",
+      "name": "Post-Soviet City Parallax",
+      "layers": [
+        "/__l5e/assets-v1/42dcdaa9-ebe0-4fec-af4c-ff5d2b373c22/e2d881085fe9.png",
+        "/__l5e/assets-v1/70a18196-d03b-449d-a06a-6b302571517a/5873bf780096.png",
+        "/__l5e/assets-v1/7e1b333c-958b-4212-837e-03841c903d22/04a8788b7e62.png",
+        "/__l5e/assets-v1/b89758b6-dcbc-4e5d-bd72-18da0f3605af/2886a782eaac.png",
+        "/__l5e/assets-v1/bed236ec-aedc-409c-a072-7ba5b44d0542/b454402dce4a.png",
+        "/__l5e/assets-v1/24d5af16-7a67-4280-82fa-400dae168f2f/c55b2a843c86.png",
+        "/__l5e/assets-v1/4bd8b88c-4d45-41f0-9232-ec500f961087/7a0dc0a7208e.png",
+        "/__l5e/assets-v1/75390188-74b7-4348-9713-2396c9dac042/3b724b726566.png",
+        "/__l5e/assets-v1/d6f6024d-f727-4229-b088-abb4d2304987/7a5c3ab4306f.png"
+      ],
+      "palette": {
+        "body": "#101414",
+        "edge": "#424849",
+        "detail": "#2a2e2f"
+      }
+    },
+    {
+      "key": "citybg",
+      "name": "CITYBG",
+      "layers": [
+        "/__l5e/assets-v1/e7c59623-d308-4d19-b53f-9f53f67020a9/0121a195e22b.png",
+        "/__l5e/assets-v1/c988e4ae-0e57-4058-84ea-d1d64ea35330/54b7fd8f5e52.png",
+        "/__l5e/assets-v1/42f603b4-499f-47a0-93b0-0bd4836ecaee/2d4f953b5a73.png",
+        "/__l5e/assets-v1/b8303adc-8a27-4a0d-bba1-cbec4e5f35f9/00c1e62f36fa.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1e"
+      }
+    },
+    {
+      "key": "street-city1-bright",
+      "name": "Street City 1 (Bright)",
+      "layers": [
+        "/__l5e/assets-v1/93eb8d18-9884-4cdd-964c-8d9200d300e4/8bf37d3351ad.png",
+        "/__l5e/assets-v1/1198623a-e08d-465e-9aa5-0ccebae05769/bcacc4dcacdd.png",
+        "/__l5e/assets-v1/d11e0ad1-ead9-4eef-9326-4e65794d4537/c6d69259df5a.png",
+        "/__l5e/assets-v1/b2c882ce-a849-4b34-932f-2fbf544de89c/e6116a35c32a.png",
+        "/__l5e/assets-v1/3a75d740-76f1-41f0-9f2d-dff0557d3469/3227f13afc64.png",
+        "/__l5e/assets-v1/1efe529d-2569-4c2b-b478-1780c1d7fbca/909eb67cebdb.png",
+        "/__l5e/assets-v1/11ae41d9-78ff-4e6c-a306-5fc22c4a8272/674579112609.png"
+      ],
+      "palette": {
+        "body": "#686868",
+        "edge": "#dcdcdc",
+        "detail": "#9f9e9e"
+      }
+    },
+    {
+      "key": "street-city1-pale",
+      "name": "Street City 1 (Pale)",
+      "layers": [
+        "/__l5e/assets-v1/a9e2e988-0bdd-49de-b0aa-3eafe1292fd0/ccea2dc1e010.png",
+        "/__l5e/assets-v1/ebd5dd51-5625-4e6d-b8ce-70319bd8cee2/13c5deb54d48.png",
+        "/__l5e/assets-v1/c1579688-082a-4271-84a5-fb9ca14ad4e6/74e4ada13a1d.png",
+        "/__l5e/assets-v1/52a37d40-bc96-4894-947a-13aa9f22061c/1759c90094a7.png",
+        "/__l5e/assets-v1/aa73495c-7410-497d-912f-b5e930177ade/9e183c8aad77.png",
+        "/__l5e/assets-v1/18b409ea-c57a-4af8-afe9-31f568aed9ec/a41e2d5b17fb.png",
+        "/__l5e/assets-v1/de36e4fc-077a-4cca-8435-8318457beeee/0227d6c18ebf.png"
+      ],
+      "palette": {
+        "body": "#6a6969",
+        "edge": "#dcdcdc",
+        "detail": "#a1a0a0"
+      }
+    },
+    {
+      "key": "street-city2-bright",
+      "name": "Street City 2 (Bright)",
+      "layers": [
+        "/__l5e/assets-v1/9f6fe943-ee0d-4d6f-8674-037edd72aac8/a34d2c411842.png",
+        "/__l5e/assets-v1/90b3a102-a46a-4668-bf5d-43ac947e2fe0/f7af096b0d3d.png",
+        "/__l5e/assets-v1/c9bf6511-1876-435c-8c6e-af322ed9a539/fbd8077c5e86.png",
+        "/__l5e/assets-v1/5dfdec19-3649-426e-845d-dc65a97fe50e/11816a0218e5.png",
+        "/__l5e/assets-v1/a6d07c65-020e-43f0-bbbf-e2340ffcb290/1b2e3f0c84e5.png",
+        "/__l5e/assets-v1/ccdfdd4a-8997-4d65-a680-b55dc2fdcc83/634fcee338e3.png"
+      ],
+      "palette": {
+        "body": "#6a6868",
+        "edge": "#dcdcdc",
+        "detail": "#a19f9f"
+      }
+    },
+    {
+      "key": "street-city2-pale",
+      "name": "Street City 2 (Pale)",
+      "layers": [
+        "/__l5e/assets-v1/72f243e5-b78b-42a7-8eae-30d65d669245/38011f182f00.png",
+        "/__l5e/assets-v1/0ebc8bfe-91ad-4541-9802-84f7b9918d4c/623f125fc3b1.png",
+        "/__l5e/assets-v1/5ad79057-2a9a-4363-bfd6-cea413b63073/c3ca35aabbeb.png",
+        "/__l5e/assets-v1/998b2ee4-01a7-49e1-bb0d-39c26b3ada90/36a4636d6a06.png",
+        "/__l5e/assets-v1/78e8798c-c4b0-4423-840a-6774b1b62c8a/2f330a26cb5a.png",
+        "/__l5e/assets-v1/8d861ea7-7ddd-4d1f-b546-0a10cf380a8c/a8642de3e04b.png"
+      ],
+      "palette": {
+        "body": "#6a6969",
+        "edge": "#dcdcdc",
+        "detail": "#a1a0a0"
+      }
+    },
+    {
+      "key": "street-city3-bright",
+      "name": "Street City 3 (Bright)",
+      "layers": [
+        "/__l5e/assets-v1/1f390987-1e8d-4527-a74c-deac2328851a/f1d9b8213170.png",
+        "/__l5e/assets-v1/ab0c0e3f-67b5-42ae-8775-7b4adca7ff3d/1e87cfcb7733.png",
+        "/__l5e/assets-v1/143a8221-e88c-42b8-9a10-5cb6f0f65a9e/716c3908efb0.png",
+        "/__l5e/assets-v1/e94c9b3f-3a99-4480-a556-00d948a6ecca/f129d7ab6730.png",
+        "/__l5e/assets-v1/d00af748-c67c-4b74-997d-f8c023005e7b/834176f82f97.png",
+        "/__l5e/assets-v1/0309d513-fd94-4049-b7d5-75c102d0233d/4c26d01390c2.png"
+      ],
+      "palette": {
+        "body": "#717070",
+        "edge": "#dcdcdc",
+        "detail": "#abaaaa"
+      }
+    },
+    {
+      "key": "street-city3-pale",
+      "name": "Street City 3 (Pale)",
+      "layers": [
+        "/__l5e/assets-v1/06c75e4c-c390-4f9b-8a60-eb73f677809d/9117f8b58318.png",
+        "/__l5e/assets-v1/b20ecb70-bdb3-4aeb-9d1e-cf271845d6f6/9fa78d441f24.png",
+        "/__l5e/assets-v1/4277456e-5402-4e4b-9daf-adac9e357597/b549984e0053.png",
+        "/__l5e/assets-v1/e0fe77ab-c870-4a80-a756-df2945c310fd/7751cf1fbc6a.png",
+        "/__l5e/assets-v1/a9c990de-f73c-4940-b0ce-a5934415e39f/e7db446747fd.png",
+        "/__l5e/assets-v1/ef3cce39-1985-4555-8074-2cfba76d3af4/ef515dbffe32.png"
+      ],
+      "palette": {
+        "body": "#717070",
+        "edge": "#dcdcdc",
+        "detail": "#aaaaaa"
+      }
+    },
+    {
+      "key": "street-city4-bright",
+      "name": "Street City 4 (Bright)",
+      "layers": [
+        "/__l5e/assets-v1/c70a6a4c-776f-4120-9f15-fd6332e13b08/cea0a4cda3df.png",
+        "/__l5e/assets-v1/e632c95b-3709-45d4-b24b-dd6f427c2ccd/32053241e854.png",
+        "/__l5e/assets-v1/4878701b-1e5b-48ff-8f82-049de7fa562b/0bbbd4ee8cbb.png",
+        "/__l5e/assets-v1/de563347-0d84-459f-8437-c7a5b247a617/b2dd15c8c70e.png",
+        "/__l5e/assets-v1/7c00a716-c778-4645-9ea4-66129b6e5020/4a2586f068de.png",
+        "/__l5e/assets-v1/237969f2-2b37-48c4-a57e-f0ce44741248/f489c774542a.png",
+        "/__l5e/assets-v1/ad6e022e-1111-4a34-a57f-52e6d2f21df4/a10e535dbb0e.png"
+      ],
+      "palette": {
+        "body": "#686765",
+        "edge": "#dcdcdc",
+        "detail": "#9f9d9b"
+      }
+    },
+    {
+      "key": "street-city4-pale",
+      "name": "Street City 4 (Pale)",
+      "layers": [
+        "/__l5e/assets-v1/22acd997-ea7c-4def-8c4b-3fd81177a491/f6278ff347d5.png",
+        "/__l5e/assets-v1/8b0b5376-1768-498a-9c07-2bb4ffd770e2/7ecc29dd8494.png",
+        "/__l5e/assets-v1/1a6c0d90-faec-4b60-b4d0-9dbe4e57e7fd/5a777b7b9c83.png",
+        "/__l5e/assets-v1/54af8828-9348-488e-a446-d8205ff4e511/f3d4cd1d9ac7.png",
+        "/__l5e/assets-v1/73a1b3b0-eedf-40c0-bb9e-3b937fb2c9d7/49108d24341b.png",
+        "/__l5e/assets-v1/993dbef6-d86d-44d6-98de-fba66cb3c72b/c0d6089b8ff4.png",
+        "/__l5e/assets-v1/4c2a5af8-629f-46b3-bc8c-36532231c332/73ad1e253895.png"
+      ],
+      "palette": {
+        "body": "#6b6966",
+        "edge": "#dcdcdc",
+        "detail": "#a2a09c"
+      }
+    },
+    {
+      "key": "futuristic-city-1",
+      "name": "Futuristic City 1",
+      "layers": [
+        "/__l5e/assets-v1/38c89567-d9a6-499c-abf5-13cdbde54827/afc9bfc00b8a.png",
+        "/__l5e/assets-v1/db98a7f5-880c-43b4-b731-9c69cf076a84/4070b24dc1c3.png",
+        "/__l5e/assets-v1/3d9eba3d-65e6-493f-bbe0-551d4e85982c/c95255b3cd88.png",
+        "/__l5e/assets-v1/518baa8c-56ba-487a-a4ee-ce71d10a2f96/b24008d628e6.png",
+        "/__l5e/assets-v1/a7e993db-30dd-40da-85b0-d839c617b08e/21e579374e37.png",
+        "/__l5e/assets-v1/65624390-7710-43cc-9601-6b18e67f1719/3d8eb8e419de.png",
+        "/__l5e/assets-v1/cc71a994-2b75-43b9-951a-425015951c64/962de14245cd.png",
+        "/__l5e/assets-v1/ed0ac594-bcbe-4924-9d21-309819a7ffc9/570ca6c2f5a6.png",
+        "/__l5e/assets-v1/6069366d-1c41-4cde-95bf-6fefca034f1e/2b1170c2874a.png",
+        "/__l5e/assets-v1/ad80c4c6-17d7-42e2-958e-d6651bd777df/650e5aa7e3bf.png",
+        "/__l5e/assets-v1/8bb99c5c-295b-44e2-9f37-8d64bc641060/c3fd4164aca3.png"
+      ],
+      "palette": {
+        "body": "#221632",
+        "edge": "#644d83",
+        "detail": "#423257"
+      }
+    },
+    {
+      "key": "futuristic-city-2",
+      "name": "Futuristic City 2",
+      "layers": [
+        "/__l5e/assets-v1/3dbaa231-1854-4819-83b8-a4f288ac657b/f29542bf16f7.png",
+        "/__l5e/assets-v1/5d22fc0e-a51f-40b1-8eab-8d3ee11ade75/802247b6b574.png",
+        "/__l5e/assets-v1/9aae0d7a-a46a-4c18-b6bd-bba3f9bb3f6b/222370768f49.png",
+        "/__l5e/assets-v1/c9a2cca5-43b4-4eb5-987c-cec590bffbc5/d9d14842374a.png",
+        "/__l5e/assets-v1/df7e7ec5-c0d6-4ca1-883e-cee468c495f9/9632dcc7c840.png",
+        "/__l5e/assets-v1/8f15e25c-c28e-4bbb-bae0-edd79b04c344/faf48b7bba2b.png",
+        "/__l5e/assets-v1/915a765d-ac7f-4f50-a4ad-6bc7a24b5f50/07b455fdcfbf.png",
+        "/__l5e/assets-v1/e6c52d21-27b5-48c3-ab52-58283d240f83/3d277bedd3ef.png",
+        "/__l5e/assets-v1/b96084a2-96ba-4e81-8eb9-34a9037e0a26/cc855e62a46f.png",
+        "/__l5e/assets-v1/ebded8ff-104c-4926-a233-0eaf046e8fec/287fc8d7ba64.png"
+      ],
+      "palette": {
+        "body": "#292949",
+        "edge": "#7271ae",
+        "detail": "#4b4b76"
+      }
+    },
+    {
+      "key": "futuristic-city-3",
+      "name": "Futuristic City 3",
+      "layers": [
+        "/__l5e/assets-v1/47015bd5-1c1d-4a24-9e73-6037bed10cc6/94134ee208c2.png",
+        "/__l5e/assets-v1/c4734748-a3f2-4e9c-832b-1fb304a2b75f/a9a6ef462e51.png",
+        "/__l5e/assets-v1/c60f4bc6-8de3-4286-95bf-898269f93160/38c9b201af56.png",
+        "/__l5e/assets-v1/e1a33cdb-1ec5-4f45-8e85-e84360d13c3e/1fc8c345b264.png",
+        "/__l5e/assets-v1/9fb6c3a4-96c4-48f7-8f82-e0fa6a8d1f4c/92e690ac2b8f.png",
+        "/__l5e/assets-v1/f50d20d4-8cfd-41d4-92d1-ce75f04009e9/792e6dab8717.png",
+        "/__l5e/assets-v1/5c377986-928e-4040-8d44-b4c487cc2cd8/fe8cafcdc34d.png",
+        "/__l5e/assets-v1/5e6da7a1-9a87-4462-a5a2-a21d755fc93b/7d5d6ca78b97.png",
+        "/__l5e/assets-v1/5567f66b-82e7-466f-b088-923d02a24b8c/e630960a18fe.png"
+      ],
+      "palette": {
+        "body": "#223859",
+        "edge": "#648ecb",
+        "detail": "#425f8a"
+      }
+    },
+    {
+      "key": "futuristic-city-4",
+      "name": "Futuristic City 4",
+      "layers": [
+        "/__l5e/assets-v1/400ca44e-26a1-4ea1-ae73-ddb07be1e137/90c05f6138f7.png",
+        "/__l5e/assets-v1/5401cfa9-f953-4cb1-acfa-abf622aa8ac7/4a92d798a54e.png",
+        "/__l5e/assets-v1/0cf361bf-d4bd-4b13-a815-58464261a92c/ca2995cd5910.png",
+        "/__l5e/assets-v1/2462dcb7-e193-4b3c-84ae-14303690f1e2/9f5a3a5b4685.png",
+        "/__l5e/assets-v1/698e94a6-a1d2-4075-b446-45235ff1aade/822ea72a6760.png",
+        "/__l5e/assets-v1/46741569-9c76-4e16-a091-c7fc02e5eb0d/642a8eaf7a96.png",
+        "/__l5e/assets-v1/429535ce-8aaf-45a7-bbe4-d263f820cd87/5852edebe140.png",
+        "/__l5e/assets-v1/0d3bda73-10f7-4726-999e-27f9ccaf3122/20effcd05e4a.png",
+        "/__l5e/assets-v1/eaba5fd0-aecd-458e-a745-704cefd956be/dd0e896ab59d.png",
+        "/__l5e/assets-v1/63cd967a-c76d-456c-9338-855573a8d00f/d6915092074b.png"
+      ],
+      "palette": {
+        "body": "#573d32",
+        "edge": "#c79682",
+        "detail": "#886557"
+      }
+    },
+    {
+      "key": "pixel-city-1",
+      "name": "Pixel City 1",
+      "layers": [
+        "/__l5e/assets-v1/0e164b7b-aa99-47bc-b9e4-e6fc398a683f/576466a0e712.png",
+        "/__l5e/assets-v1/0c5eee5a-b4a5-4d87-a973-50da433fe8e0/8397800f1b41.png",
+        "/__l5e/assets-v1/d6cec83b-9fc5-4c17-af0d-556d792c9ac0/cc273ff57ce8.png",
+        "/__l5e/assets-v1/043b73dc-70b9-4f2c-8dbf-d87e726df5d2/455c2c0578b0.png",
+        "/__l5e/assets-v1/0048a7e4-b463-47e4-bddc-cde9100c9165/e07136f4e12d.png",
+        "/__l5e/assets-v1/66442c6d-3ed7-434a-a228-ac52a243be52/2eecf56f00f9.png",
+        "/__l5e/assets-v1/15363bc8-d53d-42f9-8f6c-78af3650acec/52584efab53b.png"
+      ],
+      "palette": {
+        "body": "#0f1a39",
+        "edge": "#3c5490",
+        "detail": "#233661"
+      }
+    },
+    {
+      "key": "pixel-city-2",
+      "name": "Pixel City 2",
+      "layers": [
+        "/__l5e/assets-v1/27dd12a0-5a26-49e1-8086-bb71a6542832/29b813bfeec0.png",
+        "/__l5e/assets-v1/eb1dc548-c027-44af-acc0-cbae26e6e4be/37b098ee553f.png",
+        "/__l5e/assets-v1/b96e0816-7149-4152-ab90-6d29f924d44e/bfed2404c02d.png",
+        "/__l5e/assets-v1/4189760f-44e9-4653-b6dd-b16382e91b3d/fc99415ab0b5.png",
+        "/__l5e/assets-v1/2048434d-488a-44e2-af2b-5f852fe8b360/1841c84aeb1d.png",
+        "/__l5e/assets-v1/2f2169c2-fb9b-4a55-b727-4dcf8470c697/77b48b2a6219.png",
+        "/__l5e/assets-v1/4a330ddd-93df-4552-b603-708b6084ee0f/7a5eece2b986.png",
+        "/__l5e/assets-v1/c8a61a29-6e51-47ff-8d3c-14b77fee24aa/3643c9ecfce1.png"
+      ],
+      "palette": {
+        "body": "#3b292f",
+        "edge": "#94707c",
+        "detail": "#634a53"
+      }
+    },
+    {
+      "key": "pixel-city-3",
+      "name": "Pixel City 3",
+      "layers": [
+        "/__l5e/assets-v1/eef4cf75-e633-4fcf-81af-b84f34adae5a/5b30133e8354.png",
+        "/__l5e/assets-v1/06a5cb03-5902-4de9-8b80-df5c26a98fe6/49b6ac1cf7e8.png",
+        "/__l5e/assets-v1/ef1379f3-f85d-4c77-a0a7-060805548d32/ca4b89cef978.png",
+        "/__l5e/assets-v1/ec0b98e7-df54-45d2-9bbb-40eca279180b/8050b1c7931f.png",
+        "/__l5e/assets-v1/46f47e79-6283-4978-afdb-5acc725e95ec/177f4ebb2f1e.png",
+        "/__l5e/assets-v1/73451fde-addc-49cd-8f28-a4821afc2c38/c0adf7d30c05.png",
+        "/__l5e/assets-v1/9890342f-3532-4463-92a9-cdeb7936cf42/a677d0657ced.png"
+      ],
+      "palette": {
+        "body": "#22333a",
+        "edge": "#648592",
+        "detail": "#425962"
+      }
+    },
+    {
+      "key": "pixel-city-4",
+      "name": "Pixel City 4",
+      "layers": [
+        "/__l5e/assets-v1/717cfd91-5997-4266-8342-f317d525af9b/1ce05d5b12e8.png",
+        "/__l5e/assets-v1/85e63c62-34a4-499f-92ee-d944b9b57578/9266626f3df1.png",
+        "/__l5e/assets-v1/91c9032a-6de8-44df-bf66-2c5c151f265c/ec6f90d1d544.png",
+        "/__l5e/assets-v1/73edac14-b4ec-441a-b1c9-8ba222f17714/c0319991b401.png",
+        "/__l5e/assets-v1/57480db9-b474-4b4d-ba6e-d32d309991b8/307682650d25.png",
+        "/__l5e/assets-v1/115b5285-01d3-4d40-b0de-119cf3815b8c/1b5aea30c19f.png",
+        "/__l5e/assets-v1/30505f45-bfc0-4fa8-9d3e-9188fac769ca/c77be6e99ec1.png",
+        "/__l5e/assets-v1/bc69a726-d44d-464d-a18f-45ce2b746af7/cf55d098c65b.png"
+      ],
+      "palette": {
+        "body": "#49312d",
+        "edge": "#ad7f79",
+        "detail": "#755550"
+      }
+    },
+    {
+      "key": "pixel-city-5",
+      "name": "Pixel City 5",
+      "layers": [
+        "/__l5e/assets-v1/14bf8af9-3d43-45ab-8971-dc81403e0acb/630d4c85e10b.png",
+        "/__l5e/assets-v1/1cb2d138-b51c-4da1-9bd8-7128f08f63ec/02d508b13b08.png",
+        "/__l5e/assets-v1/fa422f67-a9ac-44a2-a74e-46a8b5cbe91c/8cc72de022d9.png",
+        "/__l5e/assets-v1/3355cc2f-969b-4628-9203-211ba1857e94/c9ef578e646e.png",
+        "/__l5e/assets-v1/bf873f73-9947-4be1-bdca-8021503a2995/a6bdd4c6c337.png",
+        "/__l5e/assets-v1/2a3322b0-0103-4084-a56d-b762d335b1bb/150897daee28.png",
+        "/__l5e/assets-v1/355daaa4-e2fa-4950-ac23-7aecaa26b8ed/c37cf201f25b.png"
+      ],
+      "palette": {
+        "body": "#102b3e",
+        "edge": "#427498",
+        "detail": "#2a4d67"
+      }
+    },
+    {
+      "key": "pixel-city-6",
+      "name": "Pixel City 6",
+      "layers": [
+        "/__l5e/assets-v1/bda1ed32-0bc6-469b-8231-b7b67fcdf428/6f76663e8e8f.png",
+        "/__l5e/assets-v1/844a57fe-f266-465b-87fb-54de3a64062c/f9816d06f2c1.png",
+        "/__l5e/assets-v1/d5525a18-c5d0-4f67-b7ee-63d49bfa02a5/07a92070dc3d.png",
+        "/__l5e/assets-v1/0478a847-1c1b-4182-ae42-cb67b781849a/0b8f4a53d739.png",
+        "/__l5e/assets-v1/f065b5f4-4032-4375-b4fb-f1899248c651/9f369fcc3018.png",
+        "/__l5e/assets-v1/121539e0-2c5b-4f9c-85b3-7cff952d64aa/b1d64d5f6b27.png",
+        "/__l5e/assets-v1/5075ec3e-9b8d-41de-9123-0354a1e18e08/4a3946d65e68.png",
+        "/__l5e/assets-v1/10c36477-3a50-4fa3-94d1-55cf346f30d2/fe694b3cdf90.png"
+      ],
+      "palette": {
+        "body": "#604271",
+        "edge": "#d89fdc",
+        "detail": "#946caa"
+      }
+    },
+    {
+      "key": "pixel-city-7",
+      "name": "Pixel City 7",
+      "layers": [
+        "/__l5e/assets-v1/9d15da3e-0495-4392-b5c5-72ec1c006e6a/f0f82d600986.png",
+        "/__l5e/assets-v1/6aefaeae-8792-49b0-b8e4-b96cc0a9b772/1fcca030fd20.png",
+        "/__l5e/assets-v1/07e0a9a6-ddaf-456a-ad14-8d28b3646145/dc2d98e43d84.png",
+        "/__l5e/assets-v1/bdbe47e5-2d57-480d-bbfb-d4cddd1b094a/de219fa6f6ac.png",
+        "/__l5e/assets-v1/7c648a67-1445-438c-b622-10c9191d3040/d213f8c4db9e.png",
+        "/__l5e/assets-v1/5d984e4e-ee36-4673-b184-769e763a55fe/11610dee0d7f.png",
+        "/__l5e/assets-v1/a0891ce2-7a28-4881-8fa3-47c1b9892aa3/e57a37e28916.png"
+      ],
+      "palette": {
+        "body": "#433340",
+        "edge": "#a1849c",
+        "detail": "#6d5869"
+      }
+    },
+    {
+      "key": "pixel-city-8",
+      "name": "Pixel City 8",
+      "layers": [
+        "/__l5e/assets-v1/2b674488-14ba-452d-8c94-51873588a37a/78e371659d52.png",
+        "/__l5e/assets-v1/489602fe-a57a-4511-a59c-29e7c17aba1b/7fc6000698b0.png",
+        "/__l5e/assets-v1/f651862a-8a40-469c-a981-5aceeadab72a/f4cb7ecbb67d.png",
+        "/__l5e/assets-v1/20b36233-b4d1-4a3c-9203-0a6c276c5b68/3809a0c0cb62.png",
+        "/__l5e/assets-v1/5124361a-8798-4d16-961b-41120eb401e8/2d6f3f6aac67.png",
+        "/__l5e/assets-v1/b68a6f5a-a0ce-475d-8407-173b0bc635fc/d4859773be56.png",
+        "/__l5e/assets-v1/5df55d67-8775-4dac-b466-b21b28c42b3d/0c5bb240cc21.png"
+      ],
+      "palette": {
+        "body": "#1e2933",
+        "edge": "#5c7084",
+        "detail": "#3c4a58"
+      }
+    },
+    {
+      "key": "scrolling-city-1-day",
+      "name": "Scrolling City 1 (Day)",
+      "layers": [
+        "/__l5e/assets-v1/906b8d86-fde4-4d6d-8cd8-4f24cf504f99/000f94c9f6c0.png",
+        "/__l5e/assets-v1/cbc02c74-d222-45e6-9d64-6619d4ce7425/26f6d5503715.png",
+        "/__l5e/assets-v1/7a6ae96c-49be-4657-b5bb-a6908fbd0dbb/43aac9f94c63.png",
+        "/__l5e/assets-v1/81ad11d3-ce51-4ad9-88fc-85e09c186fdf/dd150586c881.png",
+        "/__l5e/assets-v1/1a4d8cdf-abe9-4ffd-ae36-27b37076c112/a51be2e02aa5.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3d",
+        "detail": "#1e1f26"
+      }
+    },
+    {
+      "key": "scrolling-city-1-night",
+      "name": "Scrolling City 1 (Night)",
+      "layers": [
+        "/__l5e/assets-v1/92fc77bb-daad-4f23-870d-4c9ce530f07e/10fc7eecc1ba.png",
+        "/__l5e/assets-v1/b724beea-3b8e-4a7b-9556-8816f6db3fd8/1cb2917d4579.png",
+        "/__l5e/assets-v1/0121121b-2b88-494a-ae35-dbe40e5615e2/5a97cf76ce15.png",
+        "/__l5e/assets-v1/3ad9d5cc-135b-4595-9bc7-c086be5fa10d/e9288770380e.png",
+        "/__l5e/assets-v1/85b64b68-a379-48fa-9f39-94354e0a7d60/df8aee6c1055.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1e"
+      }
+    },
+    {
+      "key": "scrolling-city-2-day",
+      "name": "Scrolling City 2 (Day)",
+      "layers": [
+        "/__l5e/assets-v1/e279a40c-a82b-4025-a136-fbbf04d6c584/54c107390c54.png",
+        "/__l5e/assets-v1/8d03d1ae-2ea2-44c4-a351-0c00660a1163/16a49413e7cd.png",
+        "/__l5e/assets-v1/73cc3cf6-e4ee-4afe-82f6-e5a00e1b84ce/b26033614e1b.png",
+        "/__l5e/assets-v1/1162371e-350b-4093-8093-e4f3ffe2698f/0992aaad32f2.png",
+        "/__l5e/assets-v1/1dee3ca9-8b11-4117-b3b9-354fd2ad73c3/f74fef3c29e9.png"
+      ],
+      "palette": {
+        "body": "#0f121d",
+        "edge": "#3e455a",
+        "detail": "#272c3b"
+      }
+    },
+    {
+      "key": "scrolling-city-2-night",
+      "name": "Scrolling City 2 (Night)",
+      "layers": [
+        "/__l5e/assets-v1/f2eae0e9-f62a-4360-ac49-2ad3bd2d7287/b8978b9ce411.png",
+        "/__l5e/assets-v1/b213d827-31e0-4a02-b09d-787cbdcfa4d4/2210a7583567.png",
+        "/__l5e/assets-v1/7642ef88-a7c8-4fe6-a541-bc7e65e4a81a/1369283b1bca.png",
+        "/__l5e/assets-v1/ae251097-f3c8-4dd5-9544-31bd07082281/1c3b06a8699f.png",
+        "/__l5e/assets-v1/f4e20619-062c-4f54-8539-6364ae8f1ecb/74804f39a371.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#222025"
+      }
+    },
+    {
+      "key": "scrolling-city-3-day",
+      "name": "Scrolling City 3 (Day)",
+      "layers": [
+        "/__l5e/assets-v1/1a0cd32e-c1a1-4f80-822d-7f652861946e/31972b63e6d7.png",
+        "/__l5e/assets-v1/ea4d788d-ebed-47c5-96d5-5e066e1d2e9c/8bd3c9628a0b.png",
+        "/__l5e/assets-v1/ff99702c-3d4b-4287-903c-c8f18fedecdd/6cc2675c99d0.png",
+        "/__l5e/assets-v1/8ac57252-3437-4f4e-a627-0eb854c904cb/b43a177b0412.png",
+        "/__l5e/assets-v1/00b1dc9b-bc2d-4a74-ae2c-009070998995/66a66a224e0f.png"
+      ],
+      "palette": {
+        "body": "#0f0f12",
+        "edge": "#3c3c46",
+        "detail": "#20232d"
+      }
+    },
+    {
+      "key": "scrolling-city-3-night",
+      "name": "Scrolling City 3 (Night)",
+      "layers": [
+        "/__l5e/assets-v1/3f4ee2ae-8d59-42c9-b78f-cfac0539db48/f20db1e99c42.png",
+        "/__l5e/assets-v1/a05e4f0e-7cef-4e71-af7d-58b8adf3368d/78b29390db2a.png",
+        "/__l5e/assets-v1/856ca32e-10b1-46a8-971d-26e53516ba53/afe0d7f6dcf1.png",
+        "/__l5e/assets-v1/f037195c-befd-4f30-a15f-4a66334c0b5e/5f04d08d7dcc.png",
+        "/__l5e/assets-v1/68e63db1-512c-44be-802e-ab68e3fdc0dd/4af6e65b245f.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1f"
+      }
+    },
+    {
+      "key": "scrolling-city-4-day",
+      "name": "Scrolling City 4 (Day)",
+      "layers": [
+        "/__l5e/assets-v1/d6953af6-2050-4740-8c46-e9d1010a5567/51337cf04aee.png",
+        "/__l5e/assets-v1/502c58bb-a233-4370-8b05-a1b45a36ae8e/c0e1c207bf76.png",
+        "/__l5e/assets-v1/b45ed5c8-5545-48f8-a7da-94487cc066c1/19744a07f003.png",
+        "/__l5e/assets-v1/901d1d33-f49e-486b-9e62-fc67a45ed05a/08edb8cb61b8.png",
+        "/__l5e/assets-v1/dd5a6101-37f1-447c-9cd0-afc965b23103/437ef77dd415.png"
+      ],
+      "palette": {
+        "body": "#0f0f15",
+        "edge": "#3c3c4c",
+        "detail": "#222531"
+      }
+    },
+    {
+      "key": "scrolling-city-4-night",
+      "name": "Scrolling City 4 (Night)",
+      "layers": [
+        "/__l5e/assets-v1/0afe5fce-4354-4786-9cab-a9e0d846066b/bfb53c40a92a.png",
+        "/__l5e/assets-v1/c1384578-3358-49ff-b50c-0f3c0e117ec1/3c5883760581.png",
+        "/__l5e/assets-v1/554932c6-f3db-4eca-bfed-737fb559a626/54a465908b99.png",
+        "/__l5e/assets-v1/f274fa52-19ee-478e-88f1-e9814c71c222/a5b34ab9aa78.png",
+        "/__l5e/assets-v1/31728f62-f5c0-4141-b9f7-d9a3dae7a1fa/77067082998f.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e20"
+      }
+    },
+    {
+      "key": "scrolling-city-5-day",
+      "name": "Scrolling City 5 (Day)",
+      "layers": [
+        "/__l5e/assets-v1/f87a0fec-bd8d-4098-8f2a-38514d84c5c3/10b07fca5fd7.png",
+        "/__l5e/assets-v1/08f86d51-797d-4ad2-ba4e-11730513d7e2/f217b83552b7.png",
+        "/__l5e/assets-v1/02fd5efa-b172-4ef0-8e9e-c1fb3159fed6/5a07074e08a4.png",
+        "/__l5e/assets-v1/f34fa71b-eee5-4ad4-8394-e168a0b2e4b4/96f73c8fd068.png",
+        "/__l5e/assets-v1/89066419-17f4-4067-bbac-41cb1c1ea5f4/9785f74d0daa.png"
+      ],
+      "palette": {
+        "body": "#0f0f19",
+        "edge": "#3c4153",
+        "detail": "#252936"
+      }
+    },
+    {
+      "key": "scrolling-city-5-night",
+      "name": "Scrolling City 5 (Night)",
+      "layers": [
+        "/__l5e/assets-v1/6882883f-f23b-4e69-b562-4a96a041b72d/a2e7b5576f33.png",
+        "/__l5e/assets-v1/9f5d4409-c282-4110-84b1-517754dea600/0dbc09c7124e.png",
+        "/__l5e/assets-v1/4915b5ca-18fb-4b9d-a9ef-ac878f091a9c/056864578e6d.png",
+        "/__l5e/assets-v1/5fdc2e66-eb1c-46c4-8b0b-a9f74eb37802/163a80de8a2c.png",
+        "/__l5e/assets-v1/722c93d5-ae81-40a7-954d-30842c50cb90/ff01a85a9200.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#201e22"
+      }
+    },
+    {
+      "key": "scrolling-city-6-day",
+      "name": "Scrolling City 6 (Day)",
+      "layers": [
+        "/__l5e/assets-v1/21ff5175-6a1d-46cb-9e13-7e66ee4481ec/49352f9f43c4.png",
+        "/__l5e/assets-v1/66b058db-df21-4124-82b1-14889f71b612/55f9e85331fc.png",
+        "/__l5e/assets-v1/68484cb9-649a-4a4a-89e4-b7cb65e2aba3/cab037fcbb1b.png",
+        "/__l5e/assets-v1/4d61d05e-a466-4792-a72a-9c32027c593a/592d5760c048.png",
+        "/__l5e/assets-v1/3fa61a9a-2f47-4167-9b91-cbdb96f41550/061511ddab6d.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e23"
+      }
+    },
+    {
+      "key": "scrolling-city-6-night",
+      "name": "Scrolling City 6 (Night)",
+      "layers": [
+        "/__l5e/assets-v1/e3d970bb-57dd-4fbd-946e-0f94b3cac0f5/1c7b03c2a15f.png",
+        "/__l5e/assets-v1/f5f701a1-9602-4610-9baa-df0ff5d0bc32/9c5015db9aa8.png",
+        "/__l5e/assets-v1/e39b05ba-f93d-455b-962c-0940fb868fd2/a5e06210db70.png",
+        "/__l5e/assets-v1/70021bc9-60c6-460f-98da-0513d9c57729/1d42c3f59a18.png",
+        "/__l5e/assets-v1/9480bed3-cc88-4424-90f5-0e246226a0e7/8b8081640737.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1e"
+      }
+    },
+    {
+      "key": "scrolling-city-7-day",
+      "name": "Scrolling City 7 (Day)",
+      "layers": [
+        "/__l5e/assets-v1/38b1f318-f8b9-4ce1-984c-eacca94b5c67/955cbad8142c.png",
+        "/__l5e/assets-v1/602f8654-8e32-402a-9960-c8bfc003a87f/95d9cc43c24d.png",
+        "/__l5e/assets-v1/121cee2c-231c-49e4-8caf-0f01349a67f9/3a77c639e29c.png",
+        "/__l5e/assets-v1/d2b2de1c-7e8b-408a-acad-21d77d42e5b3/e08a7f648cf7.png",
+        "/__l5e/assets-v1/3096430b-7148-4675-8729-f134a608b81f/bb74296b2a77.png"
+      ],
+      "palette": {
+        "body": "#0f0f19",
+        "edge": "#3c4052",
+        "detail": "#242835"
+      }
+    },
+    {
+      "key": "scrolling-city-7-night",
+      "name": "Scrolling City 7 (Night)",
+      "layers": [
+        "/__l5e/assets-v1/f23245ab-a181-4172-9fe6-dee275ef1bbd/e85b7f84a0aa.png",
+        "/__l5e/assets-v1/07c8c72d-ceb5-46b8-a3ea-655c54b4d594/0bfbbc71146c.png",
+        "/__l5e/assets-v1/80a19b29-d96d-4a59-914a-48ef59ba4c56/d85e207887b2.png",
+        "/__l5e/assets-v1/22e3659b-a9d1-4c38-8ee2-97a00f4d97e9/beaa25cc7578.png",
+        "/__l5e/assets-v1/586b8c4d-e3f0-4fa7-ba95-534aeffe935d/70d55d1cc0ae.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#201e22"
+      }
+    },
+    {
+      "key": "scrolling-city-8-day",
+      "name": "Scrolling City 8 (Day)",
+      "layers": [
+        "/__l5e/assets-v1/53dbd746-7a3c-4aa6-9a84-5ea2708d0790/714a722fe683.png",
+        "/__l5e/assets-v1/63803339-93fb-4509-ad8f-3ca899ba048c/e7bd31b580d6.png",
+        "/__l5e/assets-v1/0c2f2aa9-2fea-4f82-80e4-c4e747d5f545/77f033de7ba9.png",
+        "/__l5e/assets-v1/5fc2953b-5e09-49b1-a95e-1c72811d0967/f6f9ee59d8d7.png",
+        "/__l5e/assets-v1/4856b807-4c16-413a-a790-5af466003ad0/dee10620eae4.png"
+      ],
+      "palette": {
+        "body": "#0f0f17",
+        "edge": "#3c3e4f",
+        "detail": "#232733"
+      }
+    },
+    {
+      "key": "scrolling-city-8-night",
+      "name": "Scrolling City 8 (Night)",
+      "layers": [
+        "/__l5e/assets-v1/1cf8c9ad-e37c-4f34-b4a4-84e8d9c7ce38/80d8a9d1984b.png",
+        "/__l5e/assets-v1/e3fd6151-d367-436a-a84a-1d0f63b701de/83f838cc6990.png",
+        "/__l5e/assets-v1/3694763b-dd35-49d2-bced-c72d8f42d70c/146e7282838c.png",
+        "/__l5e/assets-v1/9bf55c95-e284-4a61-99a4-128e1ea5ec02/f8c000d6f32a.png",
+        "/__l5e/assets-v1/4a3fe9f0-f837-43ea-959f-952d2fd77ceb/989ee58e7b43.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1f1e21"
+      }
+    },
+    {
+      "key": "steampunk-cityscape-1",
+      "name": "Steampunk Cityscape 1",
+      "layers": [
+        "/__l5e/assets-v1/79fd3430-5f62-4971-926d-68e7314e2bb5/14b79f6cdfdd.png",
+        "/__l5e/assets-v1/afecd18e-9aaf-472a-8cbd-a4b57b4b8c1c/e3173cbe9248.png",
+        "/__l5e/assets-v1/0fce00e5-9629-472b-9def-bf412e6cbaac/43bac2c5176d.png",
+        "/__l5e/assets-v1/bd45050f-25bb-4e0d-b185-4f7e78aa5c35/0fe351f5b46b.png"
+      ],
+      "palette": {
+        "body": "#19100f",
+        "edge": "#53413c",
+        "detail": "#36291f"
+      }
+    },
+    {
+      "key": "steampunk-cityscape-2",
+      "name": "Steampunk Cityscape 2",
+      "layers": [
+        "/__l5e/assets-v1/f6159fa5-0361-4923-a14c-70752d04d68c/0c2cc38549b8.png",
+        "/__l5e/assets-v1/6b7e110b-2834-4ccd-a89c-8ee5e2103527/a86ced9e9eee.png",
+        "/__l5e/assets-v1/d27b55b8-8585-490c-9a64-dab037573fda/62eaff827b8b.png",
+        "/__l5e/assets-v1/8f79f7f4-de52-42ee-9575-5da6f25aac32/4c78eb86f323.png"
+      ],
+      "palette": {
+        "body": "#1f0f0f",
+        "edge": "#5f4141",
+        "detail": "#3e2929"
+      }
+    },
+    {
+      "key": "steampunk-cityscape-3",
+      "name": "Steampunk Cityscape 3",
+      "layers": [
+        "/__l5e/assets-v1/2e0dc71c-9b25-4dbf-b72c-6ca340d5b438/8da7efa40157.png",
+        "/__l5e/assets-v1/18dfb5fd-ed63-4d58-a159-c750fe91379e/d5f24a86b3a9.png",
+        "/__l5e/assets-v1/8441a3e8-cae4-4b89-a577-7c667826c5ed/ab3c6dc66bcd.png",
+        "/__l5e/assets-v1/64fa913c-f711-4166-b99a-5cb83b833136/0a140a57c947.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e25"
+      }
+    },
+    {
+      "key": "steampunk-cityscape-4",
+      "name": "Steampunk Cityscape 4",
+      "layers": [
+        "/__l5e/assets-v1/9faa19ff-7ef5-4c1c-890e-4881e1678530/4b3ebf9ec9e7.png",
+        "/__l5e/assets-v1/a3ba619e-7a8d-4099-b52f-91259a2ccc04/eadf3314fa6f.png",
+        "/__l5e/assets-v1/ef688bb2-3929-4b03-bef6-de97989f4c56/9a673527be77.png",
+        "/__l5e/assets-v1/dbd521d8-b50b-46df-92ac-38721f1afcf5/65b3fc34cc58.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#211e1e"
+      }
+    },
+    {
+      "key": "underwater-world-1",
+      "name": "Underwater World 1",
+      "layers": [
+        "/__l5e/assets-v1/6fbed15b-2e57-4614-a99f-4cbcd0a26d9e/a2319c5f2105.png",
+        "/__l5e/assets-v1/e3b59b6a-501e-432a-985b-76e90f31fa7c/ff7a785556a7.png",
+        "/__l5e/assets-v1/974b4a3b-74ce-4270-9156-75c22eb66ea2/887375131756.png",
+        "/__l5e/assets-v1/81d2929a-599e-4d41-a8e5-d7a5a473e1e4/61d50b74ce2e.png",
+        "/__l5e/assets-v1/8833338f-b547-4c1f-9764-166ff89bdc86/4dea2e610da8.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1f"
+      }
+    },
+    {
+      "key": "underwater-world-2",
+      "name": "Underwater World 2",
+      "layers": [
+        "/__l5e/assets-v1/44216c77-1968-4d99-9c53-08f45191573c/7159d1f91f7b.png",
+        "/__l5e/assets-v1/1db8be72-bf30-401b-a5fd-e1e581e8208a/d474f339c21a.png",
+        "/__l5e/assets-v1/5f1762dd-8ea2-49d1-81cb-bf5eb93501d1/5103be364937.png",
+        "/__l5e/assets-v1/ac3ed3ab-400f-488e-9ceb-a2430f68f434/0c6130dcb34c.png",
+        "/__l5e/assets-v1/3fec4867-31dd-431a-91c2-ee586b6eec0d/2d63846d6384.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1e"
+      }
+    },
+    {
+      "key": "underwater-world-3",
+      "name": "Underwater World 3",
+      "layers": [
+        "/__l5e/assets-v1/38bb9b17-f618-4fd6-a5ce-33c9082bcca9/abf2a07585b3.png",
+        "/__l5e/assets-v1/d1b5feb5-5e34-4288-9cdc-509d90bf4616/e7410eafd163.png",
+        "/__l5e/assets-v1/c7f77d80-9d95-4674-a941-44ab7bd94692/93df969130a9.png",
+        "/__l5e/assets-v1/cfe12bb7-a3b1-41b5-93d5-95f89a997337/a23dfb5b55ef.png",
+        "/__l5e/assets-v1/4d1fd50d-c864-46ae-8ce8-bc96dfba9042/7d2c253df192.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1e"
+      }
+    },
+    {
+      "key": "underwater-world-4",
+      "name": "Underwater World 4",
+      "layers": [
+        "/__l5e/assets-v1/3834c94e-2857-4027-a2fc-bda8cb711b99/0cb092ed4b8d.png",
+        "/__l5e/assets-v1/6b27807d-c078-44f5-afc7-993152e2b104/cfca497c3bed.png",
+        "/__l5e/assets-v1/3a8de99f-ec16-45f1-847a-a5434e12ddbf/85148ac51ca8.png",
+        "/__l5e/assets-v1/f3815d27-e2a7-43c1-8c02-e79c846b0a5f/1506b7fa5dab.png"
+      ],
+      "palette": {
+        "body": "#0f201f",
+        "edge": "#3c605d",
+        "detail": "#213f3d"
+      }
+    },
+    {
+      "key": "warped-city",
+      "name": "Warped City",
+      "layers": [
+        "/__l5e/assets-v1/019a48fb-9078-4c14-aae9-a40d478e84d2/82bc99e33311.png",
+        "/__l5e/assets-v1/803fb304-6ead-4bc1-856c-c64319afed29/86f54e7378e3.png",
+        "/__l5e/assets-v1/bcbd199e-4977-4fdc-b0db-fc5d47642df5/b46e9da912eb.png",
+        "/__l5e/assets-v1/40039c57-abfb-4608-879c-408e77b0953c/b91522607021.png"
+      ],
+      "palette": {
+        "body": "#262933",
+        "edge": "#6c7083",
+        "detail": "#474a58"
+      }
+    },
+    {
+      "key": "cyberpunk-rooftops-1",
+      "name": "Cyberpunk Rooftops 1",
+      "layers": [
+        "/__l5e/assets-v1/c63b4b6f-f2ba-49a2-a3f9-2ce689a7d3a5/4bee72cdb7e7.png",
+        "/__l5e/assets-v1/3804aaaf-1909-47bb-ba7a-5b5b6e18b1f7/97455831ea89.png",
+        "/__l5e/assets-v1/40fa4682-2b7c-4840-aba0-0eca2620851e/38ca55179aa5.png",
+        "/__l5e/assets-v1/c7c331af-ed87-4797-8ec4-d611f30f2481/fb9d69a96424.png",
+        "/__l5e/assets-v1/6b1656d4-eefa-4a91-b2dd-664581a00192/87a214e315b3.png",
+        "/__l5e/assets-v1/60b6da0a-16ba-4d83-9e22-3d29e424d66d/bfd16e29bfdf.png",
+        "/__l5e/assets-v1/4892709b-e31c-43a7-bcb2-69073ed6ad03/a0b164969775.png",
+        "/__l5e/assets-v1/32f4c375-1283-4554-8d8e-d91cddff86c7/2abf8c25aba8.png",
+        "/__l5e/assets-v1/055fdae1-82d0-4768-9a51-6de79a8aa894/9184ec26f6f0.png",
+        "/__l5e/assets-v1/4b0afb71-4614-4869-a749-d283b875fe47/ebfbcc5a7be6.png",
+        "/__l5e/assets-v1/de9d5a2f-b198-45d2-968c-12df5c19becc/31c992d95174.png",
+        "/__l5e/assets-v1/b01d2392-8331-406e-9b01-55ec164876c2/1f6fceb4897b.png",
+        "/__l5e/assets-v1/87fd9241-9845-4ae9-be5b-f08cab8ba2fe/dc9066c1135d.png",
+        "/__l5e/assets-v1/a911a5b5-1321-4af8-be14-6550e9ae6b89/dd4d4f3b4837.png",
+        "/__l5e/assets-v1/d080050c-06da-46dc-8040-8cc69ed51f51/074cf07f59b2.png",
+        "/__l5e/assets-v1/8ed9c835-2f84-4bd6-a1b4-8cd792dec48f/1b43ddde2a5a.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e21"
+      }
+    },
+    {
+      "key": "cyberpunk-rooftops-2",
+      "name": "Cyberpunk Rooftops 2",
+      "layers": [
+        "/__l5e/assets-v1/0b8b2766-7573-4de5-a29a-786766d906c7/2a42ac23cfb4.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e2025"
+      }
+    },
+    {
+      "key": "cyberpunk-rooftops-3",
+      "name": "Cyberpunk Rooftops 3",
+      "layers": [
+        "/__l5e/assets-v1/f2d01ffc-3cce-46e7-b253-c2441d867211/4b1a98128dd2.png"
+      ],
+      "palette": {
+        "body": "#16111a",
+        "edge": "#4e4454",
+        "detail": "#322b36"
+      }
+    },
+    {
+      "key": "cyberpunk-rooftops-4",
+      "name": "Cyberpunk Rooftops 4",
+      "layers": [
+        "/__l5e/assets-v1/d4c27322-daa0-4743-a118-9497b527a01a/c95b16d9c5de.png",
+        "/__l5e/assets-v1/abe63be5-40e1-4b64-b4b4-3e694438a7a2/718821d9a815.png",
+        "/__l5e/assets-v1/80d6858b-0883-49b0-bd5f-9dff5b8c3dcc/2c57431026dd.png",
+        "/__l5e/assets-v1/c89b493a-cec3-4c50-b68c-1b308a55eb2a/cff522fd16b7.png",
+        "/__l5e/assets-v1/7f4abae0-eddd-42be-89c7-eef957b0a503/ad7a9f36cdc1.png",
+        "/__l5e/assets-v1/3b8ade2c-6d3b-48e5-997e-118db605b361/eb4bca09620f.png",
+        "/__l5e/assets-v1/01ebd5f6-5779-43a5-818b-6afa0bec8ecc/3bddfda1fa41.png",
+        "/__l5e/assets-v1/8a70dfe1-ac44-4e96-86b4-bf29e5103e62/f639b9e2a5d6.png",
+        "/__l5e/assets-v1/54674994-6a36-4342-8870-050fac05482f/ee1feae01e8c.png",
+        "/__l5e/assets-v1/e3bf9d97-c38c-4b8a-9b5c-fcae5268f707/6f9474f5fe91.png",
+        "/__l5e/assets-v1/e8cc2027-a585-431f-9f9d-07aa090e5c3f/988df90c7a5f.png",
+        "/__l5e/assets-v1/6234b295-dda2-4eb1-a32e-0d42f45e4ac7/c81bfcb29742.png",
+        "/__l5e/assets-v1/5b7c3005-c1a1-46cb-ad28-965030057af9/f6ae26ce71f2.png",
+        "/__l5e/assets-v1/e5f9ccce-dc75-436b-ab90-368f6783d966/987d8f03a4e4.png",
+        "/__l5e/assets-v1/a2527b40-546f-48d1-bb64-d903c6516db3/11975ecc13a3.png",
+        "/__l5e/assets-v1/c6d43528-b579-4801-8dfd-b6a96c8e44e8/da67423a0ebb.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3c",
+        "detail": "#1e1e1e"
+      }
+    },
+    {
+      "key": "cyberpunk-rooftops-5",
+      "name": "Cyberpunk Rooftops 5",
+      "layers": [
+        "/__l5e/assets-v1/72147f66-1752-4112-aae9-30a1f845847f/f778207bd721.png"
+      ],
+      "palette": {
+        "body": "#241c26",
+        "edge": "#67596a",
+        "detail": "#443a46"
+      }
+    },
+    {
+      "key": "cyberpunk-rooftops-6",
+      "name": "Cyberpunk Rooftops 6",
+      "layers": [
+        "/__l5e/assets-v1/01db2c16-c2f0-4c4b-86b9-31ad0a81d57d/76e417c7c7b8.png"
+      ],
+      "palette": {
+        "body": "#5c3b24",
+        "edge": "#d19367",
+        "detail": "#8f6344"
+      }
+    },
+    {
+      "key": "sidescroller-central-city",
+      "name": "Sidescroller Shooter - Central City",
+      "layers": [
+        "/__l5e/assets-v1/cd7dd461-5ff5-4dde-b1bd-c012ba30badb/0cef01c75618.png",
+        "/__l5e/assets-v1/aa665183-3030-47a1-b641-f80206d62a57/10e45b3a5423.png"
+      ],
+      "palette": {
+        "body": "#120f17",
+        "edge": "#463c50",
+        "detail": "#2c2233"
+      }
+    },
+    {
+      "key": "industrial-zone",
+      "name": "Free Industrial Zone",
+      "layers": [
+        "/__l5e/assets-v1/c0cf2fcb-f6bd-44cf-8182-624d77fd93e9/4156dadf1875.png",
+        "/__l5e/assets-v1/c56dcca2-f1bc-40b1-9a4d-957b968c439e/5e1fe33142d9.png",
+        "/__l5e/assets-v1/fc5cada3-8e7e-49d9-a9aa-061ae7f1e51f/3ff102414b44.png",
+        "/__l5e/assets-v1/0c2cd4f7-90bd-4f32-bdf6-4903bd8fe9fd/c5f090d1f540.png",
+        "/__l5e/assets-v1/eba90a5a-a836-4388-af4b-892f77201151/484850baea3a.png",
+        "/__l5e/assets-v1/85131a18-66d0-463e-a43b-5a1f27688102/cbdc52773604.png"
+      ],
+      "palette": {
+        "body": "#0f0f0f",
+        "edge": "#3c3c3d",
+        "detail": "#1e1f26"
+      }
+    }
+  ]
+}

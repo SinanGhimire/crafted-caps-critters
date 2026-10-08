@@ -26,6 +26,8 @@
 - [ ] APK build — blocked: this sandbox has no Java/Android SDK
 
 ## Side-scroller conversion
+- [ ] Integrate all new supplied enemy packs and parallax environments, with matching platform tiles
+- [ ] Implement clear-count waves and approachable data-driven rewards from the supplied brief
 - [ ] Convert arena movement, physics, camera, collisions, enemy spawning, and combat to platform survival
 - [ ] Add mobile run/jump/aim controls and keep the compact pause HUD
 - [ ] Integrate compatible supplied UI frames and buttons without changing the menu artwork
